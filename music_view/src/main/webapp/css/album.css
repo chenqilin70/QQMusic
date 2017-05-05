@@ -1,0 +1,328 @@
+.container{
+    background-image: url(../img/bg_detail.jpg);
+    background-position: 0px -58px;
+    background-repeat: repeat-x;
+}
+.albumContent{
+    width: 1200px;
+}
+.albumBaseInfo{
+    height: 325px;
+    width: 100%;
+}
+.albumImgBox{
+    position: relative;
+    float: left;
+    height: 100%;
+    width:340px;
+}
+.albumInfoBox{
+    float: left;
+    height: 100%;
+    width:860px;
+}
+.albumHead{
+    height: 250px;
+    position: absolute;
+    top: 40px;
+}
+.albumInfoBox table{
+    margin-top: 50px;
+    table-layout: fixed;
+}
+.albumInfoBox table td{
+    padding-bottom: 3px;
+    font-weight: 300;
+}
+.setWidth1{
+    width: 230px;
+}
+.setWidth2{
+    width: 372px;
+}
+.albumName{
+   
+}
+.albumName div{
+	width:602px;
+	height: 50px;
+	line-height: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 31px;
+}
+.albumSinger{
+    height:24px;
+}
+.albumSinger div{
+    font-size: 16px;
+    line-height: 24px;
+    float: left;
+}
+.setHeight{
+    height:27px;
+}
+.mainBody{
+    font-size: 14px;
+    line-height: 27px;
+}
+.singerIcon{
+    display: block;
+    float: left;
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+    background-image: url(../img/icon_sprite.png);
+    background-position: -20px -236px;
+    background-repeat: no-repeat;
+}
+.albumBtn{
+    width:122px;
+    height:40px;
+    border-radius:3px;
+    padding:0;
+    font-size:14px;
+    outline:none;
+    margin-right:2px;
+    cursor:pointer;
+    margin-top: 7px;
+}
+.playAll{
+    color:#ffffff;
+    background-color:#31C27C;
+    border:none;
+}
+.playAll i{
+    background-position: -80px -220px;
+    height: 16px;
+    width: 13px;
+}
+.collect , .more{
+    color:rgb(51,51,51);
+   background-color:#ffffff;
+    border:1px solid rgb(201,201,201);
+}
+.collect i{
+     height: 16px;
+      width: 16px;
+}
+.collect .uncollected{
+	background-position: -60px -0px;
+}
+.collect .collected{
+	background-position: 0px -80px;
+}
+.more i{
+     background-position: -20px -80px;
+     height: 16px;
+    width: 16px;
+}
+.albumBtn i{
+    display: inline-block;
+    background-image: url(../img/icon_sprite.png);
+    vertical-align: -3px;
+}
+.albumSpecificInfo{
+    width: 100%;
+}
+.songsTable{
+    table-layout: fixed;
+    text-align: left;
+    font-weight: 100;
+    margin-bottom: 80px;
+    display: inline-block;
+    vertical-align:text-top
+}
+.songsTable th{
+    background-color:rgb(251,251,253);
+    color: rgb(153,153,153);
+    height: 50px;
+    font-size: 14px;
+    line-height: 50px;
+    font-weight: 200;
+}
+.songIndex{
+    width: 45px;
+}
+.songName{
+    width: 546px;
+}
+.singer{
+    width: 176px;
+}
+.songTime{
+    width: 87px
+}
+.songSetHeight{
+    height: 50px;
+    color: rgb(153,153,153);
+    padding-left: 10px;
+}
+.songTd{
+    line-height: 50px;
+    font-size: 14px;
+    font-weight:500;
+}
+.songNameTd{
+    color: rgb(51,51,51);
+    padding-right:10px;
+}
+.songOption{
+	margin-top:7px;
+	margin-right:10px;
+	width:36px;
+	height:36px;
+	float: right;
+	cursor: pointer;
+	display:none;
+}
+.shareSong{
+	background-image:url(../img/icon_list_menu.png);
+	background-position:0px -40px;
+}
+.downloadSong{
+	background-image:url(../img/icon_list_menu.png);
+	background-position:0px -120px
+}
+.addSong{
+	background-image:url(../img/icon_list_menu.png);
+	background-position:0px -80px
+}
+.playSong{
+	background-image:url(../img/icon_list_menu.png);
+	background-position:0px 0px
+}
+.albumTd{
+    color: rgb(51,51,51)
+}
+.songTimeTd{
+    color: rgb(153,153,153)
+}
+.songTr:nth-child(even){
+    background-color:rgb(251,251,253);
+}
+.songTr:nth-child(odd){
+    background-color:rgb(255,255,255);
+}
+.otherDiv{
+    width: 290px;
+    float: right;
+    position: relative;
+}
+.introTitle{
+    font-size: 20px;
+    line-height: 20px;
+}
+.introP{
+    width: 280px;
+    height:90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin:15px 0 0 0;
+    padding: 0;
+    line-height: 22px;
+    color:#333;
+    font-size: 14px;
+}
+.moreBaseInfo{
+    color: #333;
+    line-height: 22px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.otherAlbumOfTheSinger{
+    margin-top: 35px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height:  20px;
+}
+.otherAlbumTable{
+    table-layout: fixed;
+    width: 286px;
+    height: 288px;
+    margin-top: 16px;
+}
+.otherAlbumTable td{
+    height: 144px;
+}
+.otherAlbumBox{
+    height: 100%;
+    width: 100%
+}
+.otherAlbumHead{
+    height: 82px;
+    width: 82px;
+    display: block;
+}
+.otherAlbumName , .otherAlbumTime{
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+.otherAlbumName{
+    color: #333;
+    
+}
+.otherAlbumTime{
+    color: #999;
+}
+.otherAlbumDescBox{
+    width: 580px;
+   position: absolute;
+    top: 80px;
+   right:310px;
+    background: #fff;
+    box-shadow: 0 0 4px rgba(0,0,0,.35);
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    display: none;
+    z-index: 2;
+}
+.bubbleIcon{
+    position: absolute;
+    right: -10px;
+    top: 50px;
+    border-left: 1px solid white;
+    height: 18px;
+    width: 10px;
+    background-image: url(../img/popup_arrow.png);
+}
+.albumMoreDesc{
+    margin: 30px 5px 30px 10px;
+    width:563px;
+    font-size: 14px;
+    line-height: 22px;
+    
+}
+.albumDescTitle{
+    font-size: 20px;
+    line-height: 22px;
+    color: #333;
+    margin-left: 15px;
+}
+.descContent{
+    font-size: 14px;
+    margin: 16px 5px 40px 30px;
+    padding-right:20px;
+    overflow-y: scroll;
+}
+.descContent::-webkit-scrollbar{
+    width:8px;
+    background-color:#ffffff;
+} 
+.descContent::-webkit-scrollbar-thumb {
+    background-color:rgb(221,221,221);
+    border-radius:8px;
+}
+.defaultStyleLink{
+    text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+
+
+

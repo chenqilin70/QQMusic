@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-30 10:30:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.huwl.oracle.qqmusic.music_model.Singer" table="SINGER">
+        <id name="singerId" type="java.lang.String">
+            <column name="SINGER_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="language" type="java.lang.String">
+        	<column name="SINGER_LAN" />
+        </property>
+        <property name="baseInfo" type="text">
+            <column name="BASE_INFO" />
+        </property>
+        <property name="singerName" type="java.lang.String">
+            <column name="SINGER_NAME" />
+        </property>
+        <set name="albums" table="ALBUM" inverse="false"  cascade="all">
+            <key>
+                <column name="SINGER_ID" />
+            </key>
+            <one-to-many class="com.huwl.oracle.qqmusic.music_model.Album" />
+        </set>
+        <set name="musicVideos" table="MUSICVIDEO" inverse="false"  cascade="all">
+            <key>
+                <column name="SINGER_ID" />
+            </key>
+            <one-to-many class="com.huwl.oracle.qqmusic.music_model.MusicVideo" />
+        </set>
+        <property name="head" type="java.lang.String">
+            <column name="HEAD" />
+        </property>
+        <property name="singerLabel" type="java.lang.String">
+            <column name="SINGER_LABEL" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-30 10:30:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.huwl.oracle.qqmusic.music_model.Music" table="MUSIC">
+        <id name="musicId" type="java.lang.String">
+            <column name="MUSIC_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="music" type="java.lang.String">
+            <column name="MUSIC" />
+        </property>
+        <property name="musicName" type="java.lang.String">
+            <column name="MUSIC_NAME" />
+        </property>
+        <property name="lyric" type="java.lang.String">
+            <column name="LYRIC" />
+        </property>
+        <many-to-one name="album"  class="com.huwl.oracle.qqmusic.music_model.Album" cascade="all">
+            <column name="ALBUM_ID"  />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

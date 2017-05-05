@@ -1,0 +1,137 @@
+.listenerProfile{
+	background-image: url(../img/bg_profile.jpg);
+	min-width:1000px;
+	background-position:50% 100%;
+	background-repeat: no-repeat;
+	height: 380px;
+	position: relative;
+}
+.unloginBox{
+	background-image: url(../img/bg_profile_unlogin.jpg);
+	background-size:cover;
+	min-width:1000px;
+	background-repeat:no-repeat;
+	background-position:50% 50%;
+	height:922px;
+	overflow: hidden;
+}
+.listenerCaption{
+	color: #ffffff;
+	font-size:60px;
+	font-weight: 300;
+	margin-top: 338px;
+}
+.manageMyMusic{
+	margin-top:23px;
+	font-size:26px;
+	color: #ffffff;
+	font-weight: 300;
+}
+.immediatelyLogin{
+	color:#ffffff;
+	font-size: 20px;
+	background-color: #2caf6f;
+	border:none;
+	outline: none;
+	width: 175px;
+	margin-top:35px;
+	cursor:pointer;
+	height:50px;
+	border-radius:3px;
+}
+.profileImg{
+	width: 102px;
+	height: 102px;
+	border-radius:50%;
+	border: 4px solid #fff;
+	margin-top: 65px;
+}
+.profileUsername{
+	color:#ffffff;
+	font-size: 30px;
+	line-height: 48px;
+	font-weight: 300;
+}
+.profileIcon{
+	display: inline-block;
+	height: 33px;
+	width: 36px;
+	cursor: pointer;
+	background-repeat: no-repeat;
+}
+.profileIcon1{
+	background-image: url(../img/svip_g@2x.png);
+}
+.profileIcon2{
+	background-image: url(../img/sui_g@2x.png);
+}
+.profileItem{
+	color:#fff;
+	margin: 0;
+	list-style:none;
+	padding:0;	
+	width: 155px;
+	margin-top: 10px;
+}
+.profileItem li{
+	text-align:center;
+	float: left;
+	width: 77px;
+	font-size: 14px;
+	cursor: pointer;
+}
+.profileItem .first{
+	border-right: 1px solid #24313d;
+}
+.profileItem  .num{
+	font-size: 22px;
+	font-weight: 300;
+}
+.profileItemLink{
+	text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+.bottomItem{
+	width: 1200px;
+	height:57px;
+	margin-top: 96px;
+	font-size:16px;
+	line-height: 57px;
+}
+.bottomItem ul{
+	list-style: none;
+	margin:0;
+	padding:0;
+}
+.bottomItem li{
+	float:left;
+	margin-right: 55px;
+}
+.bottomItemLink{
+	text-decoration: none;
+    outline: none;
+    color: inherit;
+    color:#ffffff;
+}
+.publicIcon{
+	display:block;
+	height: 20px;
+	width:16px;
+	background-image: url(../img/icon_sprite.png);
+	background-position: -60px -180px;
+	float: right;
+	cursor: pointer;
+	margin-top:20px;
+}
+.detailContent{
+	width: 1200px;
+	min-height: 500px;
+}
+.loading{
+	margin-top: 200px;
+	margin-right: 550px;
+	margin-left: 550px;
+}
+
+

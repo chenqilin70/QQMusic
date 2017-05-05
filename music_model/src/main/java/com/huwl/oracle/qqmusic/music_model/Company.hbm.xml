@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-30 10:30:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.huwl.oracle.qqmusic.music_model.Company" table="COMPANY">
+        <id name="companyId" type="java.lang.String">
+            <column name="COMPANY_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="comName" type="java.lang.String">
+            <column name="COM_NAME" />
+        </property>
+        <property name="comHead" type="java.lang.String">
+            <column name="COM_HEAD" />
+        </property>
+        <set name="albums"  cascade="all" table="ALBUM" inverse="false" >
+            <key>
+                <column name="COMPANY_ID" />
+            </key>
+            <one-to-many class="com.huwl.oracle.qqmusic.music_model.Album" />
+        </set>
+        <set name="musicVideos" table="MUSICVIDEO" inverse="false"  cascade="all">
+            <key>
+                <column name="COMPANY_ID" />
+            </key>
+            <one-to-many class="com.huwl.oracle.qqmusic.music_model.MusicVideo" />
+        </set>
+    </class>
+</hibernate-mapping>
