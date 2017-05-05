@@ -12,11 +12,15 @@ $(function(){
         var flag = thisElement.compareDocumentPosition($relatedElement);
         return !(flag == 0 || flag == 20);
     }
-    $(".defaultStyleLink").mouseover(function(){
-    	$(this).css("color","#31c27c");
+    $(".conditionBox li").mouseover(function(){
+    	$this=$(this);
+    	if($this.attr("selectedItem")) return false;
+    	$this.css("color","#31c27c");
     });
-    $(".defaultStyleLink").mouseout(function(){
-    	$(this).css("color","#333");
+    $(".conditionBox li").mouseout(function(){
+    	$this=$(this);
+    	if($this.attr("selectedItem")=="true") return false;
+    	$this.css("color","#333");
     });
 	$(".loginBtnInBg").mouseover(function(){
 		$(".lightBorder").stop(true,true);
@@ -96,22 +100,49 @@ $(function(){
 			},200);
 		}
 	});
-	function updateSingerList(pageNo){
-		$.ajax({
-			url:"singer_discover!updateSingerList.action",
-			type:"GET",
-			data:{
-				pageNo:pageNo,
-			},
-			error:function(){
-				alert("请检查网络！");
-			},
-			success:function(data){
-				$(".singersBox").html(data);
-			}
+	function changeItemToTrue($item){
+		$item.attr("selectedItem","true").css({
+			"background-color": "#31c27c",
+			"color":"#ffffff"
 		});
 	}
+	function changeItemToFalse($item){
+		$item.attr("selectedItem","false").css({
+			"background-color": "#fbfbfd",
+			"color":"#333"
+		});
+	}
+	$(".conditionBox li").click(function(){
+		let $condition=$(".conditionBox");
+		let $conditioinUl=$(this).parent().parent();
+		let optionClass=$conditioinUl.attr("class");
+		changeItemToFalse($conditioinUl.find("li[selectedItem='true']"));
+		changeItemToTrue($(this));
+		updateSingerList(1,$(".category li[selectedItem='true']").attr("val"),$(".letter li[selectedItem='true']").attr("val"));
+		return false;
+	});
 	
+	var updateSingerList=(function fun(pageNo,category,letter){
+		function innerFunc(){
+			$.ajax({
+				url:"singer_discover!updateSingerList.action",
+				type:"GET",
+				data:{
+					pageNo:pageNo,
+					category:category,
+					letter:letter
+				},
+				error:function(){
+					alert("请检查网络！");
+				},
+				success:function(data){
+					$(".singersBox").html(data);
+				}
+			});
+		};
+		innerFunc();
+		return fun;
+	})(1,"all","hot");
 	
 	
 });

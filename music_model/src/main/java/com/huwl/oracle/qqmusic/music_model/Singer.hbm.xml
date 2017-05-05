@@ -11,6 +11,9 @@
         <property name="language" type="java.lang.String">
         	<column name="SINGER_LAN" />
         </property>
+        <property name="letter" type="java.lang.String">
+        	<column name="SINGER_LETTER" />
+        </property>
         <property name="baseInfo" type="text">
             <column name="BASE_INFO" />
         </property>

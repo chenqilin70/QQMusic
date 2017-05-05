@@ -1,6 +1,7 @@
 package com.huwl.oracle.qqmusic.music_daoimpl;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -44,6 +45,17 @@ public class SingerDaoImpl extends BaseDaoImpl<Singer> implements SingerDao{
 	@Override
 	public int addCareSinger(String loginedListenerId, String singerId) {
 		return updateBySql("insert into LIS_SIN(QQLIS_ID,SINGER_ID) values(?,?)", loginedListenerId,singerId);
+	}
+	
+	@Override
+	public Long getSingersCount(String letter,List<String> category) {
+		StringBuffer hql=new StringBuffer("select count(*) from Singer s where ");
+		Iterator<String> it=category.iterator();
+		while (it.hasNext()) {
+			hql.append(" s.language like '%"+it.next()+"%' or ");
+		}
+		System.out.println(hql.substring(0, hql.lastIndexOf("or")));
+		return (Long) uniqueQuery(hql.substring(0, hql.lastIndexOf("or")));
 	}
 	
 	

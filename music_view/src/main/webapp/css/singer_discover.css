@@ -14,7 +14,6 @@
 	width:100%;
 	background-image: url(../img/bg_singer.jpg);
 	background-position: 50% 50%;
-	background-repeat: no-repeat;
 	min-width: 1050px;
 }
 .TitleInSingerBg{
@@ -245,6 +244,17 @@
 	margin-right: 550px;
 	margin-left: 550px;
 }
+.conditionBox li{
+	text-decoration: none;
+    outline: none;
+    color: inherit;
+    color:#333;
+}
+.conditionBox li[selectedItem='true']{
+	background-color: #31c27c;
+	color:#ffffff;
+}
+
 
 
 

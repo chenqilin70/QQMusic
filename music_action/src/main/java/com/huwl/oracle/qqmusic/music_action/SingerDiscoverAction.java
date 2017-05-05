@@ -76,8 +76,7 @@ public class SingerDiscoverAction extends BaseAction {
 		return SUCCESS;
 	}	
 	public String updateSingerList() {
-		
-//		Integer SingerCount=singerDiscoverBiz.getSingersCount(category,letter);
+		Long SingerCount=singerDiscoverBiz.getSingersCount(category,letter);
 //		pageBean=new PageBean(100, pageNo, objCount);
 		return "updateSingerList";
 	}

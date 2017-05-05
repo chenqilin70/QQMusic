@@ -113,56 +113,48 @@
 	         <div class="conditionBox">
 	         	<div class="categoryBox">
 	         		<ul class="category">
-	         			<s:a class="defaultStyleLink"><li class="AllItem"><s:text name="all"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem" val="ChinaMale"><s:text name="ChinaMale"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="ChinaFemale"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="ChinaGroup"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="KoreaMale"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="KoreaFemale"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="KoreaGroup"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="JapanMale"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="JapanFemale"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="JapanGroup"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="EuropeAndAmericaMale"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="EuropeAndAmericaFemale"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="EuropeAndAmericaGroup"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="Philharmonic"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="performer"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="composer"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="conductor"/></li></s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem"><s:text name="otherCategory"/></li></s:a>
+	         			<s:a ><li selectedItem="true" class="AllItem" val="all"><s:text name="all"/></li></s:a>
+		         		<s:a ><li selectedItem="false" class="optionItem" val="Chinese"><s:text name="Chinese"/></li></s:a>
+		         		<s:a ><li selectedItem="false" class="optionItem" val="English"><s:text name="English"/></li></s:a>
+		         		<s:a ><li selectedItem="false" class="optionItem" val="Japanese"><s:text name="Japanese"/></li></s:a>
+		         		<s:a ><li selectedItem="false" class="optionItem" val="Korean"><s:text name="Korean"/></li></s:a>
+		         		<s:a ><li selectedItem="false" class="optionItem" val="Cantonese"><s:text name="Cantonese"/></li></s:a>
+		         		<s:a ><li selectedItem="false" class="optionItem" val="Taiwanese"><s:text name="Taiwanese"/></li></s:a>
+		         		<s:a ><li selectedItem="false" class="optionItem" val="German"><s:text name="German"/></li></s:a>
+		         		<s:a ><li selectedItem="false" class="optionItem" val="otherCategory"><s:text name="other"/></li></s:a>
+		         		<s:a ><li selectedItem="false" class="optionItem" val="AbsoluteMusic"><s:text name="AbsoluteMusic"/></li></s:a>
 		         	</ul>
 	         	</div>
 	         	<div class="letterBox">
 	         		<ul class="letter">
-	         			<s:a class="defaultStyleLink"><li class="hotItem"><s:text name="hot"/></li></s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">A</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">B</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">C</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">D</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">E</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">F</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">G</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">H</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">I</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">J</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">K</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">L</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">M</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">N</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">O</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">P</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">Q</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">R</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">S</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">T</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">U</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">V</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">W</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">X</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">Y</s:a>
-	         			<s:a class="defaultStyleLink"><li class="optionItem">Z</s:a>
-		         		<s:a class="defaultStyleLink"><li class="optionItem">#</s:a>
+	         			<s:a ><li selectedItem="true" class="hotItem" val="hot"><s:text name="hot"/></li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="A">A</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="B">B</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="C">C</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="D">D</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="E">E</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="F">F</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="G">G</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="H">H</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="I">I</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="J">J</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="K">K</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="L">L</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="M">M</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="N">N</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="O">O</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="P">P</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="Q">Q</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="R">R</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="S">S</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="T">T</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="U">U</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="V">V</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="W">W</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="X">X</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="Y">Y</li></s:a>
+	         			<s:a ><li selectedItem="false" class="optionItem" val="Z">Z</li></s:a>
+		         		<s:a ><li selectedItem="false" class="optionItem" val="#">#</li></s:a>
 		         	</ul>
 	         	</div>
 	         </div>

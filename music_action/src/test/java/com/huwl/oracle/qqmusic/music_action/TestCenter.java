@@ -14,6 +14,7 @@ import com.huwl.oracle.qqmusic.music_biz.AlbumBiz;
 import com.huwl.oracle.qqmusic.music_biz.IndexBiz;
 import com.huwl.oracle.qqmusic.music_biz.ListenerBiz;
 import com.huwl.oracle.qqmusic.music_biz.SingerBiz;
+import com.huwl.oracle.qqmusic.music_biz.SingerDiscoverBiz;
 import com.huwl.oracle.qqmusic.music_dao.AlbumDao;
 import com.huwl.oracle.qqmusic.music_dao.BaseDao;
 import com.huwl.oracle.qqmusic.music_dao.CompanyDao;
@@ -36,6 +37,7 @@ public class TestCenter {
 	private static AlbumBiz albumBiz;
 	private static ListenerBiz listenerBiz;
 	public static Query query;
+	private static SingerDiscoverBiz singerDiscoverBiz;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		ac=new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -49,6 +51,7 @@ public class TestCenter {
 		singerBiz=(SingerBiz) ac.getBean("singerBiz");
 		listenerDao=(ListenerDao) ac.getBean("listenerDao");
 		sessionFactory=(SessionFactory) ac.getBean("sessionFactory");
+		singerDiscoverBiz=(SingerDiscoverBiz) ac.getBean("singerDiscoverBiz");
 	}
 
 	@AfterClass
@@ -57,20 +60,8 @@ public class TestCenter {
 	}
 	@Test
 	public void testMusic(){
-		List<LanOfSinger> list=singerDao.query("FROM LanOfSinger");
-		for(LanOfSinger l:list){
-			String singerId=l.getSingerId();
-			String lanString=l.getLanguage();
-			Singer s=singerDao.getObjectById(singerId);
-			if(s!=null){
-				if(s.getLanguage()!=null && !"".equals(s.getLanguage()))
-					lanString=lanString+","+s.getLanguage();
-				System.out.println(singerId+","+lanString);
-				singerDao.updateByHql("update Singer s set s.language=? where s.singerId=?", lanString,singerId);
-			}else{
-				System.out.println("singer 未取到");
-			}
-		}
+		System.out.println(singerDiscoverBiz.getSingersCount("otherCategory", ""));;
+		
 	}
 	
 	

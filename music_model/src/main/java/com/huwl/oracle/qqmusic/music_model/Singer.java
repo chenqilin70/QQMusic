@@ -11,7 +11,14 @@ public class Singer {
 	private String head;
 	private String singerLabel;
 	private String language;
+	private String letter;
 	
+	public String getLetter() {
+		return letter;
+	}
+	public void setLetter(String letter) {
+		this.letter = letter;
+	}
 	public String getLanguage() {
 		return language;
 	}

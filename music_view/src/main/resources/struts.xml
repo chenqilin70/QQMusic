@@ -35,7 +35,7 @@
         	<allowed-methods>regex:.*</allowed-methods>
         </action>
         <action name="singer_discover" class="singerDiscoverAction">
-        	<result name="updateSingerList">/content/album_discover_content.jsp</result>
+        	<result name="updateSingerList">/content/singer_discover_content.jsp</result>
         	<result name="success">/content/singer_discover.jsp</result>
         	<allowed-methods>regex:.*</allowed-methods>
         </action>

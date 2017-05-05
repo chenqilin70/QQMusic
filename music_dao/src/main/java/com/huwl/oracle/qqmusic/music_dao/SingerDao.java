@@ -11,5 +11,6 @@ public interface SingerDao extends BaseDao<Singer>{
 	List<Singer> getSingersByGenresAndLanguage(String g, String lan,Integer limit);
 	boolean judgeIsCaredByOneListener(String listenerId, String singerId);
 	int addCareSinger(String loginedListenerId, String singerId);
+	Long getSingersCount(String letter,List<String> category);
 	
 }
