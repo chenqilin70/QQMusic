@@ -192,7 +192,6 @@
 	width: 1200px;
 }
 .conditionBox{
-	height: 175px;
 	width: 1198px;
 	max-width:1198px;
 	background-color: #fbfbfd;
@@ -206,7 +205,7 @@
 	list-style: none;
 }
 .categoryBox{
-	height:78px;
+	height:39px;
 }
 .optionItem{
 	float: left;
@@ -229,9 +228,11 @@
 	margin-bottom: 14px;
 }
 .letter{
-	margin: 7px 0px 0px 39px;;
+	margin: 7px 0px 20px 39px;;
 	padding: 0px;
 	list-style: none;
+	height: 39px;
+	
 }
 .letter .optionItem{
 	font-weight: 300;

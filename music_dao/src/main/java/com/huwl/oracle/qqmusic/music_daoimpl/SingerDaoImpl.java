@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.huwl.oracle.qqmusic.music_dao.SingerDao;
 import com.huwl.oracle.qqmusic.music_model.MusicVideo;
 import com.huwl.oracle.qqmusic.music_model.Singer;
+import com.huwl.oracle.qqmusic.music_util_model.PageBean;
 @Repository("singerDao")
 public class SingerDaoImpl extends BaseDaoImpl<Singer> implements SingerDao{
 	{
@@ -48,14 +49,46 @@ public class SingerDaoImpl extends BaseDaoImpl<Singer> implements SingerDao{
 	}
 	
 	@Override
-	public Long getSingersCount(String letter,List<String> category) {
-		StringBuffer hql=new StringBuffer("select count(*) from Singer s where ");
-		Iterator<String> it=category.iterator();
-		while (it.hasNext()) {
-			hql.append(" s.language like '%"+it.next()+"%' or ");
+	public Long getSingersCount(List<String> letter,List<String> category) {
+		StringBuffer hql=new StringBuffer("select count(*) from Singer s ");
+		String conditionHql=getConditionHql(letter, category);
+		hql.append(conditionHql);
+		System.out.println(hql);
+		return (Long) uniqueQuery(hql.toString());
+	}
+	
+	@Override
+	public List<Object[]> getSingerListByCondition(PageBean pageBean,List<String> categorys, List<String> letters) {
+		StringBuffer hql=new StringBuffer("select s.singerId,s.singerName from Singer s ");
+		String conditionHql=getConditionHql(letters, categorys);
+		hql.append(conditionHql);
+		System.out.println(hql);
+		return query(hql.toString(), pageBean.getPageSize(), pageBean.getPageNo());
+	}
+	
+	private String getConditionHql(List<String> letter,List<String> category){
+		int categorySize=category.size(),letterSize=letter.size();
+		StringBuffer hql= new StringBuffer(" where ");
+		if(categorySize==0 && letterSize==0){
+			hql=new StringBuffer(hql.substring(0, hql.lastIndexOf("where")));
+		}else{
+			if(categorySize!=0){
+				Iterator<String> it=category.iterator();
+				hql.append(" ( ");
+				while (it.hasNext()) {
+					hql.append(" (s.language like '%"+it.next()+"%') or ");
+				}
+				hql=new StringBuffer(hql.substring(0, hql.lastIndexOf("or")));
+				hql.append(" ) ");
+			}
+			if(categorySize!=0 && letterSize!=0){
+				hql.append(" and ( ");
+			}
+			if(letterSize!=0){
+				hql.append("s.letter='"+letter.get(0)+"' )");
+			}
 		}
-		System.out.println(hql.substring(0, hql.lastIndexOf("or")));
-		return (Long) uniqueQuery(hql.substring(0, hql.lastIndexOf("or")));
+		return hql.toString();
 	}
 	
 	

@@ -113,16 +113,17 @@ $(function(){
 		});
 	}
 	$(".conditionBox li").click(function(){
-		let $condition=$(".conditionBox");
-		let $conditioinUl=$(this).parent().parent();
-		let optionClass=$conditioinUl.attr("class");
-		changeItemToFalse($conditioinUl.find("li[selectedItem='true']"));
-		changeItemToTrue($(this));
-		updateSingerList(1,$(".category li[selectedItem='true']").attr("val"),$(".letter li[selectedItem='true']").attr("val"));
+		$(".singersBox").html("<img class='loading' alt='' src='/music_view/img/loading.gif'>");
+		let $this=$(this);
+		console.log($this[0]);
+		updateSingerList(1
+				,$(".category li[selectedItem='true']").attr("val")
+				,$(".letter li[selectedItem='true']").attr("val")
+				,$this);
 		return false;
 	});
 	
-	var updateSingerList=(function fun(pageNo,category,letter){
+	var updateSingerList=(function fun(pageNo,category,letter,$this){
 		function innerFunc(){
 			$.ajax({
 				url:"singer_discover!updateSingerList.action",
@@ -136,6 +137,11 @@ $(function(){
 					alert("请检查网络！");
 				},
 				success:function(data){
+					if($this){
+						let $conditioinUl=$this.parent().parent();
+						changeItemToFalse($conditioinUl.find("li[selectedItem='true']"));
+						changeItemToTrue($this);
+					}
 					$(".singersBox").html(data);
 				}
 			});

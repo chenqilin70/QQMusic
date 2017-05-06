@@ -1,0 +1,31 @@
+.nullImg{
+	padding-top: 88px;
+}
+.nothingBeFound{
+	font-size: 20px;
+	color:#666666;
+	text-align: center;
+	margin-top: 27px;
+}
+.topSingerTable{
+	table-layout: fixed;
+}
+.topSingerTable td{
+	height: 265px;
+	width: 244px;
+	position: relative;
+}
+.topSingerBox{
+	height: 245px;
+	width: 224px;
+	background-color: #fbfbfd;
+	position: absolute;
+	top:0;
+	left: 0;
+}
+.singerTable{
+	table-layout: fixed;
+}
+.singerTable td{
+	width: 244px;
+}

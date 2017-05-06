@@ -23,6 +23,7 @@ import com.huwl.oracle.qqmusic.music_dao.SingerDao;
 import com.huwl.oracle.qqmusic.music_model.LanOfSinger;
 import com.huwl.oracle.qqmusic.music_model.Listener;
 import com.huwl.oracle.qqmusic.music_model.Singer;
+import com.huwl.oracle.qqmusic.music_util_model.PageBean;
 
 public class TestCenter {
 	public static ClassPathXmlApplicationContext ac;
@@ -60,7 +61,11 @@ public class TestCenter {
 	}
 	@Test
 	public void testMusic(){
-		System.out.println(singerDiscoverBiz.getSingersCount("otherCategory", ""));;
+		List<Singer> list=singerDiscoverBiz.getSingerListByCondition(new PageBean(1000, 1, 10000), "Chinese", "Z");
+		System.out.println(list.size());
+		for(Singer s: list){
+			System.out.println(s.getSingerId()+","+s.getSingerName());
+		}
 		
 	}
 	

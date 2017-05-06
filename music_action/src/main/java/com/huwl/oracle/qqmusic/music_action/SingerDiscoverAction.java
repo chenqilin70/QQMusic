@@ -18,9 +18,18 @@ public class SingerDiscoverAction extends BaseAction {
 	private PageBean pageBean;
 	private String category;
 	private String letter;
+	private List<Singer> singerList;
 	@Autowired
 	private SingerDiscoverBiz singerDiscoverBiz;
 	
+	public List<Singer> getSingerList() {
+		return singerList;
+	}
+
+	public void setSingerList(List<Singer> singerList) {
+		this.singerList = singerList;
+	}
+
 	public String getCategory() {
 		return category;
 	}
@@ -77,7 +86,8 @@ public class SingerDiscoverAction extends BaseAction {
 	}	
 	public String updateSingerList() {
 		Long SingerCount=singerDiscoverBiz.getSingersCount(category,letter);
-//		pageBean=new PageBean(100, pageNo, objCount);
+		pageBean=new PageBean(100, pageNo, SingerCount.intValue());
+		singerList=singerDiscoverBiz.getSingerListByCondition(pageBean,category,letter);
 		return "updateSingerList";
 	}
 }
