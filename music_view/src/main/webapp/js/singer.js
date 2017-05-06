@@ -2,12 +2,12 @@ $(function(){
 	$(".musicPlace").attr("selectedItem","true");
 	$(".musicPlace").css("background-color","#31C27C").css("color","#fff");
 	
-	var singerHeads=document.getElementsByName("singerHead");
-	for(var h in singerHeads){
-		singerHeads[h].onerror=function(){
-			this.src="/music_view/img/singer_300.png";
-		};
-	}
+//	var singerHeads=document.getElementsByName("singerHead");
+//	for(var h in singerHeads){
+//		singerHeads[h].onerror=function(){
+//			this.src="/music_view/img/singer_300.png";
+//		};
+//	}
 	/*判断是否为最外面的元素被移出了*/
     function isWrapElement(e, thisElement) {
         $relatedElement = e.relatedTarget;

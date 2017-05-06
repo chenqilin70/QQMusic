@@ -58,8 +58,8 @@
 		</tbody>
 	</table>
 	
-	<!-- 数量大于30才会有翻页 -->
-	<s:if test="likeAlbumCount > 30">
+	<!-- 数量大于100才会有翻页 -->
+	<s:if test="likeAlbumCount > 100">
 		<div class="pageBtnBox">
 			<!-- 为首页时没有“上一页” -->
 			<s:if test="pageBean.prevPage >= 1">
@@ -80,7 +80,7 @@
 				</s:iterator>
 			</s:if>
 			<!-- 总页数大于8,则部分用省略号代替 -->
-			<s:if test="pageBean.pageCount >= 8">
+			<s:if test="pageBean.pageCount > 8">
 				<!-- 如果当前页小于3，则从1直接罗列到当前页 -->
 				<s:if test="pageBean.pageNo-1 <= 3">
 					<s:iterator begin="1" end="pageBean.pageNo"   var="p">

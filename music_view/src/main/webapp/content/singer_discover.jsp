@@ -113,7 +113,7 @@
 	         <div class="conditionBox">
 	         	<div class="categoryBox">
 	         		<ul class="category">
-	         			<s:a ><li selectedItem="true" class="AllItem" val="all"><s:text name="all"/></li></s:a>
+	         			<s:a ><li selectedItem="false" class="AllItem" val="all"><s:text name="all"/></li></s:a>
 		         		<s:a ><li selectedItem="false" class="optionItem" val="Chinese"><s:text name="Chinese"/></li></s:a>
 		         		<s:a ><li selectedItem="false" class="optionItem" val="English"><s:text name="English"/></li></s:a>
 		         		<s:a ><li selectedItem="false" class="optionItem" val="Japanese"><s:text name="Japanese"/></li></s:a>
@@ -127,7 +127,7 @@
 	         	</div>
 	         	<div class="letterBox">
 	         		<ul class="letter">
-	         			<s:a ><li selectedItem="true" class="hotItem" val="hot"><s:text name="hot"/></li></s:a>
+	         			<s:a ><li selectedItem="false" class="hotItem" val="hot"><s:text name="hot"/></li></s:a>
 	         			<s:a ><li selectedItem="false" class="optionItem" val="A">A</li></s:a>
 	         			<s:a ><li selectedItem="false" class="optionItem" val="B">B</li></s:a>
 	         			<s:a ><li selectedItem="false" class="optionItem" val="C">C</li></s:a>

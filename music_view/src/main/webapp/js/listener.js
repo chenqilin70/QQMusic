@@ -1,4 +1,13 @@
 $(function(){
+	/*判断是否为最外面的元素被移出了*/
+    function isWrapElement(e, thisElement) {
+        $relatedElement = e.relatedTarget;
+        if ($relatedElement == null) {
+            return true;
+        }
+        var flag = thisElement.compareDocumentPosition($relatedElement);
+        return !(flag == 0 || flag == 20);
+    }
 	$(".myMusic").attr("selectedItem","true")
 				.css("background-color","#31C27C").css("color","#fff");
 	$(".immediatelyLogin").click(function(){
@@ -53,4 +62,40 @@ $(function(){
 		});
 	}
 	changeModel(window.location.hash==""?"MYLIKE_MUSIC":window.location.hash.replace(/#/,""),1);
+	$(".profileImgBox").mouseover(function(e){
+		if(isWrapElement(e, this)){
+			$(".updateProfileImg").css("display","block");
+		}
+	});
+	$(".profileImgBox").mouseout(function(e){
+		if(isWrapElement(e, this)){
+			$(".updateProfileImg").css("display","none");
+		}
+	});
+	$(".updateProfileImg").click(function(){
+		$(".myChooser").trigger("click");
+	});
+	$(".myChooser").change(function(){
+		var windowURL = window.URL || window.webkitURL;//windowURL相当于一个资源管理器
+		var dataURL = windowURL.createObjectURL(this.files.item(0));
+		var $img=$(".image");
+		$img.attr('src', dataURL);
+		$(".chooserMask").css("display","block");
+	});
+	$(".closeEdit").click(function(){
+		$(".chooserMask").css("display","none");
+		$(".myChooser").val("");
+	});
+	 $(".closeEdit").mouseover(function(){
+    	$(this).css("background-position","-14px -200px");
+    });
+    $(".closeEdit").mouseout(function(){
+    	$(this).css("background-position","0px -200px");
+    });
 });
+
+
+
+
+
+

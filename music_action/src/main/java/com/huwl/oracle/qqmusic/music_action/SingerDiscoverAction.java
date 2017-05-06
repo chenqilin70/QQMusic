@@ -88,6 +88,7 @@ public class SingerDiscoverAction extends BaseAction {
 		Long SingerCount=singerDiscoverBiz.getSingersCount(category,letter);
 		pageBean=new PageBean(100, pageNo, SingerCount.intValue());
 		singerList=singerDiscoverBiz.getSingerListByCondition(pageBean,category,letter);
+		System.out.println(pageBean);
 		return "updateSingerList";
 	}
 }

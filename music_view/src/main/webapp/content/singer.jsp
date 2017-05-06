@@ -19,6 +19,11 @@
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/singer.css" >
         <script type="text/javascript" src="<%=request.getContextPath()%>/js/singer.js"></script>
         <!-- 本页js和css，结束 -->
+		<script type="text/javascript">
+			function changeErrorImg(element){
+				element.src="/music_view/img/singer_300.png";
+			}
+		</script>
     </head>
     <body>
     <!-- 用于快速回到开头 -->
@@ -30,7 +35,7 @@
          <div class="container" align="center">
          	<div class="singerContent">
          		<div class="singerInfo"  align="left">
-         			<img class="singerHead"   name="singerHead"  
+         			<img class="singerHead"   name="singerHead"   onerror="changeErrorImg(this)"
          				src="<s:text name='img_repository_path'></s:text>/singer_head/<s:property  value="singerId"/>.jpg"/>
          			<div class="singerBaseInfo">
          				<div class="singerName">
@@ -214,7 +219,7 @@
 		         					<s:a action="singer">
 		         						<s:param name="<s:property value='#s.singerId' />"></s:param>
 			         					<img 
-			         						alt=""  class="similarSingerHead" name="singerHead" 
+			         						alt=""  class="similarSingerHead" name="singerHead"   onerror="changeErrorImg(this)" 
 			         						src="<s:text name='img_repository_path'/>/singer_head/<s:property  value='#s.singerId'/>.jpg"">
 		         					</s:a>
 		         					<div class="similarSingerName">

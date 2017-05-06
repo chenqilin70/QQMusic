@@ -21,6 +21,60 @@
         <!-- 模块css开始 -->
         <link rel="stylesheet" type="text/css" id="modelCss" href="" >
         <!-- 模块css结束 -->
+        <!-- 插件开始 -->
+        <script type="text/javascript" src="<%=request.getContextPath()%>/js/cropper.js"></script>
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/cropper.css" >
+        <!-- 插件结束 -->
+        <script type="text/javascript">
+        function getRoundedCanvas(sourceCanvas,length) {
+            var canvas = document.createElement('canvas');
+            var context = canvas.getContext('2d');
+            var width = length;
+            var height = length;
+            canvas.width = width;
+            canvas.height = height;
+            context.beginPath();
+            context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI);
+            context.strokeStyle = 'rgba(0,0,0,0)';
+            context.stroke();
+            context.clip();
+            context.drawImage(sourceCanvas, 0, 0, width, height);
+
+            return canvas;
+          }
+        	function newHeadLoad(){
+        		var $this=$(".chooserMask .image");
+        		var $big=$(".bigDisplay");
+        		var $meddle=$(".meddleDisplay");
+        		var $small=$(".smallDisplay");
+        		var croppable=false;
+        		$this.cropper({
+        	        aspectRatio: 1,
+        	        viewMode: 1,
+        	        ready: function () {
+        	          croppable = true;
+        	        },
+        			cropmove:function(){
+        				var cropBoxData = $this.cropper('getCropBoxData');
+        				console.log(cropBoxData)
+        				var croppedCanvas;
+        		        var roundedCanvas;
+        		        if (!croppable) {
+        		          return;
+        		        }
+        		        // Crop
+        		        croppedCanvas = $this.cropper('getCroppedCanvas');
+        		        // Round
+        		        roundedCanvas = getRoundedCanvas(croppedCanvas);
+        		        // Show
+        		        $big.find("img").attr("src",getRoundedCanvas(croppedCanvas,150).toDataURL());
+        		        $meddle.find("img").attr("src",getRoundedCanvas(croppedCanvas,100).toDataURL());
+        		        $small.find("img").attr("src",getRoundedCanvas(croppedCanvas,50).toDataURL());
+        		        
+        			}
+        	      });
+        	}
+        </script>
     </head>
     <body >
     <!-- 用于快速回到开头 -->
@@ -38,12 +92,21 @@
         </s:if>
         <s:else>
         	<div class="listenerProfile" align="center">
-        		<img class="profileImg" alt="" src="<s:text name="img_repository_path"/>/listener_head/<s:property value='#session.listener.listenerHead==""?"default.jpg":#session.listener.listenerHead'/>">
+        		<div class="profileImgBox">
+        			<img class="profileImg" alt="" src="<s:text name="img_repository_path"/>/listener_head/<s:property value='#session.listener.listenerHead==""?"default.jpg":#session.listener.listenerHead'/>">
+	        		<div class="updateProfileImg" align="center">
+	        		
+	        		<span>
+	        			<s:text name="updateProfileImg"></s:text>
+	        			</span>
+	        		</div>
+	        	</div>
 	        	<div>
 	        		<span class="profileUsername"><s:property value="#session.listener.username"/></span>
 	        		<i class="profileIcon1 profileIcon"></i>
 	        		<i class="profileIcon2 profileIcon"></i>
 	        	</div>
+	        	<input type="file" class="myChooser" >
 	        	<div align="center">
 	        		<ul class="profileItem">
 	        			<li class="first">
@@ -80,9 +143,30 @@
         		</div>
         	</div>
         </s:else>
-	        <!-- 固定Div开始 -->
-	        <jsp:include page="/fixed_div.jsp"></jsp:include>
-	        <!-- 固定Div结束 -->
+        <div class="chooserMask" align="center">
+        	<div class="imgEditorWin" align="left">
+        	<div class="mainAreaTitle">
+        		<s:text name="editImg"></s:text>
+        		<i class="closeEdit"></i>
+        	</div>
+        		<div class="mainArea">
+        			<img class="image" onload="newHeadLoad()" alt="" src="">
+        		</div>
+        		<div class="bigDisplay">
+        			<img src=""/>
+        		</div>
+        		<div class="meddleDisplay">
+        			<img src=""/>
+        		</div>
+        		<div class="smallDisplay">
+        			<img src=""/>
+        		</div>
+        		<div class="submitHead"></div>
+        	</div>
+        </div>
+        <!-- 固定Div开始 -->
+        <jsp:include page="/fixed_div.jsp"></jsp:include>
+        <!-- 固定Div结束 -->
         <!-- 主体，结束 -->
         <!-- 模板尾，开始 -->
         <jsp:include page="/foot.jsp"></jsp:include>
