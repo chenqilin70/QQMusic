@@ -1,8 +1,15 @@
 package com.huwl.oracle.qqmusic.music_action;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -25,7 +32,65 @@ public class ListenerAction   extends BaseAction{
 	private List<Album> likeAlbum;
 	private PageBean pageBean;
 	private Integer pageNo;
+	private File upload;
+    private String uploadContentType;
+    private String uploadFileName;
+    private String message,height,width,top,left,imageName;
 	
+	public String getImageName() {
+		return imageName;
+	}
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+	public String getHeight() {
+		return height;
+	}
+	public void setHeight(String height) {
+		this.height = height;
+	}
+	public String getWidth() {
+		return width;
+	}
+	public void setWidth(String width) {
+		this.width = width;
+	}
+	public String getTop() {
+		return top;
+	}
+	public void setTop(String top) {
+		this.top = top;
+	}
+	public String getLeft() {
+		return left;
+	}
+	public void setLeft(String left) {
+		this.left = left;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public File getUpload() {
+		return upload;
+	}
+	public void setUpload(File upload) {
+		this.upload = upload;
+	}
+	public String getUploadContentType() {
+		return uploadContentType;
+	}
+	public void setUploadContentType(String uploadContentType) {
+		this.uploadContentType = uploadContentType;
+	}
+	public String getUploadFileName() {
+		return uploadFileName;
+	}
+	public void setUploadFileName(String uploadFileName) {
+		this.uploadFileName = uploadFileName;
+	}
 	public PageBean getPageBean() {
 		return pageBean;
 	}
@@ -113,6 +178,18 @@ public class ListenerAction   extends BaseAction{
 	public String execute() throws Exception {
 		injectUnAndPd();
 		return SUCCESS;
+	}
+	public String uploadHead(){
+		message=listenerBiz.uploadImg(getRequest().getServletContext().getRealPath("")
+					,upload,getLoginedListenerId(),imageName,height,width,top,left);
+		
+		return "uploadHead";
+	}
+	@Override
+	public String input() throws Exception {
+		System.out.println("执行了input操作");
+		inputStream=new ByteArrayInputStream("true".getBytes());
+		return super.input();
 	}
 	
 

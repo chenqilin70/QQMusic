@@ -24,6 +24,7 @@
         <!-- 插件开始 -->
         <script type="text/javascript" src="<%=request.getContextPath()%>/js/cropper.js"></script>
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/cropper.css" >
+        <script type="text/javascript" src="<%=request.getContextPath()%>/js/ajaxfileupload.js"></script>
         <!-- 插件结束 -->
         <script type="text/javascript">
         function getRoundedCanvas(sourceCanvas,length) {
@@ -48,32 +49,38 @@
         		var $meddle=$(".meddleDisplay");
         		var $small=$(".smallDisplay");
         		var croppable=false;
+        		
         		$this.cropper({
         	        aspectRatio: 1,
         	        viewMode: 1,
         	        ready: function () {
         	          croppable = true;
+        	          cropmove($this,$big,$meddle,$small,croppable);
         	        },
         			cropmove:function(){
-        				var cropBoxData = $this.cropper('getCropBoxData');
-        				console.log(cropBoxData)
-        				var croppedCanvas;
-        		        var roundedCanvas;
-        		        if (!croppable) {
-        		          return;
-        		        }
-        		        // Crop
-        		        croppedCanvas = $this.cropper('getCroppedCanvas');
-        		        // Round
-        		        roundedCanvas = getRoundedCanvas(croppedCanvas);
-        		        // Show
-        		        $big.find("img").attr("src",getRoundedCanvas(croppedCanvas,150).toDataURL());
-        		        $meddle.find("img").attr("src",getRoundedCanvas(croppedCanvas,100).toDataURL());
-        		        $small.find("img").attr("src",getRoundedCanvas(croppedCanvas,50).toDataURL());
-        		        
+        				cropmove($this,$big,$meddle,$small,croppable)
         			}
         	      });
         	}
+        	function cropmove($this,$big,$meddle,$small,croppable){
+        		var cropBoxData = $this.cropper('getCropBoxData');
+				$("#imgOffset").val(JSON.stringify(cropBoxData));
+				var croppedCanvas;
+		        var roundedCanvas;
+		        if (!croppable) {
+		          return;
+		        }
+		        // Crop
+		        croppedCanvas = $this.cropper('getCroppedCanvas');
+		        // Round
+		        roundedCanvas = getRoundedCanvas(croppedCanvas);
+		        // Show
+		       
+		        $big.find("img").attr("src",getRoundedCanvas(croppedCanvas,150).toDataURL());
+		        $meddle.find("img").attr("src",getRoundedCanvas(croppedCanvas,100).toDataURL());
+		        $small.find("img").attr("src",getRoundedCanvas(croppedCanvas,50).toDataURL());
+        	}
+        	
         </script>
     </head>
     <body >
@@ -106,7 +113,7 @@
 	        		<i class="profileIcon1 profileIcon"></i>
 	        		<i class="profileIcon2 profileIcon"></i>
 	        	</div>
-	        	<input type="file" class="myChooser" >
+	        	
 	        	<div align="center">
 	        		<ul class="profileItem">
 	        			<li class="first">
@@ -161,7 +168,16 @@
         		<div class="smallDisplay">
         			<img src=""/>
         		</div>
-        		<div class="submitHead"></div>
+        		<div class="rechoose"><s:text name="rechoose"/></div>
+        		<s:form theme="simple" >
+        			<s:file name="upload" id="myChooser" class="myChooser"></s:file>
+        			<input name="offset" type="hidden" id="imgOffset" value=""/>
+        			<div class="submitHead"><s:text name="submit"></s:text></div>
+        			<!-- 
+        			<s:submit class="submitHead" value="%{getText('submit')}"></s:submit>
+        			 -->
+        		</s:form>
+        		
         	</div>
         </div>
         <!-- 固定Div开始 -->

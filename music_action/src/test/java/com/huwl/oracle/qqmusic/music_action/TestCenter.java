@@ -1,6 +1,10 @@
 package com.huwl.oracle.qqmusic.music_action;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
 import org.hibernate.Query;
@@ -39,20 +43,22 @@ public class TestCenter {
 	private static ListenerBiz listenerBiz;
 	public static Query query;
 	private static SingerDiscoverBiz singerDiscoverBiz;
+	public static BigDecimal BOX_WIDTH=new BigDecimal("600")
+	,BOX_HEIGHT=new BigDecimal("450");
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-		albumDao=(AlbumDao) ac.getBean("albumDao");
-		baseDao=(BaseDao) ac.getBean("baseDao");
-		singerDao=(SingerDao)ac.getBean("singerDao");
-		companyDao=(CompanyDao) ac.getBean("companyDao");
-		indexBiz=(IndexBiz) ac.getBean("indexBiz");
-		albumBiz=(AlbumBiz) ac.getBean("albumBiz");
-		listenerBiz=(ListenerBiz) ac.getBean("listenerBiz");
-		singerBiz=(SingerBiz) ac.getBean("singerBiz");
-		listenerDao=(ListenerDao) ac.getBean("listenerDao");
-		sessionFactory=(SessionFactory) ac.getBean("sessionFactory");
-		singerDiscoverBiz=(SingerDiscoverBiz) ac.getBean("singerDiscoverBiz");
+//		ac=new ClassPathXmlApplicationContext("applicationContext.xml");
+//		albumDao=(AlbumDao) ac.getBean("albumDao");
+//		baseDao=(BaseDao) ac.getBean("baseDao");
+//		singerDao=(SingerDao)ac.getBean("singerDao");
+//		companyDao=(CompanyDao) ac.getBean("companyDao");
+//		indexBiz=(IndexBiz) ac.getBean("indexBiz");
+//		albumBiz=(AlbumBiz) ac.getBean("albumBiz");
+//		listenerBiz=(ListenerBiz) ac.getBean("listenerBiz");
+//		singerBiz=(SingerBiz) ac.getBean("singerBiz");
+//		listenerDao=(ListenerDao) ac.getBean("listenerDao");
+//		sessionFactory=(SessionFactory) ac.getBean("sessionFactory");
+//		singerDiscoverBiz=(SingerDiscoverBiz) ac.getBean("singerDiscoverBiz");
 	}
 
 	@AfterClass
@@ -61,12 +67,7 @@ public class TestCenter {
 	}
 	@Test
 	public void testMusic(){
-		List<Singer> list=singerDiscoverBiz.getSingerListByCondition(new PageBean(1000, 1, 10000), "Chinese", "Z");
-		System.out.println(list.size());
-		for(Singer s: list){
-			System.out.println(s.getSingerId()+","+s.getSingerName());
-		}
-		
+		System.out.println(BOX_WIDTH.divide(BOX_HEIGHT,10,BigDecimal.ROUND_HALF_DOWN));
 	}
 	
 	

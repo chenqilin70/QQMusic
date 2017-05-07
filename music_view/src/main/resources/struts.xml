@@ -6,7 +6,7 @@
     <constant name="struts.devMode" value="true"></constant>
     <constant name="struts.custom.i18n.resources" value="global" />
     <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
-    
+    <constant name="struts.multipart.maxSize" value="5242880"></constant>
     <package name="qqmusic" extends="struts-default">
     	<result-types>
         	<result-type name="json" class="org.apache.struts2.json.JSONResult"></result-type>
@@ -51,6 +51,10 @@
         	<result name="MYLIKE_ALBUM">/content/listener_model/mylike_album.jsp</result>
         	<result name="MYLIKE_MENU">/content/listener_model/mylike_menu.jsp</result>
         	<result name="MYLIKE_MV">/content/listener_model/mylike_mv.jsp</result>
+        	<result name="uploadHead" type="json" >
+        		<param name="root">message</param>
+        	</result>
+        	<result name="input">/error.jsp</result>
         	<result name="unLogin" type="stream">
         		<param name="inputName">inputStream</param>
         	</result>
