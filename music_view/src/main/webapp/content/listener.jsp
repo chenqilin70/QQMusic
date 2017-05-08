@@ -54,7 +54,10 @@
         	        viewMode: 1, 
         	        ready: function () {
         	          croppable = true;
-        	          cropmove($this,$big,$meddle,$small,croppable);
+        	          setTimeout(function(){
+        	        	  cropmove($this,$big,$meddle,$small,croppable);
+        	          }, 200);
+        	          
         	        },
         			cropmove:function(){
         				cropmove($this,$big,$meddle,$small,croppable)
@@ -102,9 +105,8 @@
         		<div class="profileImgBox">
         			<img class="profileImg" alt="" src="<%=request.getContextPath() %>/img/listener_head/<s:property value='#session.listener.listenerHead==""?"default.jpg":#session.listener.listenerHead'/>">
 	        		<div class="updateProfileImg" align="center">
-	        		
-	        		<span>
-	        			<s:text name="updateProfileImg"></s:text>
+	        			<span>
+	        				<s:text name="updateProfileImg"></s:text>
 	        			</span>
 	        		</div>
 	        	</div>

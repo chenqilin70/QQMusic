@@ -72,7 +72,7 @@ $(function(){
 		}
 	});
 	$(".updateProfileImg").click(function(){
-		$(".myChooser").trigger("click");
+		$(".myChooser").attr("from","profile").trigger("click");
 	});
 	var globalFiles,isFake=false;
 	function chooserChange(fileElement){
@@ -86,10 +86,13 @@ $(function(){
 		var fileName=file.name;
 		var ext=fileName.substring(fileName.lastIndexOf(".")+1).toUpperCase();
 		if(ext!=='GIF' && ext!=='JPG' && ext!=='BMP' && ext!=='PNG' && ext!=='JPEG'){
-			if(globalFiles){
-				isFake=true;
+//			if(globalFiles){
+//				isFake=true;
+//			}
+			if("rechoose"==$(".myChooser").attr("from")){
+				fileElement.files=globalFiles;
 			}
-			fileElement.files=globalFiles;
+			
 			var $messageDiv=$(".fileMessage");
 			var $messageBg=$(".messageBg");
 			$messageDiv.css("display","block").animate({
@@ -117,11 +120,11 @@ $(function(){
 			
 			return false;
 		}else{
-			if(isFake){
-				alert("图片被拦截")
-				isFake=false;
-				return;
-			}
+//			if(isFake){
+//				alert("图片被拦截")
+//				isFake=false;
+//				return;
+//			}
 			var windowURL = window.URL || window.webkitURL;//windowURL相当于一个资源管理器
 			var dataURL = windowURL.createObjectURL(fileElement.files.item(0));
 			$(".mainArea").html("").prepend("<img class='image' onload='newHeadLoad()' alt='' src='"+dataURL+"'>");
@@ -152,7 +155,7 @@ $(function(){
     	$(this).css("background-color","#31c27c");
     });
     $(".rechoose").click(function(){
-    	$(".myChooser").trigger("click");
+    	$(".myChooser").attr("from","rechoose").trigger("click");
     });
     $(".chooserMask").click(function(e){
     	var $relatedElement=e.target || event.srcElement;
