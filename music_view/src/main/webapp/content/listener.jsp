@@ -49,7 +49,6 @@
         		var $meddle=$(".meddleDisplay");
         		var $small=$(".smallDisplay");
         		var croppable=false;
-        		
         		$this.cropper({
         	        aspectRatio: 1,
         	        viewMode: 1,
@@ -68,6 +67,7 @@
 				var croppedCanvas;
 		        var roundedCanvas;
 		        if (!croppable) {
+		        	console.log("croppable is false;")
 		          return;
 		        }
 		        // Crop
@@ -100,7 +100,7 @@
         <s:else>
         	<div class="listenerProfile" align="center">
         		<div class="profileImgBox">
-        			<img class="profileImg" alt="" src="<s:text name="img_repository_path"/>/listener_head/<s:property value='#session.listener.listenerHead==""?"default.jpg":#session.listener.listenerHead'/>">
+        			<img class="profileImg" alt="" src="<%=request.getContextPath() %>/img/listener_head/<s:property value='#session.listener.listenerHead==""?"default.jpg":#session.listener.listenerHead'/>">
 	        		<div class="updateProfileImg" align="center">
 	        		
 	        		<span>
@@ -150,6 +150,10 @@
         		</div>
         	</div>
         </s:else>
+        <div class="fileMessage" align="center">
+        	<div class="messageBg"></div>
+        	<div class="messageText"><s:text name="fileMessage"/></div>
+        </div>
         <div class="chooserMask" align="center">
         	<div class="imgEditorWin" align="left">
         	<div class="mainAreaTitle">
@@ -172,7 +176,10 @@
         		<s:form theme="simple" >
         			<s:file name="upload" id="myChooser" class="myChooser"></s:file>
         			<input name="offset" type="hidden" id="imgOffset" value=""/>
-        			<div class="submitHead"><s:text name="submit"></s:text></div>
+        			<div class="submitHead">
+        				<s:text name="submit"></s:text>
+        			</div>
+        			<div  class="uploadWaiting"></div>
         			<!-- 
         			<s:submit class="submitHead" value="%{getText('submit')}"></s:submit>
         			 -->

@@ -94,4 +94,10 @@ public class ListenerDaoImpl  extends BaseDaoImpl<Listener> implements ListenerD
 	public List<Singer> getFocusSinger(Serializable listenerId,Integer limit) {
 		return query("select s from Listener l left join l.creaSinger s where l.listenerId=?", limit, listenerId);
 	}
+
+	@Override
+	public boolean updateListenerHead(String fileName,String listenerId) {
+		int flag=updateByHql("update Listener l set l.listenerHead=? where l.listenerId=?", fileName,listenerId);
+		return (flag==1)?true:false;
+	}
 }

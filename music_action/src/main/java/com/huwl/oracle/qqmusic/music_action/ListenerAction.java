@@ -181,7 +181,7 @@ public class ListenerAction   extends BaseAction{
 	}
 	public String uploadHead(){
 		message=listenerBiz.uploadImg(getRequest().getServletContext().getRealPath("")
-					,upload,getLoginedListenerId(),imageName,height,width,top,left);
+					,upload,getLoginedListener(),imageName,height,width,top,left);
 		
 		return "uploadHead";
 	}

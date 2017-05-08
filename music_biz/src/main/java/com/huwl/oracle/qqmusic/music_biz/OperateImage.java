@@ -33,8 +33,15 @@ public class OperateImage {
     // ===剪切点宽度  
     private int width;  
     private int height;  
-  
-    public OperateImage() {  
+    
+    private String type;
+    public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public OperateImage() {  
     }  
   
     public OperateImage(int x, int y, int width, int height) {  
@@ -65,7 +72,7 @@ public class OperateImage {
              * (例如 "jpeg" 或 "tiff")等 。 
              */  
             Iterator<ImageReader> it = ImageIO  
-                    .getImageReadersByFormatName("jpg");  
+                    .getImageReadersByFormatName(type);  
   
             ImageReader reader = it.next();  
   
@@ -118,9 +125,9 @@ public class OperateImage {
              * 它作为一个完整的 BufferedImage 返回。 
              */  
             BufferedImage bi = reader.read(0, param);  
-  
             // 保存新图片  
-            ImageIO.write(bi, "jpg", new File(subpath));  
+            ImageIO.write(bi, type, new File(subpath));  
+            
         } finally {  
             if (is != null)  
                 is.close();  
@@ -130,12 +137,6 @@ public class OperateImage {
   
     }  
       
-    public static void main(String[] args) throws Exception {  
-        String name = "D:\\1.jpg";  
-        OperateImage o = new OperateImage(-100, 100, 100, 100);  
-        o.setSrcpath(name);  
-        o.setSubpath("D:\\11.jpg");  
-        o.cut();  
-    }  
+    
   
 }  

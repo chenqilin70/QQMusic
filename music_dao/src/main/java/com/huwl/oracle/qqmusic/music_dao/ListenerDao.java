@@ -30,4 +30,6 @@ public interface ListenerDao  extends BaseDao<Listener>{
 
 	List<Singer> getFocusSinger(Serializable listenerId,Integer limit);
 
+	boolean updateListenerHead(String fileName,String listenerId);
+
 }

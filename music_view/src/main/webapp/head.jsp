@@ -44,9 +44,9 @@
 				<s:else>
 				<input type="hidden" id="isLogin" value="true"/>
 					<div class="lisenerHeadBox" align="center">
-						<img src="<s:text name='img_repository_path'/>/listener_head/<s:property value='#session.listener.listenerHead==""?"default.jpg":#session.listener.listenerHead'/>" alt='' class='userHeadInHead'>
+						<img src="<%=request.getContextPath() %>/img/listener_head/<s:property value='#session.listener.listenerHead==""?"default.jpg":#session.listener.listenerHead'/>" alt='' class='userHeadInHead'>
 						<div class="listenerInfoBox" align="left">
-							<img class="lisenerHead" alt="" src="<s:text name='img_repository_path'/>/listener_head/<s:property value='#session.listener.listenerHead'/>">
+							<img class="lisenerHead" alt="" src="<%=request.getContextPath() %>/img/listener_head/<s:property value='#session.listener.listenerHead'/>">
 							<div class="lisenerNameInfo"><s:a class="defaultStyleLink"><s:property value='#session.listener.username'/></s:a></div>
 							<img class="IconInfo1" src="<%=request.getContextPath() %>/img/svip_g.png" alt="" >
 							<img  class="IconInfo2" src="<%=request.getContextPath() %>/img/sui_g.png" alt="" >

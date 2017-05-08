@@ -74,11 +74,63 @@ $(function(){
 	$(".updateProfileImg").click(function(){
 		$(".myChooser").trigger("click");
 	});
+	var globalFiles,isFake=false;
 	function chooserChange(fileElement){
-		var windowURL = window.URL || window.webkitURL;//windowURL相当于一个资源管理器
-		var dataURL = windowURL.createObjectURL(fileElement.files.item(0));
-		$(".mainArea").html("").prepend("<img class='image' onload='newHeadLoad()' alt='' src='"+dataURL+"'>");
-		$(".chooserMask").css("display","block");
+		console.log("dd")
+		var file=fileElement.files[0];
+		if(!file){
+			console.log("如果没有选文件，则设置为全局");
+			fileElement.files=globalFiles;
+			return;
+		}
+		var fileName=file.name;
+		var ext=fileName.substring(fileName.lastIndexOf(".")+1).toUpperCase();
+		if(ext!=='GIF' && ext!=='JPG' && ext!=='BMP' && ext!=='PNG' && ext!=='JPEG'){
+			if(globalFiles){
+				isFake=true;
+			}
+			fileElement.files=globalFiles;
+			var $messageDiv=$(".fileMessage");
+			var $messageBg=$(".messageBg");
+			$messageDiv.css("display","block").animate({
+				opacity:"1"
+			},'fast',function(){
+				setTimeout(function(){
+					$messageDiv.animate({
+						opacity:"0"
+					},'fast',function(){
+						$messageDiv.css("display","none");
+					});
+				}, 3000);
+			});
+			$messageBg.css("display","block").animate({
+				opacity:"0.8"
+			},'fast',function(){
+				setTimeout(function(){
+					$messageBg.animate({
+						opacity:"0"
+					},'fast',function(){
+						$messageBg.css("display","none")
+					});
+				}, 3000);
+			});
+			
+			return false;
+		}else{
+			if(isFake){
+				alert("图片被拦截")
+				isFake=false;
+				return;
+			}
+			var windowURL = window.URL || window.webkitURL;//windowURL相当于一个资源管理器
+			var dataURL = windowURL.createObjectURL(fileElement.files.item(0));
+			$(".mainArea").html("").prepend("<img class='image' onload='newHeadLoad()' alt='' src='"+dataURL+"'>");
+			console.log("1111111111111111");
+			$(".chooserMask").css("display","block");
+			globalFiles=fileElement.files;
+		}
+		
+		
 	}
 	$(".myChooser").change(function(){
 		chooserChange(this);
@@ -110,9 +162,12 @@ $(function(){
     		$(".myChooser").val("");
     	}
     });
-    $(".submitHead").click(function(){
+    function submitHeadFunc(){
     	var offset=JSON.parse($("#imgOffset").val());
-    	console.log();
+    	var $submitBtn=$(".submitHead");
+    	var $uploadWaiting=$(".uploadWaiting");
+    	$submitBtn.css("display","none");
+    	$uploadWaiting.css("display","block");
     	$.ajaxFileUpload
         (
             {
@@ -127,21 +182,28 @@ $(function(){
                 	imageName:document.getElementById("myChooser").files[0].name
                 },
                 dataType: 'json',//返回值类型 一般设置为json
-                success: function (data)  //服务器成功响应处理函数
+                success: function (data,status)  //服务器成功响应处理函数
                 {
-                    var json=JSON.parse(data);
-                    console.log(json)
+                	var message=JSON.parse(data);
+                	$submitBtn.css("display","block");
+                	$uploadWaiting.css("display","none");
+                	$(".chooserMask").css("display","none");
+                	if(message.isSuccess){
+                		$(".profileImg , .userHeadInHead").attr("src","/music_view/img/listener_head/"+message.head+"?time="+new Date().getTime());
+                	}else{
+                		alert("请检查网络");
+                	}
                 },
-                error: function (data)//服务器响应失败处理函数
+                error: function (data, status, e)//服务器响应失败处理函数
                 {
-                    alert("network is wrong");
+                	alert("请检查网络");
                 }
             }
-        )
+        );
         $(".myChooser").unbind("change").change(function(){
-    		chooserChange(this);
+    		 chooserChange(this);
     	});
-      
+        $(".submitHead").one("click",submitHeadFunc);
 //    	var xhr = new XMLHttpRequest();
 //    	var fileInput = $(".myChooser")[0];
 //    	var file = fileInput.files[0];
@@ -159,7 +221,8 @@ $(function(){
 //    	}
 //    	xhr.send(formData);
 //    	xhr = null;
-    });
+    }
+    $(".submitHead").one("click",submitHeadFunc);
 });
 
 
