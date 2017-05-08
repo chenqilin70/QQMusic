@@ -51,7 +51,7 @@
         		var croppable=false;
         		$this.cropper({
         	        aspectRatio: 1,
-        	        viewMode: 1,
+        	        viewMode: 1, 
         	        ready: function () {
         	          croppable = true;
         	          cropmove($this,$big,$meddle,$small,croppable);
