@@ -34,6 +34,16 @@ public class MusicDaoImpl  extends BaseDaoImpl<Music> implements MusicDao{
 		return query("SELECT m FROM Music m left join m.album a left join a.singer s WHERE s.singerId=?"
 				, singerId);
 	}
+
+	@Override
+	public List<Object[]> getPlayList(String[] ids) {
+		StringBuffer hql=new StringBuffer("select m.musicId, m.musicName,a.albumId,a.albumName,s.singerId,s.singerName from Music m left join m.album a left join a.singer s where ");
+		for(String id:ids){
+			hql.append("m.musicId=? or ");
+		}
+		String hqlResult=hql.substring(0, hql.lastIndexOf("or"));
+		return query(hqlResult, ids);
+	}
 	
 
 

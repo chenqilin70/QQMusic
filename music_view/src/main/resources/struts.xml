@@ -19,6 +19,9 @@
     		<exception-mapping result="500" exception="java.lang.Exception"></exception-mapping>
     	</global-exception-mappings>
     	 -->
+    	 <action name="player" class="playerAction">
+    	 	<result name="success">/content/player.jsp</result>
+    	 </action>
         <action name="index" class="indexAction">
             <result name="success">/content/index.jsp</result>
         </action>

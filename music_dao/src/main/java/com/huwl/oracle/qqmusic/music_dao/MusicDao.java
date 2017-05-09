@@ -8,4 +8,5 @@ public interface MusicDao extends BaseDao<Music>{
 	Long getMusicCountBySinger(String singerId);
 	List<Music> getMusicListBySinger(String singerId , Integer limit);
 	List<Music> getMusicListBySinger(String singerId);
+	List<Object[]> getPlayList(String[] ids);
 }

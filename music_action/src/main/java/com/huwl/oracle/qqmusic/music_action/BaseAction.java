@@ -95,6 +95,19 @@ public class BaseAction extends ActionSupport implements SessionAware{
 		setUsernameInCookie(getCookieValue("username"));
 		setPasswordInCookie(getCookieValue("password"));
 	}
+	/**
+	 * 根据cookie的名字返回相应的值
+	 */
+	protected String getCookieValueByName(String name){
+		if(name==null || name.isEmpty()) return null;
+		Cookie[] cookies=getRequest().getCookies();
+		for(Cookie c:cookies){
+			if(name.equals(c.getName())){
+				return c.getValue();
+			}
+		}
+		return null;
+	}
 	
 	
 
