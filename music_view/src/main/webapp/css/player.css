@@ -1,11 +1,14 @@
+*{
+	font-family:  "Microsoft YaHei";
+	color:#ffffff;
+}
 .playerBg{
 	position: fixed;
 	width: 100%;
 	height: 100%;
-	border:1px solid red;
 	top:0;
 	left:0;
-	background-image:url(../img/qqmusic_img_repository/album_head/T002R300x300M0000001QUHr0ZY6kM.jpg);
+	background-image:url(../img/qqmusic_img_repository/album_head/T002R300x300M000000xYkHr2VLAZ4.jpg);
 	background-repeat: no-repeat;
 	background-size:cover;
 	background-position: 50% 50%;
@@ -16,4 +19,197 @@
 .bgMask{
 	width: 100%;
 	height: 100%;
+	background-color:rgba(60,60,60,0.5);
 }
+.QQMusicLink{
+	height:21px;
+	width:78px;
+	float: left;
+	font-weight: 300;
+	margin-left: 20px;
+	margin-top: 20px;
+	background-image:url(../img/player_logo.png);
+	opacity:0.3;
+}
+.contentContainer{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top:0;
+	left:0;
+}
+.login , .setting{
+	float: right;
+	margin-top: 25px;
+	font-size: 14px;
+	opacity:0.3
+}
+.login{
+	margin-right: 13px;
+}
+.setting{
+	margin-right: 65px;
+}
+.centerBox{
+	position:fixed;
+	height: 81%;
+	width: 84.5%;
+	top:11%;
+	left:7.5%;
+	border:1px solid red;
+	min-width: 1010px;
+}
+.optBtn{
+	width: 120px;
+	height: 38px;
+	margin-right: 10px;
+	float: left;
+	border-radius:3px;
+	position: relative;
+}
+.btnBorder{
+	height: 100%;
+	width: 100%;
+	border-radius:3px;
+	border:1px solid #ffffff;
+	opacity:0.3;
+	position: absolute;
+	top:0;
+	left:0;
+}
+.optBtn span{
+	line-height: 38px;
+	opacity:0.6;
+	font-size: 14px;
+}
+.optBtn i{
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	background-repeat: no-repeat;
+	background-image: url(../img/icon_sprite.png);
+	margin-right: 5px;
+	vertical-align:-3px;
+	
+}
+.collect i{
+	background-position: -60px -20px
+}
+.addTo i{
+	background-position: -20px -20px
+}
+.download i{
+	background-position: -40px -240px;
+}
+.delete i{
+	background-position: -100px -20px;
+}
+.clearList i{
+	height:17px;
+	width:17px;
+	background-position: -40px -300px;
+}
+.rightColumn{
+	float: right;
+	width: 255px;
+	height: 85%;
+	border:1px solid red;
+	position: relative;
+}
+.albumHead{
+	width: 186px;
+	height: 186px;
+}
+.albumCover{
+	height: 186px;
+	position: absolute;
+	top:0;
+	left: 0;
+	z-index: 2;
+}
+.musicInfoBox{
+	width: 186px;
+	height: 100px;
+	border:1px solid red;
+	font-size: 14px;
+	line-height: 26px;
+	opacity:0.6;
+	margin-top: 11px;
+	
+}
+.musicInfoBox div{
+	width:186px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.lyricBox{
+	width: 186px;
+	height: 40%;
+	border:1px solid red;
+	margin-top:10%;
+}
+.musicConsole{
+	position: absolute;
+	bottom: 0px;
+	border:1px solid red;
+	height: 15%;
+	width: 100%;
+}
+.musicList{
+	border:1px solid red;
+	width: 73.5%;
+	height: 80%;
+	float: left;
+	min-width: 743px;
+	min-height: 298px;
+	position: relative;
+}
+.musicList table{
+	table-layout: fixed;
+	width: 100%;
+	height: 100%;
+	text-align: left;
+}
+.musicList th{
+	opacity:0.6;
+	font-weight: 300;
+	font-size: 14px;
+}
+.musicList table td , .musicList table th{
+	height: 50px;
+}
+.checkBoxTh{
+	width: 3.6%;
+}
+.musicTh{
+	width: 60%;
+}
+.singerTh{
+	width: 26.2%;
+}
+.musicCheckbox{
+	height: 14px;
+	width: 14px;
+	border:1px solid #ffffff;
+	border-radius:2px;
+	color:#ffffff;
+	margin:0;
+	opacity: 0.6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

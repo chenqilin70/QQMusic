@@ -20,6 +20,9 @@
     	</global-exception-mappings>
     	 -->
     	 <action name="player" class="playerAction">
+    	 	<result name="updateMusicList" type="json">
+    	 		<param name="root">updatedMusicList</param>
+    	 	</result>
     	 	<result name="success">/content/player.jsp</result>
     	 </action>
         <action name="index" class="indexAction">

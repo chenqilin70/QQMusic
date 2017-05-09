@@ -13,6 +13,7 @@ import com.huwl.oracle.qqmusic.music_model.Music;
 @Scope("prototype")
 public class PlayerAction extends BaseAction {
 	private List<Music> playList;
+	private String updatedMusicList;
 	@Autowired
 	private PlayerBiz playerBiz;
 	
@@ -28,4 +29,13 @@ public class PlayerAction extends BaseAction {
 		playList=playerBiz.getPlayList(musics);
 		return SUCCESS;
 	}
+	public String updateMusicList(){
+		
+		return "updateMusicList";
+	}
+	
+	
+	
+	
+	
 }
