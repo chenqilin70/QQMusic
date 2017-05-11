@@ -1,7 +1,9 @@
 package com.huwl.oracle.qqmusic.music_action;
 
-import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -10,6 +12,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huwl.oracle.qqmusic.music_biz.AlbumBiz;
 import com.huwl.oracle.qqmusic.music_biz.IndexBiz;
 import com.huwl.oracle.qqmusic.music_biz.ListenerBiz;
@@ -22,7 +26,6 @@ import com.huwl.oracle.qqmusic.music_dao.CompanyDao;
 import com.huwl.oracle.qqmusic.music_dao.ListenerDao;
 import com.huwl.oracle.qqmusic.music_dao.MusicDao;
 import com.huwl.oracle.qqmusic.music_dao.SingerDao;
-import com.huwl.oracle.qqmusic.music_model.Music;
 
 public class TestCenter {
 	public static ClassPathXmlApplicationContext ac;
@@ -40,6 +43,7 @@ public class TestCenter {
 	private static SingerDiscoverBiz singerDiscoverBiz;
 	private static MusicDao musicDao;
 	public static PlayerBiz playerBiz;
+	private static ObjectMapper objectMapper;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		ac=new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -56,6 +60,7 @@ public class TestCenter {
 		singerDiscoverBiz=(SingerDiscoverBiz) ac.getBean("singerDiscoverBiz");
 		musicDao=(MusicDao) ac.getBean("musicDao");
 		playerBiz=(PlayerBiz) ac.getBean("playerBiz");
+		objectMapper=(ObjectMapper) ac.getBean("objectMapper");
 	}
 
 	@AfterClass
@@ -64,10 +69,9 @@ public class TestCenter {
 	}
 	@Test
 	public void testMusic(){
-		List<Music> list=playerBiz.getPlayList("000000t62JXXEh,000000U31BLK6Z,000002a33Eqj3D,002fSAYe0iix7R,000006We3ObGPu");
-		for(Music m:list){
-			System.out.println(m.getMusicName());
-		}
+		String result=
+				playerBiz.getMusicInfoList("000000U31BLK6Z,000000t62JXXEh,000000U31BLK6Z,000002a33Eqj3D,000005FX0vVDAw,000006We3ObGPu");
+		System.out.println(result);
 	}
 	
 	

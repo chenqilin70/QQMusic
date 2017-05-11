@@ -5,39 +5,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+ <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.0.min.js"></script>
 </head>
 <body>
 <h1>Test Cookies</h1>
+<input type="text" name="message"><input type="button" id="btn" name="submit">
 <script type="text/javascript">
-
-//JS操作cookies方法!
-//写cookies
-function setCookie(name,value)
-{
-	var Days = 30;
-	var exp = new Date();
-	exp.setTime(exp.getTime() + Days*24*60*60*1000);
-	document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+$("#btn").click(function(){
+	$.ajax({
+		url:"/music_view/AsyncServlet",
+		type:"GET",
+		data:{
+			method:"onMessage",
+			message:$("input[name='message']").val()
+		},
+		error:function(){
+			alert("请检查网络")
+		},
+		success:function(data){
+		}
+	});
+});
+function reverseAjax(){
+	$.ajax({
+	    url : "/music_view/AsyncServlet?method=onOpen",
+	    cache : false,
+	    dataType : "text",
+	    success : function(data) {
+	    	reverseAjax();
+	        alert(data);
+	    }
+	});
 }
-function getCookie(name)
-{
-	var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-	if(arr=document.cookie.match(reg))
-	return unescape(arr[2]);
-	else
-	return null;
-}
-function delCookie(name)
-{
-	var exp = new Date();
-	exp.setTime(exp.getTime() - 1);
-	var cval=getCookie(name);
-	if(cval!=null)
-	document.cookie= name + "="+cval+";expires="+exp.toGMTString();
-}
-
-
-
+reverseAjax();
 </script>
 </body>
 </html>

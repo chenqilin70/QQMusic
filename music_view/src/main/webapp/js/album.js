@@ -11,10 +11,32 @@ $(function(){
         var flag = thisElement.compareDocumentPosition($relatedElement);
         return !(flag == 0 || flag == 20);
     }
+    function setCookie(name,value)
+	{
+		var Days = 30;
+		var exp = new Date();
+		exp.setTime(exp.getTime() + Days*24*60*60*1000);
+		document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+	}
+	function getCookie(name)
+	{
+		var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+		if(arr=document.cookie.match(reg))
+		return unescape(arr[2]);
+		else
+		return null;
+	}
+	function delCookie(name)
+	{
+		var exp = new Date();
+		exp.setTime(exp.getTime() - 1);
+		var cval=getCookie(name);
+		if(cval!=null)
+		document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+	}
     if(Number($(".container").css("height").replace(/px/,""))<840){
         $(".container").css("height","865px");
     }
-    
     var desc=$(".descValue").attr("value");
     $(".introP")[0].innerHTML=desc.replace(/<br>/,"");
     $(".descContent")[0].innerHTML=desc;
@@ -108,8 +130,44 @@ $(function(){
 			});
 		}
 	});
-	$(".playAll").click(function(){
+	function playerIsOpen(){
+		var openNoStr=getCookie("playerIsOpen");
+		if(openNoStr!=null){
+			var openNo=Number(openNoStr);
+			if(openNo>0){
+				return true;
+			}else{
+				return false;
+			};
+		}else{
+			return false;
+		};
+	}
+	$(".playAll").click(function(e){
+		if(playerIsOpen()){
+			setCookie("playList",value);
+		}else{
+			alert("没有打开");
+		}
 		
+	});
+	$(".playSong").click(function(){
+		if(playerIsOpen()){
+			var oldList=getCookie("playList");
+			if(oldList!=null){
+				var oldListArr=oldList.split(",");
+				for(var i in oldListArr){
+					if($(this).attr("musicId")==oldListArr[i]){
+						setCookie("nowPlay",$(this).attr("musicId"));
+						return;
+					}
+				}
+			}
+			setCookie("nowPlay",$(this).attr("musicId"));
+			setCookie("playList",(oldList==null?"":(oldList+","))+$(this).attr("musicId"));
+		}else{
+			alert("没有打开");
+		};
 	});
 	
 	

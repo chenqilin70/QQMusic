@@ -9,4 +9,6 @@ public interface MusicDao extends BaseDao<Music>{
 	List<Music> getMusicListBySinger(String singerId , Integer limit);
 	List<Music> getMusicListBySinger(String singerId);
 	List<Object[]> getPlayList(String[] ids);
+	Object[] getSimpleMusicInfo(String nowMusicId);
+	List<Object[]> getMusicInfoList(String[] ids);
 }

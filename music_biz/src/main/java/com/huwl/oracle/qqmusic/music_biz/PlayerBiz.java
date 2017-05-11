@@ -1,10 +1,14 @@
 package com.huwl.oracle.qqmusic.music_biz;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.huwl.oracle.qqmusic.music_model.Album;
 import com.huwl.oracle.qqmusic.music_model.Music;
 import com.huwl.oracle.qqmusic.music_model.Singer;
@@ -34,6 +38,50 @@ public class PlayerBiz extends BaseBiz {
 		}
 		
 		return result;
+	}
+
+	public String getMusicInfo(String nowMusicId) {
+		Object[] musicInfo=musicDao.getSimpleMusicInfo(nowMusicId);
+		Map<String,String> map=new HashMap<>();
+		map.put("musicId", musicInfo[0].toString());
+		map.put("musicName", musicInfo[1].toString());
+		map.put("albumId", musicInfo[2].toString());
+		map.put("albumName", musicInfo[3].toString());
+		map.put("singerId", musicInfo[4].toString());
+		map.put("singerName", musicInfo[5].toString());
+		String result=null;
+		try {
+			result=objectMapper.writeValueAsString(map);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public String getMusicInfoList(String musicIds) {
+		List<Object[]> olist=musicDao.getMusicInfoList(musicIds.split(","));
+		List<Music> result=new ArrayList<>();
+		for(Object[] oarr:olist){
+			Music m=new Music();
+			m.setMusicId(oarr[0].toString());
+			m.setMusicName(oarr[1].toString());
+			Album a=new Album();
+			a.setAlbumId(oarr[2].toString());
+			a.setAlbumName(oarr[3].toString());
+			Singer s=new Singer();
+			s.setSingerId(oarr[4].toString());
+			s.setSingerName(oarr[5].toString());
+			a.setSinger(s);
+			m.setAlbum(a);
+			result.add(m);
+		}
+		String resultStr=null;
+		try {
+			resultStr = objectMapper.writeValueAsString(result);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return resultStr;
 	}
 
 }

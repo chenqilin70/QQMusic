@@ -172,7 +172,7 @@
                                             <div class="songOption shareSong"></div>
                                             <div class="songOption downloadSong"></div>
                                             <div class="songOption addSong"></div>
-                                            <div class="songOption playSong"></div>
+                                            <div class="songOption playSong" musicId='<s:property value='musicId'/>'></div>
                                         </td>
                                     
                                     

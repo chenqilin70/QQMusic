@@ -13,14 +13,14 @@
 
 </head>
 <body>
-<div class="playerBg">
+<input type="hidden" name="img_repository_path" value="<s:text name='img_repository_path'/>" />
+<div class="playerBg playerBg1">
 	<div class="bgMask"></div>
 </div>
 <div class="contentContainer" align="center">
 	<div class="QQMusicLink"></div>
 	<div class="setting"><s:text name="setting"/></div>
 	<div class="login"><s:text name="login"/></div>
-	
 </div>
 <div class="centerBox">
 	<div class="optBtnGroup">
@@ -47,12 +47,12 @@
 	</div>
 	<div class="rightColumn">
 		<img class="albumHead" 
-			src="<%=request.getContextPath() %>/img/qqmusic_img_repository/album_head/T002R300x300M000000xYkHr2VLAZ4.jpg" alt="">
+			src="<%=request.getContextPath() %>/img/player_cover.png" alt="">
 		<img class="albumCover" src="<%=request.getContextPath() %>/img/album_cover.png">
 		<div class="musicInfoBox" align="center">
-			<div><s:text name="musicName"></s:text>：啷个哩个啷</div>
-			<div><s:text name="singerName"></s:text>：鹏泊</div>
-			<div><s:text name="albumName"></s:text>：啷个哩个啷</div>
+			<div><s:text name="musicName"></s:text>：<span class="musicName"></span></div>
+			<div><s:text name="singerName"></s:text>：<span class="singerName"></span></div>
+			<div><s:text name="albumName"></s:text>：<span class="albumName"></span></div>
 		</div>
 		<div class="lyricBox"></div>
 	</div>
@@ -66,9 +66,9 @@
 					<th class="songTimeTh"><s:text name="songTime"/></th>
 				</tr>
 			</thead>
-			<thead>
+			<tbody>
 				
-			</thead>
+			</tbody>
 		</table>
 	</div>
 	<div class="musicConsole"></div>
