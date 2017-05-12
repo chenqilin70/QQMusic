@@ -2,6 +2,8 @@ package com.huwl.oracle.qqmusic.music_biz;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +61,18 @@ public class PlayerBiz extends BaseBiz {
 	}
 
 	public String getMusicInfoList(String musicIds) {
-		List<Object[]> olist=musicDao.getMusicInfoList(musicIds.split(","));
+		final String[] idsArr=musicIds.split(",");
+		List<Object[]> olist=musicDao.getMusicInfoList(idsArr);
+		Collections.sort(olist, new Comparator<Object[]>() {
+			private List<String> idsList=Arrays.asList(idsArr);
+			@Override
+			public int compare(Object[] arg0, Object[] arg1) {
+				String id1=arg0[0].toString();
+				String id2=arg1[0].toString();
+				return idsList.indexOf(id1)-idsList.indexOf(id2);
+			}
+			
+		} );
 		List<Music> result=new ArrayList<>();
 		for(Object[] oarr:olist){
 			Music m=new Music();

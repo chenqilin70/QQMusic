@@ -164,7 +164,7 @@ $(function(){
 				}
 			}
 			setCookie("nowPlay",$(this).attr("musicId"));
-			setCookie("playList",(oldList==null?"":(oldList+","))+$(this).attr("musicId"));
+			setCookie("playList",((oldList==null || oldList=="")?"":(oldList+","))+$(this).attr("musicId"));
 		}else{
 			alert("没有打开");
 		};

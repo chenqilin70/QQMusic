@@ -72,9 +72,9 @@ $(function(){
 	function updatePlayer(playList){
 		var playList=getCookie("playList");
 		var nowPlay=getCookie("nowPlay");
-		var openNo=getCookie("nowPlay");
-		//如果两者都为空，表示手动输入url第一次进入了播放器，或者用户手动删除了所有cookie
-		if(playList!=null && nowPlay!=null){
+		var openNo=getCookie("playerIsOpen");
+		
+		if(playList!=null && nowPlay!=null){//cookie中有值
 			if(pageScopePlayList!=playList){
 				pageScopePlayList=playList;
 				updateNowList(playList);
@@ -83,12 +83,20 @@ $(function(){
 				pageScopeNowPlay=nowPlay;
 				updateNowPlay(nowPlay);
 			}
+		}else if(playList==null && nowPlay==null){//cookie中没值
+			if(pageScopePlayList==undefined && pageScopeNowPlay==undefined){//cookie中没值  page中没值：用户第一次手动输入url打开player
+				changeBg();
+			}else if(pageScopePlayList!=undefined && pageScopeNowPlay!=undefined){//cookie中没值  page中有值：用户手动删除了cookie
+				setCookie("playList", pageScopePlayList);
+				setCookie("nowPlay", pageScopeNowPlay);
+			}else{
+				alert("page中的nowPlay和playList状态不一致");
+			}
 		}else{
-			changeBg();
+			alert("cookie中的nowPlay和playList状态不一致");
 		}
-		if(openNo==null){
-			pageScopeNowPlayerNo=1;
-			setCookie("playerIsOpen","1");
+		if(openNo==null){//用户手动删除了cookie
+			setCookie("playerIsOpen",pageScopeNowPlayerNo);
 		}
 	}
 	function updateNowPlay(nowPlay){
@@ -119,27 +127,18 @@ $(function(){
 	
 	function updateNowList(playList){
 		var musicInCookieArr=playList.split(",");
-		var musicInTableArr;
+		var musicInTableArr=new Array();
 		$(".musicList tbody tr").each(function(index,element){
 			var tempMusicId=$(element).attr("musicid");
-			console.log(index+","+tempMusicId)
-			musicInTableArr[index+1]=tempMusicId;
+			musicInTableArr.push(tempMusicId);
 		});
-		if(musicInTableArr==undefined){
+		if(musicInTableArr.length==0){
 			//如果界面中没有任何音乐信息，则发送请求，读取musicInCookieArr中所有音乐的信息
-			var musicsJson=getMusicInfoList(playList);
-			for(var i in musicsJson){
-				$(".musicList tbody").append("<tr  musicid='"+musicsJson[i].musicId+"' >" +
-						"<td><div class='musicCheckbox'></div></td>" +
-						"<td><a musicid='"+musicsJson[i].musicId+"'>"+musicsJson[i].musicName+"</a></td>" +
-						"<td><a albumid='"+musicsJson[i].album.albumId+"'>"+musicsJson[i].album.albumName+"</a></td>" +
-						"<td></td>" +
-						"</tr>");
-			}
+			addMusicByStr(playList);
 		}else{
 			//如果界面中已经存在音乐信息，则筛选出界面中没有的，但cookie中有的，再发送请求读取这些信息
 			var willRequest=new Array();
-			var cookieList=playList.split;
+			var cookieList=playList.split(",");
 			for(var c=0 ;c<cookieList.length;c++){
 				var flag=true;
 				for(var u=0;u<musicInTableArr.length;u++){
@@ -152,11 +151,24 @@ $(function(){
 					willRequest.push(cookieList[c]);
 				}
 			}
-			for(var k in willRequest){
-				alert(willRequest[k]);
-			}
+			
+			console.log(willRequest.toString());
+			addMusicByStr(willRequest.toString());
 		}
 	} 
+	
+	function addMusicByStr(playList){
+		var musicsJson=getMusicInfoList(playList);
+		for(var i in musicsJson){
+			
+			$(".musicList tbody").append("<tr  musicid='"+musicsJson[i].musicId+"' >" +
+					"<td><div class='musicCheckbox'></div></td>" +
+					"<td><a musicid='"+musicsJson[i].musicId+"'>"+musicsJson[i].musicName+"</a></td>" +
+					"<td><a singerid='"+musicsJson[i].album.singer.singerId+"'>"+musicsJson[i].album.singer.singerName+"</a></td>" +
+					"<td></td>" +
+					"</tr>");
+		}
+	}
 	function getMusicInfoList(musicIds){
 		var result;
 		$.ajax({
@@ -191,9 +203,12 @@ $(function(){
 	//在这个方法中不能写阻塞代码，比如alert，否则报错
 	$(window).bind('beforeunload',function(){
 		var openNo=getCookie("playerIsOpen");
-		pageScopeNowPlayerNo=(Number(openNo)-1);
-		setCookie("playerIsOpen",(Number(openNo)-1)+"");
-		console.log("此时player开启数量是："+getCookie("playerIsOpen"));
+		if(openNo!=null){
+			pageScopeNowPlayerNo=(Number(openNo)-1);
+			setCookie("playerIsOpen",(Number(openNo)-1)+"");
+			console.log("此时player开启数量是："+getCookie("playerIsOpen"));
+		}
+		
 	});
 	
 	
