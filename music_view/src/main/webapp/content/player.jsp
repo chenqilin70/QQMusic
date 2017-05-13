@@ -6,10 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>我的音乐</title>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/jquery.mCustomScrollbar.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/player.css">
  <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/rgbaster.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/player.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.mCustomScrollbar.min.js"></script>
 
 </head>
 <body>
@@ -56,8 +58,8 @@
 		</div>
 		<div class="lyricBox"></div>
 	</div>
-	<div class="musicList">
-		<table  border="1" cellpadding="0" cellspacing="0" align="left">
+	<div class="musicList mCS-my-theme">
+		<table  border="0" cellpadding="0" cellspacing="0" align="left">
 			<thead>
 				<tr>
 					<th class="checkBoxTh"><div class="musicCheckbox"></div></th>
@@ -71,7 +73,44 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="musicConsole"></div>
+	<div class="musicConsole" style="border:1px solid red">
+		<table cellpadding="0" cellspacing="0" border="1">
+			<tbody>
+				<tr>
+					<td class="playBtnBox">
+						<div class="prevMusic playBtn"></div>
+						<div class="playMusic playBtn" ></div>
+						<div class="nextMusic playBtn" ></div>
+					</td>
+					<td class="progressBox">
+						<div class="progressBoxDiv">
+							<div class="progressBar"></div>
+							<div class="nowPlayMusic">
+								<span class="nowName"></span>
+								<span class="nowTime">03:21</span>
+							</div>
+						</div>
+					</td>
+					<td class="otherBtnBox">
+						<div class="otherBtnBoxDiv">
+							<div class="loopList"></div>
+							<div class="likeBtn"></div>
+							<div class="downLoadBtn"></div>
+							<div class="changeModel"></div>
+							<div class="trumpetIcon"></div>
+							<div class="volume"></div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- 
+		<div class="progressBox">
+			
+		</div>
+		 -->
+		
+	</div>
 </div>
 </body>
 </html>

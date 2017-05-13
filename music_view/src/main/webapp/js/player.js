@@ -18,7 +18,15 @@ $(function(){
 //        });
 //    })();
 	
-
+	 /*判断是否为最外面的元素被移出了*/
+    function isWrapElement(e, thisElement) {
+        $relatedElement = e.relatedTarget;
+        if ($relatedElement == null) {
+            return true;
+        }
+        var flag = thisElement.compareDocumentPosition($relatedElement);
+        return !(flag == 0 || flag == 20);
+    }
 	
 	function setCookie(name,value)
 	{
@@ -44,9 +52,11 @@ $(function(){
 		document.cookie= name + "="+cval+";expires="+exp.toGMTString();
 	}
 	/*以上定义操作cookies 的方法*/
-	
-	
-	
+	//设置滚动条
+	$(".mCS-my-theme").mCustomScrollbar({
+		theme:"my-theme",
+		axis:"y"
+	});
 	
 	var pageScopePlayList;
 	var pageScopeNowPlay;
@@ -120,6 +130,7 @@ $(function(){
 				$(".musicName").text(jsonData.musicName);
 				$(".singerName").text(jsonData.singerName);
 				$(".albumName").text(jsonData.albumName);
+				$(".nowName").text(jsonData.musicName);
 				
 			}
 		});
@@ -211,9 +222,27 @@ $(function(){
 		
 	});
 	
-	
-	
-	
-	
-	
+	$(".thumb").mousedown(function(e){
+		var $thumb=$(this);
+		var oldTop=Number($thumb.css("top").replace(/px/,""));
+		var oldMouseY=window.event.screenY;
+		var thumbHeight=Number($thumb.css("height").replace(/px/,""));
+		var barHeight=Number($(".scrollBar").css("height").replace(/px/,""));
+		$("body").mousemove(function(e){
+			var newMouseY=window.event.screenY;
+			var nowTop=Number($thumb.css("top").replace(/px/,""));
+			var newTop=(nowTop+(newMouseY-oldMouseY));
+			if(newTop>=0 && (newTop+thumbHeight)<=barHeight){
+				$thumb.css("top",newTop+"px");
+				oldMouseY=newMouseY;
+			}
+		});
+	});
+	$("body").mouseup(function(){
+		$("body").unbind("mousemove");
+	}).mouseover(function(e){
+		if(isWrapElement(e, this)){
+			$("body").unbind("mousemove");
+		}
+	});;
 });

@@ -66,7 +66,6 @@
 	width: 84.5%;
 	top:11%;
 	left:7.5%;
-	border:1px solid red;
 	min-width: 1010px;
 }
 .optBtn{
@@ -89,7 +88,7 @@
 }
 .optBtn span{
 	line-height: 38px;
-	opacity:0.6;
+	opacity:0.8;
 	font-size: 14px;
 }
 .optBtn i{
@@ -123,7 +122,6 @@
 	float: right;
 	width: 255px;
 	height: 85%;
-	border:1px solid red;
 	position: relative;
 }
 .albumHead{
@@ -140,7 +138,6 @@
 .musicInfoBox{
 	width: 186px;
 	height: 100px;
-	border:1px solid red;
 	font-size: 14px;
 	line-height: 26px;
 	opacity:0.6;
@@ -156,30 +153,36 @@
 .lyricBox{
 	width: 186px;
 	height: 40%;
-	border:1px solid red;
 	margin-top:10%;
 }
 .musicConsole{
 	position: absolute;
 	bottom: 0px;
-	border:1px solid red;
 	height: 15%;
 	width: 100%;
 }
 .musicList{
-	border:1px solid red;
 	width: 73.5%;
 	height: 80%;
 	float: left;
 	min-width: 743px;
 	min-height: 298px;
 	position: relative;
-	overflow-y: scroll;
 }
+
+.mCS-my-theme.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ 
+	background-color: rgba(0,0,0,0.2); 
+	width:7px;
+}
+.mCS-my-theme.mCSB_scrollTools .mCSB_draggerRail{ 
+	background-color: rgba(255,255,255,0); 
+} 
 .musicList table{
 	table-layout: fixed;
 	width:100%;
 	text-align: left;
+	opacity:0.8;
+	font-weight: 300;
 }
 .musicList th{
 	opacity:0.6;
@@ -188,6 +191,7 @@
 }
 .musicList table td , .musicList table th{
 	height: 50px;
+	border-top:1px solid rgba(255,255,255,0.02);
 }
 .checkBoxTh{
 	width: 3.6%;
@@ -206,6 +210,135 @@
 	color:#ffffff;
 	margin:0;
 	opacity: 0.6;
+	
+}
+.playBtn{
+	background-image:url(../img/player.png);
+	background-repeat: no-repeat;
+	bottom: 20px;
+	opacity:0.8;
+}
+.prevMusic{
+	height: 20px;
+	width: 19px;
+	margin-bottom: -10px;
+	position: absolute;
+	background-position: 0 -29px;
+}
+.playMusic{
+	height: 29px;
+	width: 21px;
+	margin-bottom: -14.5px;
+	position: absolute;
+	left: 76px;
+	background-position: 0 0;
+}
+.nextMusic{
+	height: 20px;
+	width: 19px;
+	margin-bottom: -10px;
+	position: absolute;
+	left: 153px;
+	background-position: 0 -52px;
+	margin-right: 34px;
+}
+.progressBar{
+	height: 2px;
+	width: 100%;
+	background-color: rgba(255,255,255,0.8);
+	position:absolute;
+	bottom: 10px;
+}
+.nowPlayMusic{
+	height: 20px;
+	width: 100%;
+	border:1px solid #ffffff;
+	position:absolute;
+	bottom: 21px;
+	font-size: 14px;
+}
+.nowName{
+	float: left;
+}
+.nowTime{
+	float: right;
+}
+.musicConsole table{
+	width: 100%;
+	height: 100%;
+	table-layout: fixed;
+}
+.playBtnBox{
+	width: 206px;
+	height: 100%;
+}
+.otherBtnBox{
+	width: 400px;
+	height: 100%;
+}
+.progressBoxDiv , .otherBtnBoxDiv{
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+.loopList{
+	width: 26px;
+	height: 25px;
+	border:1px solid #ffffff;
+	position: absolute;
+	left: 55px;
+	bottom: 10px;
+	background-image: url(../img/player.png);
+	background-position: 0 -205px;
+	
+}
+.likeBtn{
+	width: 23px;
+	height: 21px;
+	border:1px solid #ffffff;
+	position: absolute;
+	left: 105px;
+	bottom: 10px;
+	background-image: url(../img/player.png);
+	background-position: 0 -95px;
+}
+.downLoadBtn{
+	width: 21px;
+	height: 21px;
+	border:1px solid #ffffff;
+	position: absolute;
+	left: 155px;
+	bottom: 10px;
+	background-image: url(../img/player.png);
+	background-position: 0 -120px;
+}
+.changeModel{
+	width: 74px;
+	height: 26px;
+	border:1px solid #ffffff;
+	position: absolute;
+	left: 200px;
+	bottom: 10px;
+	background-image: url(../img/player.png);
+	background-position: 0 -282px;
+}
+.trumpetIcon{
+	width: 26px;
+	height: 21px;
+	border:1px solid #ffffff;
+	position: absolute;
+	left: 300px;
+	bottom: 10px;
+	background-image: url(../img/player.png);
+	background-position: 0 -143px;
+}
+.volume{
+	width: 81px;
+	height: 2px;
+	background-color: #ffffff;
+	position: absolute;
+	left: 336px;
+	bottom: 10px;
 }
 
 
