@@ -5,6 +5,7 @@
 }
 .albumContent{
     width: 1200px;
+    min-height: 862px;
 }
 .albumBaseInfo{
     height: 325px;

@@ -75,6 +75,7 @@
 	float: left;
 	border-radius:3px;
 	position: relative;
+	cursor: pointer;
 }
 .btnBorder{
 	height: 100%;
@@ -140,7 +141,6 @@
 	height: 100px;
 	font-size: 14px;
 	line-height: 26px;
-	opacity:0.6;
 	margin-top: 11px;
 	
 }
@@ -168,6 +168,7 @@
 	min-width: 743px;
 	min-height: 298px;
 	position: relative;
+	margin-top: 20px;
 }
 
 .mCS-my-theme.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ 
@@ -181,17 +182,22 @@
 	table-layout: fixed;
 	width:100%;
 	text-align: left;
-	opacity:0.8;
 	font-weight: 300;
+	cursor: default;
 }
+
 .musicList th{
-	opacity:0.6;
 	font-weight: 300;
 	font-size: 14px;
 }
+.musicTh,.singerTh,.songTimeTh{
+	opacity:0.6;
+} 
 .musicList table td , .musicList table th{
 	height: 50px;
 	border-top:1px solid rgba(255,255,255,0.02);
+	font-size: 14px;
+	line-height: 50px;
 }
 .checkBoxTh{
 	width: 3.6%;
@@ -205,18 +211,17 @@
 .musicCheckbox{
 	height: 14px;
 	width: 14px;
-	border:1px solid #ffffff;
 	border-radius:2px;
 	color:#ffffff;
 	margin:0;
-	opacity: 0.6;
+	opacity: 0.2;
+	border:1px solid #ffffff;
 	
 }
 .playBtn{
 	background-image:url(../img/player.png);
 	background-repeat: no-repeat;
 	bottom: 20px;
-	opacity:0.8;
 }
 .prevMusic{
 	height: 20px;
@@ -252,7 +257,6 @@
 .nowPlayMusic{
 	height: 20px;
 	width: 100%;
-	border:1px solid #ffffff;
 	position:absolute;
 	bottom: 21px;
 	font-size: 14px;
@@ -284,7 +288,6 @@
 .loopList{
 	width: 26px;
 	height: 25px;
-	border:1px solid #ffffff;
 	position: absolute;
 	left: 55px;
 	bottom: 10px;
@@ -295,7 +298,6 @@
 .likeBtn{
 	width: 23px;
 	height: 21px;
-	border:1px solid #ffffff;
 	position: absolute;
 	left: 105px;
 	bottom: 10px;
@@ -305,7 +307,6 @@
 .downLoadBtn{
 	width: 21px;
 	height: 21px;
-	border:1px solid #ffffff;
 	position: absolute;
 	left: 155px;
 	bottom: 10px;
@@ -315,7 +316,6 @@
 .changeModel{
 	width: 74px;
 	height: 26px;
-	border:1px solid #ffffff;
 	position: absolute;
 	left: 200px;
 	bottom: 10px;
@@ -325,7 +325,6 @@
 .trumpetIcon{
 	width: 26px;
 	height: 21px;
-	border:1px solid #ffffff;
 	position: absolute;
 	left: 300px;
 	bottom: 10px;
@@ -335,10 +334,57 @@
 .volume{
 	width: 81px;
 	height: 2px;
-	background-color: #ffffff;
 	position: absolute;
 	left: 336px;
-	bottom: 10px;
+	bottom: 20px;
+	background-color:#ffffff;
+}
+.opacityLink{
+	text-decoration: none;
+	opacity:0.6;
+	cursor: pointer;
+}
+.right{
+	display: inline-block;
+	height: 14px;
+	width: 14px;
+	line-height: 14px;
+	margin-left: 2px;
+	display:none;
+}
+.thisMusicBtn{
+	float: right;
+	height: 36px;
+	width: 36px;
+	background-image: url(../img/icon_list_menu.png);
+	margin-right: 10px;
+	display:none;
+	margin-top: 7px;
+	cursor: pointer;
+}
+.playThisMusic{
+	background-position: -80px 0;
+}
+.shareThisMusic{
+	background-position: -80px -40px;
+}
+.downLoadThisMusic{
+	background-position: -80px -120px;
+}
+.addToMenu{
+	background-position: -80px -80px;
+}
+.playBtn , .loopList , .likeBtn , .downLoadBtn ,.changeModel , .trumpetIcon , .volume{
+	opacity:0.8;
+	cursor: pointer;
+}
+.defaultPlayerLink{
+	text-decoration: none;
+	opacity:0.6;
+	cursor: pointer;
+}
+.infoTitle{
+	opacity:0.6;	
 }
 
 

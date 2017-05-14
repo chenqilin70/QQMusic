@@ -50,11 +50,11 @@
 	<div class="rightColumn">
 		<img class="albumHead" 
 			src="<%=request.getContextPath() %>/img/player_cover.png" alt="">
-		<img class="albumCover" src="<%=request.getContextPath() %>/img/album_cover.png">
+		<a target="_blank"><img class="albumCover" src="<%=request.getContextPath() %>/img/album_cover.png"></a>
 		<div class="musicInfoBox" align="center">
-			<div><s:text name="musicName"></s:text>：<span class="musicName"></span></div>
-			<div><s:text name="singerName"></s:text>：<span class="singerName"></span></div>
-			<div><s:text name="albumName"></s:text>：<span class="albumName"></span></div>
+			<div><span class="infoTitle"><s:text name="musicName"></s:text>：</span><a target="_blank"  class="defaultPlayerLink"><span class="musicName"></span></a></div>
+			<div><span class="infoTitle"><s:text name="singerName"></s:text>：</span><a target="_blank" class="defaultPlayerLink"><span class="singerName"></span></a></div>
+			<div><span class="infoTitle"><s:text name="albumName"></s:text>：</span><a target="_blank"  class="defaultPlayerLink"><span class="albumName"></span></a></div>
 		</div>
 		<div class="lyricBox"></div>
 	</div>
@@ -62,7 +62,11 @@
 		<table  border="0" cellpadding="0" cellspacing="0" align="left">
 			<thead>
 				<tr>
-					<th class="checkBoxTh"><div class="musicCheckbox"></div></th>
+					<th class="checkBoxTh">
+						<div class="musicCheckbox" selecteditem="false">
+							<span class="right">√</span>
+						</div>
+					</th>
 					<th class="musicTh"><s:text name="music"/></th>
 					<th class="singerTh"><s:text name="singer"/></th>
 					<th class="songTimeTh"><s:text name="songTime"/></th>
@@ -73,8 +77,8 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="musicConsole" style="border:1px solid red">
-		<table cellpadding="0" cellspacing="0" border="1">
+	<div class="musicConsole">
+		<table cellpadding="0" cellspacing="0" border="0">
 			<tbody>
 				<tr>
 					<td class="playBtnBox">
@@ -104,11 +108,6 @@
 				</tr>
 			</tbody>
 		</table>
-		<!-- 
-		<div class="progressBox">
-			
-		</div>
-		 -->
 		
 	</div>
 </div>

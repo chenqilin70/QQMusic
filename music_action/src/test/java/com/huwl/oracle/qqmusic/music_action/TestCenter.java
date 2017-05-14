@@ -46,21 +46,21 @@ public class TestCenter {
 	private static ObjectMapper objectMapper;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-		albumDao=(AlbumDao) ac.getBean("albumDao");
-		baseDao=(BaseDao) ac.getBean("baseDao");
-		singerDao=(SingerDao)ac.getBean("singerDao");
-		companyDao=(CompanyDao) ac.getBean("companyDao");
-		indexBiz=(IndexBiz) ac.getBean("indexBiz");
-		albumBiz=(AlbumBiz) ac.getBean("albumBiz");
-		listenerBiz=(ListenerBiz) ac.getBean("listenerBiz");
-		singerBiz=(SingerBiz) ac.getBean("singerBiz");
-		listenerDao=(ListenerDao) ac.getBean("listenerDao");
-		sessionFactory=(SessionFactory) ac.getBean("sessionFactory");
-		singerDiscoverBiz=(SingerDiscoverBiz) ac.getBean("singerDiscoverBiz");
-		musicDao=(MusicDao) ac.getBean("musicDao");
-		playerBiz=(PlayerBiz) ac.getBean("playerBiz");
-		objectMapper=(ObjectMapper) ac.getBean("objectMapper");
+//		ac=new ClassPathXmlApplicationContext("applicationContext.xml");
+//		albumDao=(AlbumDao) ac.getBean("albumDao");
+//		baseDao=(BaseDao) ac.getBean("baseDao");
+//		singerDao=(SingerDao)ac.getBean("singerDao");
+//		companyDao=(CompanyDao) ac.getBean("companyDao");
+//		indexBiz=(IndexBiz) ac.getBean("indexBiz");
+//		albumBiz=(AlbumBiz) ac.getBean("albumBiz");
+//		listenerBiz=(ListenerBiz) ac.getBean("listenerBiz");
+//		singerBiz=(SingerBiz) ac.getBean("singerBiz");
+//		listenerDao=(ListenerDao) ac.getBean("listenerDao");
+//		sessionFactory=(SessionFactory) ac.getBean("sessionFactory");
+//		singerDiscoverBiz=(SingerDiscoverBiz) ac.getBean("singerDiscoverBiz");
+//		musicDao=(MusicDao) ac.getBean("musicDao");
+//		playerBiz=(PlayerBiz) ac.getBean("playerBiz");
+//		objectMapper=(ObjectMapper) ac.getBean("objectMapper");
 	}
 
 	@AfterClass
@@ -69,9 +69,9 @@ public class TestCenter {
 	}
 	@Test
 	public void testMusic(){
-		String result=
-				playerBiz.getMusicInfoList("000000U31BLK6Z,000000t62JXXEh,000000U31BLK6Z,000002a33Eqj3D,000005FX0vVDAw,000006We3ObGPu");
-		System.out.println(result);
+//		String result=
+//				playerBiz.getMusicInfoList("000000U31BLK6Z,000000t62JXXEh,000000U31BLK6Z,000002a33Eqj3D,000005FX0vVDAw,000006We3ObGPu");
+//		System.out.println(result);
 	}
 	
 	

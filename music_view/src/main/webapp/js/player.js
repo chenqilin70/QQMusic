@@ -55,6 +55,7 @@ $(function(){
 	//设置滚动条
 	$(".mCS-my-theme").mCustomScrollbar({
 		theme:"my-theme",
+		scrollbarPosition:"outside",
 		axis:"y"
 	});
 	
@@ -127,9 +128,10 @@ $(function(){
 				$(".albumHead").attr("src","").attr("src",imgUrl);
 				$playerBg.css("background-image"
 						,"url("+imgUrl+")");
-				$(".musicName").text(jsonData.musicName);
-				$(".singerName").text(jsonData.singerName);
-				$(".albumName").text(jsonData.albumName);
+				$(".albumCover").parent().attr("href","/music_view/album.action?albumId="+jsonData.albumId);
+				$(".musicName").text(jsonData.musicName).parent().attr("href","/music_view/music.action?musicId="+jsonData.musicId);
+				$(".singerName").text(jsonData.singerName).parent().attr("href","/music_view/singer.action?singerId="+jsonData.singerId);
+				$(".albumName").text(jsonData.albumName).parent().attr("href","/music_view/album.action?albumId="+jsonData.albumId);
 				$(".nowName").text(jsonData.musicName);
 				
 			}
@@ -171,13 +173,23 @@ $(function(){
 	function addMusicByStr(playList){
 		var musicsJson=getMusicInfoList(playList);
 		for(var i in musicsJson){
-			
 			$(".musicList tbody").append("<tr  musicid='"+musicsJson[i].musicId+"' >" +
-					"<td><div class='musicCheckbox'></div></td>" +
-					"<td><a musicid='"+musicsJson[i].musicId+"'>"+musicsJson[i].musicName+"</a></td>" +
-					"<td><a singerid='"+musicsJson[i].album.singer.singerId+"'>"+musicsJson[i].album.singer.singerName+"</a></td>" +
+					"<td><div class='musicCheckbox' selecteditem='false'> <span class='right'>√</span> </div></td>" +
+					"<td>" +
+						"<a class='opacityLink' musicid='"+musicsJson[i].musicId+"'>"+musicsJson[i].musicName+"</a>" +
+						"<div class='shareThisMusic thisMusicBtn'></div>" +
+						"<div class='downLoadThisMusic thisMusicBtn'></div>" +
+						"<div class='addToMenu thisMusicBtn'></div>" +
+						"<div musicid="+musicsJson[i].musicId+" class='playThisMusic thisMusicBtn'></div>" +
+					"</td>" +
+					"<td><a class='opacityLink' href='/music_view/singer.action?singerId="+musicsJson[i].album.singer.singerId+"' target='_blank'>"+musicsJson[i].album.singer.singerName+"</a></td>" +
 					"<td></td>" +
 					"</tr>");
+		}
+		refreshListJs();
+		var $headCheckBox=$(".musicList thead .musicCheckbox");
+		if($headCheckBox.attr("selecteditem")=='true'){
+			$headCheckBox.attr("selecteditem",'false').css("opacity","0.2").find("span").css("display","none");
 		}
 	}
 	function getMusicInfoList(musicIds){
@@ -222,27 +234,150 @@ $(function(){
 		
 	});
 	
-	$(".thumb").mousedown(function(e){
-		var $thumb=$(this);
-		var oldTop=Number($thumb.css("top").replace(/px/,""));
-		var oldMouseY=window.event.screenY;
-		var thumbHeight=Number($thumb.css("height").replace(/px/,""));
-		var barHeight=Number($(".scrollBar").css("height").replace(/px/,""));
-		$("body").mousemove(function(e){
-			var newMouseY=window.event.screenY;
-			var nowTop=Number($thumb.css("top").replace(/px/,""));
-			var newTop=(nowTop+(newMouseY-oldMouseY));
-			if(newTop>=0 && (newTop+thumbHeight)<=barHeight){
-				$thumb.css("top",newTop+"px");
-				oldMouseY=newMouseY;
+	$(".optBtn").mouseover(function(e){
+		if(isWrapElement(e,this)){
+			$(this).find("span , .btnBorder").css("opacity","1");
+		}
+	}).mouseout(function(e){
+		if(isWrapElement(e,this)){
+			$(this).find("span").css("opacity","0.8");
+			$(this).find(".btnBorder").css("opacity","0.3");
+		}
+	});
+	$(".musicList thead .musicCheckbox").mouseover(function(e){
+		if(isWrapElement(e, this)){
+			$(this).css("opacity","1");
+		}
+	}).mouseout(function(e){
+		if(isWrapElement(e, this)){
+			if($(this).attr("selecteditem")=='false'){
+				$(this).css("opacity","0.2");
+			}
+		}
+	}).click(function(){
+		var $this=$(this);
+		var oldflag=$this.attr("selecteditem");
+		if(oldflag=='true'){
+			$this.attr("selecteditem","false").find("span").css("display","none");
+		}else{
+			$this.attr("selecteditem","true").css("opacity","1").find("span").css("display","inline-block");
+		}
+		var newflag=$this.attr("selecteditem");
+		var $allChecBox=$(".musicCheckbox");
+		$allChecBox.attr("selecteditem",newflag);
+		if(newflag=='true'){
+			$allChecBox.css("opacity","1").find("span").css("display","inline-block");
+		}else{
+			$(".musicList tbody .musicCheckbox").css("opacity","0.2");
+			$allChecBox.find("span").css("display","none");
+		}
+	});
+	/*设定刷新列表时重新加载的时间--开始*/
+	function opacityLinkMouseover(){
+		$(this).css("opacity","1");
+	}
+	function opacityLinkMouseout(){
+		$(this).css("opacity","0.8");
+	}
+	function bodyCheckBoxClick($this){
+		var flag=$this.attr("selecteditem");
+		if(flag=='true'){
+			$this.attr("selecteditem","false").find("span").css("display","none");
+		}else{
+			$this.attr("selecteditem","true").css("opacity","1").find("span").css("display","inline-block");
+		}
+		var $headCheckBox=$(".musicList thead .musicCheckbox");
+		if(isAllCheckBoxValOf("true")){
+			$headCheckBox.attr("selecteditem",'true').css("opacity","1").find("span").css("display","inline-block");
+		}else{
+			$headCheckBox.attr("selecteditem",'false').css("opacity","0.2").find("span").css("display","none");
+		}
+		
+	}
+	function bodyCheckBoxMouseover(e,element){
+		if(isWrapElement(e, element)){
+			$(this).css("opacity","1");
+		}
+	}
+	function bodyCheckBoxMouseout(e,element){
+		if(isWrapElement(e, element)){
+			if($(this).attr("selecteditem")=='false'){
+				$(this).css("opacity","0.2");
+			}
+		}
+	}
+	function bodyTrMouseover(e,element){
+		if(isWrapElement(e,element)){
+			$(element).find(".thisMusicBtn").css("display","block");
+		}
+	}
+	function bodyTrMouseout(e,element){
+		if(isWrapElement(e,element)){
+			$(element).find(".thisMusicBtn").css("display","none");
+		}
+	}
+	function thisMusicBtnMouseover(element){
+		var $this=$(element);
+		var oldPosition=$this.css("background-position");
+		var oldX=Number(oldPosition.split(" ")[0].replace(/px/ ,""));
+		var oldY=Number(oldPosition.split(" ")[1].replace(/px/ ,""));
+		$this.css("background-position",(oldX-40)+"px "+oldY+"px");
+		
+	}
+	function thisMusicBtnMouseout(element){
+		var $this=$(element);
+		var oldPosition=$this.css("background-position");
+		var oldX=Number(oldPosition.split(" ")[0].replace(/px/ ,""));
+		var oldY=Number(oldPosition.split(" ")[1].replace(/px/ ,""));
+		$this.css("background-position",(oldX+40)+"px "+oldY+"px");
+		
+	}
+	function playThisMusicClick(element){
+		var nowPlay=$(element).attr("musicid");
+		setCookie("nowPlay", nowPlay);
+		pageScopeNowPlay=nowPlay;
+		updateNowPlay(nowPlay);
+	}
+	/*设定刷新列表时重新加载的时间--结束*/
+	function refreshListJs(){
+		$(".opacityLink").unbind().mouseover(opacityLinkMouseover).mouseout(opacityLinkMouseout);
+		$(".musicList tbody .musicCheckbox")
+			.unbind()
+			.click(function(){bodyCheckBoxClick($(this));})
+			.mouseover(function(e){bodyCheckBoxMouseover(e,this);})
+			.mouseout(function(e){bodyCheckBoxMouseout(e,this);});
+		$(".musicList tbody tr")
+			.unbind()
+			.mouseover(function(e){bodyTrMouseover(e,this);})
+			.mouseout(function(e){bodyTrMouseout(e,this)});
+		$(".thisMusicBtn")
+			.unbind()
+			.mouseover(function(){thisMusicBtnMouseover(this)})
+			.mouseout(function(){thisMusicBtnMouseout(this)});
+		$(".playThisMusic").click(function(){playThisMusicClick(this);});
+	}
+	
+	function isAllCheckBoxValOf(val){
+		var result=true;
+		$(".musicList tbody .musicCheckbox").each(function(index,element){
+			if($(element).attr("selecteditem")!=val){
+				result=false;
+				return false;
 			}
 		});
+		return result;
+	}
+	$(".playBtn , .loopList , .likeBtn , .downLoadBtn ,.changeModel , .trumpetIcon")
+				.mouseover(function(){
+		$(this).css("opacity","1");
+	}).mouseout(function(){
+		$(this).css("opacity","0.8");
 	});
-	$("body").mouseup(function(){
-		$("body").unbind("mousemove");
-	}).mouseover(function(e){
-		if(isWrapElement(e, this)){
-			$("body").unbind("mousemove");
-		}
-	});;
+	$(".defaultPlayerLink").mouseover(function(){
+		$(this).css("opacity","1");
+	}).mouseout(function(){
+		$(this).css("opacity","0.6");
+	});
+	
+	
 });
