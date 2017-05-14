@@ -250,7 +250,7 @@
 .progressBar{
 	height: 2px;
 	width: 100%;
-	background-color: rgba(255,255,255,0.8);
+	background: linear-gradient(to right,rgba(255,255,255,1) 0%,rgba(255,255,255,0.2) 0%);
 	position:absolute;
 	bottom: 10px;
 }
@@ -385,6 +385,16 @@
 }
 .infoTitle{
 	opacity:0.6;	
+}
+.circleInBar{
+	border-radius:50%;
+	width: 10px;
+	height: 10px;
+	background-color: #ffffff;
+	position: absolute;
+	top:-4px;
+	left:0;
+	cursor: pointer;
 }
 
 

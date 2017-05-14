@@ -110,6 +110,7 @@ $(function(){
 			setCookie("playerIsOpen",pageScopeNowPlayerNo);
 		}
 	}
+	var globalDuration;
 	function updateNowPlay(nowPlay){
 		$.ajax({
 			url:"player!changeNowPlay.action",
@@ -133,7 +134,7 @@ $(function(){
 				$(".singerName").text(jsonData.singerName).parent().attr("href","/music_view/singer.action?singerId="+jsonData.singerId);
 				$(".albumName").text(jsonData.albumName).parent().attr("href","/music_view/album.action?albumId="+jsonData.albumId);
 				$(".nowName").text(jsonData.musicName);
-				
+				globalDuration=document.getElementById("mp3Audio").duration;
 			}
 		});
 	}
@@ -378,6 +379,50 @@ $(function(){
 	}).mouseout(function(){
 		$(this).css("opacity","0.6");
 	});
+	/*以下开始处理音频播放*/
 	
+	$(".playMusic").click(function(){
+		var audio=document.getElementById("mp3Audio");
+		if(audio.paused){
+			$(this).css("background-position","-30px 0");
+			audio.play();
+		}else{
+			$(this).css("background-position","0 0");
+			audio.pause();
+		}
+	});
+	(function(){
+		var audio=document.getElementById("mp3Audio");
+		var $progressBar=$(".progressBar");
+		var $nowTime=$(".nowTime");
+		var $circleInBar=$(".circleInBar");
+		setInterval(function(){
+			var percent=((audio.currentTime/globalDuration)*100)+"%";
+			console.log("百分比："+percent);
+			$circleInBar.css("left",percent);
+			var currentMinite=Math.floor(audio.currentTime/60);
+			var currentSecond=Math.floor(audio.currentTime-(currentMinite*60));
+			var allMinite=Math.floor(globalDuration/60);
+			var allSecond=Math.floor(globalDuration-(allMinite*60));
+			$nowTime.text(getBothLetter(currentMinite)+":"+getBothLetter(currentSecond)+"/"+getBothLetter(allMinite)+":"+getBothLetter(allSecond));
+			$progressBar.css("background","linear-gradient(to right,rgba(255,255,255,1) "+percent+",rgba(255,255,255,0.2) "+percent+")")
+		}, 1000);
+		function getBothLetter(num){
+			return (num<10?("0"+num):(num+""));
+		}
+	})();
+	$(".circleInBar").mousedown(function(){
+		
+	});
+	document.onmousemove=function(e){
+		var e=e || window.event;
+		console.log(e.clientX)
+	}
 	
 });
+
+
+
+
+
+
