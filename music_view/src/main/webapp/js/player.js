@@ -391,12 +391,13 @@ $(function(){
 			audio.pause();
 		}
 	});
-	(function(){
+	var t1;
+	var continuallyUpdateCircle=(function thisFun(){
 		var audio=document.getElementById("mp3Audio");
 		var $progressBar=$(".progressBar");
 		var $nowTime=$(".nowTime");
 		var $circleInBar=$(".circleInBar");
-		setInterval(function(){
+		t1=setInterval(function(){
 			var percent=((audio.currentTime/globalDuration)*100)+"%";
 			console.log("百分比："+percent);
 			$circleInBar.css("left",percent);
@@ -405,19 +406,52 @@ $(function(){
 			var allMinite=Math.floor(globalDuration/60);
 			var allSecond=Math.floor(globalDuration-(allMinite*60));
 			$nowTime.text(getBothLetter(currentMinite)+":"+getBothLetter(currentSecond)+"/"+getBothLetter(allMinite)+":"+getBothLetter(allSecond));
-			$progressBar.css("background","linear-gradient(to right,rgba(255,255,255,1) "+percent+",rgba(255,255,255,0.2) "+percent+")")
+			$progressBar.css("background","linear-gradient(to right,rgba(255,255,255,1) "+percent+",rgba(255,255,255,0.2) "+percent+")");
 		}, 1000);
 		function getBothLetter(num){
 			return (num<10?("0"+num):(num+""));
 		}
+		return thisFun;
 	})();
-	$(".circleInBar").mousedown(function(){
-		
+	
+	
+	$(".circleInBar").mousedown(function(e){
+		var audio=document.getElementById("mp3Audio");
+		if(audio.ended){
+			console.log("ended")
+			return;
+		}
+		var barWidth=Number($(".progressBar").css("width").replace(/px/,""));
+		var oldMouseX=e.clientX;
+		var $this=$(this);
+		var oldLeft=Number($this.css("left").replace(/px/,""));
+		var $progressBar=$(".progressBar");
+		var newPercent;
+		window.clearInterval(t1);
+		$(document).mousemove(function(e){
+			var newMouseX=e.clientX;
+			var offsetX=oldMouseX-newMouseX;
+			var newLeft=oldLeft-offsetX;
+			if(newLeft>=0 && newLeft<=barWidth){
+				newPercent=newLeft/barWidth;
+				var percentLeft=(newPercent*100)+"%";
+				console.log($this.css("left"))
+				$this.css("left",percentLeft);
+				$progressBar.css("background","linear-gradient(to right,rgba(255,255,255,1) "+percentLeft+",rgba(255,255,255,0.2) "+percentLeft+")")
+				
+			}
+		});
+		$(document).mouseup(function(){
+			console.log("结束拖动");
+			$(document).unbind('mousemove').unbind('mouseup');
+			if(newPercent!=undefined){
+				audio.currentTime=globalDuration*(newPercent);
+			}
+			
+			continuallyUpdateCircle();
+		});
 	});
-	document.onmousemove=function(e){
-		var e=e || window.event;
-		console.log(e.clientX)
-	}
+	
 	
 });
 

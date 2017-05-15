@@ -14,7 +14,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.mCustomScrollbar.min.js"></script>
 
 </head>
-<body>
+<body onselectstart="return false;">
 <input type="hidden" name="img_repository_path" value="<s:text name='img_repository_path'/>" />
 <div class="playerBg playerBg1">
 	<div class="bgMask"></div>

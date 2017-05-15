@@ -266,6 +266,7 @@
 }
 .nowTime{
 	float: right;
+	opacity:0.8;
 }
 .musicConsole table{
 	width: 100%;
