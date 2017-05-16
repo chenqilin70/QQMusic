@@ -161,7 +161,7 @@
                         </thead>
                         <tbody>
                             <s:iterator value="album.musics" status="status" var="music">
-                                <tr class="songTr">
+                                <tr class="songTr" musicid="<s:property value='musicId'/>">
                                     <td class="songSetHeight songTd"><s:property value="#status.index+1" /></td>
                                     
                                         <td class="songNameTd songTd">

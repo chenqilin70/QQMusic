@@ -22,6 +22,7 @@ public interface BaseDao<T> {
 	Long getSetCount(String parameterName, Serializable id);
 	List query(String hql,Integer pageSize,Integer pageNo,Serializable... params);
 	List sqlQuery(String sql,Integer pageSize,Integer pageNo,Serializable... params);
+	boolean exists(Serializable id);
 	//以下方法获取配置信息
 	String getCenterTableName(String propertyName);
 	String getCenterTableAppointColumn(String propertyName);

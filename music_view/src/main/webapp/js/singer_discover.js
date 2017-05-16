@@ -119,8 +119,8 @@ $(function(){
 	}
 	$(".conditionBox li").click(function(){
 		$(".singersBox").html("<img class='loading' alt='' src='/music_view/img/loading.gif'>");
-		let $this=$(this);
-		let $conditioinUl=$this.parent().parent();
+		var $this=$(this);
+		var $conditioinUl=$this.parent().parent();
 		changeItemToFalse($conditioinUl.find("li[selectedItem='true']"));
 		changeItemToTrue($this);
 		updateSingerList(1

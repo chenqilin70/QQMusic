@@ -1,8 +1,10 @@
 package com.huwl.oracle.qqmusic.music_model;
 
+import java.io.File;
+
 public class Music {
 	private String musicId;
-	private String music;
+	private Integer music;
 	private String musicName;
 	private String lyric;
 	private Album album;
@@ -12,10 +14,10 @@ public class Music {
 	public void setMusicId(String musicId) {
 		this.musicId = musicId;
 	}
-	public String getMusic() {
+	public Integer getMusic() {
 		return music;
 	}
-	public void setMusic(String music) {
+	public void setMusic(Integer music) {
 		this.music = music;
 	}
 	public String getMusicName() {
@@ -36,7 +38,7 @@ public class Music {
 	public void setAlbum(Album album) {
 		this.album = album;
 	}
-	public Music(String musicId, String music, String musicName, String lyric,
+	public Music(String musicId, Integer music, String musicName, String lyric,
 			String image, Album album) {
 		super();
 		this.musicId = musicId;

@@ -1,22 +1,25 @@
 $(function(){
-	//以下是采用反向ajax的方式，暂时无法实现功能
-//	(function connect() {
-//		alert(21)
-//        $.ajax({
-//            url : "/music_view/ReverseAjaxServlet",
-//            data:{
-//            	method:"onOpen"
-//            },
-//            dataType : "text",
-//            error:function(){
-//            	alert("error");
-//            },
-//            success : function(data) {
-//                connect();
-//                alert(data);
-//            }
-//        });
-//    })();
+    //判断访问终端
+    var browser={
+        versions:function(){
+            var u = navigator.userAgent, app = navigator.appVersion;
+            return {
+                trident: u.indexOf('Trident') > -1, //IE内核
+                presto: u.indexOf('Presto') > -1, //opera内核
+                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
+                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                iPhone: u.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器
+                iPad: u.indexOf('iPad') > -1, //是否iPad
+                webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+                weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+                qq: u.match(/\sQQ/i) == " qq" //是否QQ
+            };
+        }(),
+        language:(navigator.browserLanguage || navigator.language).toLowerCase()
+    }
 	
 	 /*判断是否为最外面的元素被移出了*/
     function isWrapElement(e, thisElement) {
@@ -80,11 +83,11 @@ $(function(){
 			updatePlayer();
 		}, 1000);
 	})();
-	function updatePlayer(playList){
+	function updatePlayer(){
+		
 		var playList=getCookie("playList");
 		var nowPlay=getCookie("nowPlay");
 		var openNo=getCookie("playerIsOpen");
-		
 		if(playList!=null && nowPlay!=null){//cookie中有值
 			if(pageScopePlayList!=playList){
 				pageScopePlayList=playList;
@@ -125,10 +128,11 @@ $(function(){
 				var jsonData=JSON.parse(data);
 				var $playerBg=$(".playerBg");
 				var imgUrl=img_repository_path+"/album_head/T002R300x300M000"+jsonData.albumId+".jpg";
-				changeBg(imgUrl);
+				
 				$(".albumHead").attr("src","").attr("src",imgUrl);
-				$playerBg.css("background-image"
-						,"url("+imgUrl+")");
+//				$playerBg.css("background-image"
+//						,"url("+imgUrl+")");
+				changeBg(imgUrl);
 				$(".albumCover").parent().attr("href","/music_view/album.action?albumId="+jsonData.albumId);
 				$(".musicName").text(jsonData.musicName).parent().attr("href","/music_view/music.action?musicId="+jsonData.musicId);
 				$(".singerName").text(jsonData.singerName).parent().attr("href","/music_view/singer.action?singerId="+jsonData.singerId);
@@ -166,7 +170,6 @@ $(function(){
 				}
 			}
 			
-			console.log(willRequest.toString());
 			addMusicByStr(willRequest.toString());
 		}
 	} 
@@ -214,10 +217,38 @@ $(function(){
 	
 	function changeBg(url){
 		if(url){
-			$(".playerBg").attr("class","playerBg playerBg2").css("background-image","url("+url+")");
-			RGBaster.colors($(".albumHead")[0], {
+			if(!browser.versions.trident){
+				$(".playerBg").attr("class","playerBg playerBg2").css("background-image","url("+url+")");
+			}
+			RGBaster.colors(url, {
 			  success: function(payload) {
-			      $("body").css("background-color",payload.dominant);
+				  var colorArr=payload.palette;
+				  var resultColor;
+				  for(var i in colorArr){
+					  var rgb=colorArr[i].replace(/rgb/,"").replace("(","").replace(")","").split(",");
+					  var r=Number(rgb[0]),g=Number(rgb[1]),b=Number(rgb[2]);
+					  if(r<230 || g<230 || b<230){
+						  var  average=(r+g+b)/3;
+						  var  gap=(Math.abs(r-average)+Math.abs(g-average)+Math.abs(b-average))/3;
+						  if(resultColor!=undefined){
+							  if(resultColor.gap>=gap){
+								  continue;
+							  }
+						  }
+						  resultColor={
+								  "color":"rgb("+r+","+g+","+b+")",
+								  "gap":gap
+						  };
+					  }
+				  }
+				  
+				  if(resultColor==undefined){
+					  resultColor={
+							  "color":"#333",
+							  "gap":0
+					  };
+				  }
+			      $("body").css("background-color",resultColor.color);
 			  }
 			});
 		}else{

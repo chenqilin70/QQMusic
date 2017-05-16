@@ -143,13 +143,36 @@ $(function(){
 			return false;
 		};
 	}
-	$(".playAll").click(function(e){
-		if(playerIsOpen()){
-			setCookie("playList",value);
-		}else{
-			alert("没有打开");
+	/*判断数组中是否存在某个值*/
+	function arrayContain(arr,val){
+		if(arr==undefined || val==undefined || arr==null || arr.length==0)
+			return false;
+		for(var o in arr){
+			if(val==o){
+				return true;
+			}
 		}
-		
+		return false;
+	}
+	$(".playAll").click(function(e){
+		var oldList=getCookie("playList");
+		var resultMids="";
+		var firstMid="";
+		$(".songsTable tbody tr").each(function(index,element){
+			var mid=$(element).attr("musicid");
+			if(index==0){
+				firstMid=mid;
+			}
+			if(oldList==null || !arrayContain(oldList.split(","),mid) ){
+				resultMids=resultMids+mid+",";
+			}
+		});
+		resultMids=resultMids.substring(0, resultMids.lastIndexOf(","));
+		setCookie("playList",oldList+","+resultMids);
+		setCookie("nowPlay",firstMid);
+		if(!playerIsOpen()){
+			window.open("http://"+window.location.host+"/music_view/player.action");
+		}
 	});
 	$(".playSong").click(function(){
 		if(playerIsOpen()){

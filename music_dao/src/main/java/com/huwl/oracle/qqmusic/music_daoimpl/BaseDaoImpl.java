@@ -233,4 +233,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> ,ApplicationContextAware{
 		}
 		return null;
 	}
+	
+	@Override
+	public boolean exists(Serializable id) {
+		long count=(Long) uniqueQuery("select count(*) from "+getType().getName()+" o where o."+getIdFieldName()+"=?", id);
+		return count>0?true:false;
+	}
 }

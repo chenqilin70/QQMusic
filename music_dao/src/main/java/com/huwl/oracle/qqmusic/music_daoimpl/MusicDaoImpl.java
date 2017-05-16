@@ -46,6 +46,7 @@ public class MusicDaoImpl  extends BaseDaoImpl<Music> implements MusicDao{
 	}
 	@Override
 	public Object[] getSimpleMusicInfo(String nowMusicId) {
+		System.out.println("----"+nowMusicId);
 		List<Object[]> results=query("select m.musicId,m.musicName,a.albumId,a.albumName,s.singerId,s.singerName from Music m left join m.album a left join a.singer s where m.musicId=?", nowMusicId);
 		return results.get(0);
 	}

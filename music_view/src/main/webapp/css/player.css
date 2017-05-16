@@ -2,6 +2,9 @@
 	font-family:  "Microsoft YaHei";
 	color:#ffffff;
 }
+body{
+	background-color: rgb(0,0,0)
+}
 .playerBg1{
 	position: fixed;
 	width: 100%;
@@ -24,6 +27,9 @@
 	background-position: 50% 50%;
 	background-color: #1B1B1C;
 	opacity:.6;
+	-webkit-filter:blur(65px);
+	-ms-filter: blur(65px);
+	-moz-filter:blur(65px);
 	filter:blur(65px);
 }
 .bgMask{

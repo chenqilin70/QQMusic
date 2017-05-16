@@ -79,7 +79,7 @@
 	</div>
 	<div class="musicConsole">
 	<audio id="mp3Audio" preload="preload"  height="100" width="100">
-	    <source src="<%=request.getContextPath() %>/mp3/1.mp3" type="audio/mp3" />
+	    <source src="<%=request.getContextPath() %>/mp3/1.m4a" type="audio/mp3" />
 	</audio>
 		<table cellpadding="0" cellspacing="0" border="0">
 			<tbody>

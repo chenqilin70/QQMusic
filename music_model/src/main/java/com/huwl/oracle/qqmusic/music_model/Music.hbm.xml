@@ -8,7 +8,7 @@
             <column name="MUSIC_ID" />
             <generator class="assigned" />
         </id>
-        <property name="music" type="java.lang.String">
+        <property name="music" type="java.lang.Integer">
             <column name="MUSIC" />
         </property>
         <property name="musicName" type="java.lang.String">
