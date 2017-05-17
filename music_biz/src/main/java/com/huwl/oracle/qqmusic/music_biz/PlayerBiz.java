@@ -1,5 +1,8 @@
 package com.huwl.oracle.qqmusic.music_biz;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,6 +10,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
@@ -51,6 +55,7 @@ public class PlayerBiz extends BaseBiz {
 		map.put("albumName", musicInfo[3].toString());
 		map.put("singerId", musicInfo[4].toString());
 		map.put("singerName", musicInfo[5].toString());
+		map.put("music", musicInfo[6]+"");
 		String result=null;
 		try {
 			result=objectMapper.writeValueAsString(map);
@@ -95,6 +100,13 @@ public class PlayerBiz extends BaseBiz {
 			e.printStackTrace();
 		}
 		return resultStr;
+	}
+
+	public InputStream getRandomMusicId(String path) {
+		File musicDir=new File(new File(path).getParent()+"\\qqmusic_img_repository\\music_m4a");
+		String[] files=musicDir.list();
+		int ran=new Random().nextInt(files.length);
+		return new ByteArrayInputStream(files[ran].getBytes());
 	}
 
 }

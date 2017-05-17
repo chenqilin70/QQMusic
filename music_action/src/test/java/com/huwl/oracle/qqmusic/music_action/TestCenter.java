@@ -69,7 +69,7 @@ public class TestCenter {
 	}
 	@Test
 	public void testMusic(){
-		System.out.println(musicDao.exists("000000t2JXXEh"));;
+		System.out.println();;
 	}
 	
 	

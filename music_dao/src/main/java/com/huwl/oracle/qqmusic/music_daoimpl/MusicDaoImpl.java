@@ -1,15 +1,12 @@
 package com.huwl.oracle.qqmusic.music_daoimpl;
 
-import java.io.Serializable;
+import java.io.File;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.huwl.oracle.qqmusic.music_dao.AlbumDao;
 import com.huwl.oracle.qqmusic.music_dao.MusicDao;
-import com.huwl.oracle.qqmusic.music_model.Album;
 import com.huwl.oracle.qqmusic.music_model.Music;
-import com.huwl.oracle.qqmusic.music_model.Singer;
 @Repository("musicDao")
 public class MusicDaoImpl  extends BaseDaoImpl<Music> implements MusicDao{
 	{
@@ -46,8 +43,7 @@ public class MusicDaoImpl  extends BaseDaoImpl<Music> implements MusicDao{
 	}
 	@Override
 	public Object[] getSimpleMusicInfo(String nowMusicId) {
-		System.out.println("----"+nowMusicId);
-		List<Object[]> results=query("select m.musicId,m.musicName,a.albumId,a.albumName,s.singerId,s.singerName from Music m left join m.album a left join a.singer s where m.musicId=?", nowMusicId);
+		List<Object[]> results=query("select m.musicId,m.musicName,a.albumId,a.albumName,s.singerId,s.singerName,m.music from Music m left join m.album a left join a.singer s where m.musicId=?", nowMusicId);
 		return results.get(0);
 	}
 
@@ -61,7 +57,4 @@ public class MusicDaoImpl  extends BaseDaoImpl<Music> implements MusicDao{
 		System.out.println(hql);
 		return query(hql.toString(), ids);
 	}
-	
-
-
 }

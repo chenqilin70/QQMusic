@@ -164,7 +164,7 @@ body{
 .musicConsole{
 	position: absolute;
 	bottom: 0px;
-	height: 15%;
+	height: 10%;
 	width: 100%;
 }
 .musicList{
@@ -256,9 +256,15 @@ body{
 .progressBar{
 	height: 2px;
 	width: 100%;
+	margin-top:5px;
 	background: linear-gradient(to right,rgba(255,255,255,1) 0%,rgba(255,255,255,0.2) 0%);
+}
+.barBox{
+	height:12px;
 	position:absolute;
 	bottom: 10px;
+	width: 100%;
+	cursor: pointer;
 }
 .nowPlayMusic{
 	height: 20px;
@@ -399,9 +405,17 @@ body{
 	height: 10px;
 	background-color: #ffffff;
 	position: absolute;
-	top:-4px;
+	top:1px;
 	left:0;
 	cursor: pointer;
+}
+table tr .num{
+	display: inline-block;
+	height: 10px;
+	width:21px;
+	background-repeat: no-repeat;
+	background-position: left;
+	
 }
 
 

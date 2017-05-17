@@ -1,11 +1,10 @@
 package com.huwl.oracle.qqmusic.music_action;
 
-import java.io.IOException;
+import java.io.File;
+import java.io.InputStream;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
-import javax.servlet.AsyncContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,15 +18,19 @@ import com.huwl.oracle.qqmusic.music_model.Music;
 public class PlayerAction extends BaseAction{
 	
 	private List<Music> playList;
-	private String updatedMusicList;
 	private String nowMusicId;
 	private String result;
 	private String musicIds;
+	private InputStream inputStream;
 	@Autowired
 	private PlayerBiz playerBiz;
 	
-	
-	
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
 	public String getMusicIds() {
 		return musicIds;
 	}
@@ -65,6 +68,11 @@ public class PlayerAction extends BaseAction{
 	public String getMusicInfoList(){
 		result=playerBiz.getMusicInfoList(musicIds);
 		return "getMusicInfoList";
+	}
+	public String getRandomMusicId(){
+		HttpServletRequest request=getRequest();
+		inputStream=playerBiz.getRandomMusicId(request.getServletContext().getRealPath(""));
+		 return "getRandomMusicId";
 	}
 	
 	

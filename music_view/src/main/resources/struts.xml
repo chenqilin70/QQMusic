@@ -26,6 +26,9 @@
     	 	<result name="getMusicInfoList" type="json">
     	 		<param name="root">result</param>
     	 	</result>
+    	 	<result name="getRandomMusicId" type="stream">
+    	 		<param name="inputName">inputStream</param>
+    	 	</result>
     	 	<result name="success">/content/player.jsp</result>
     	 	<allowed-methods>regex:.*</allowed-methods>
     	 </action>

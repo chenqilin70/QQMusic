@@ -147,12 +147,11 @@
 	    <artifactId>aopalliance</artifactId>
 	    <version>1.0</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/junit/junit -->
 	<dependency>
 	    <groupId>junit</groupId>
 	    <artifactId>junit</artifactId>
-	    <version>4.9</version>
+	    <version>4.10</version>
 	</dependency>
-	
-		
   </dependencies>
 </project>

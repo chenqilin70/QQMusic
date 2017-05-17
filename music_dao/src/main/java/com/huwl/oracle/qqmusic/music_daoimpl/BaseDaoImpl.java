@@ -91,7 +91,6 @@ public class BaseDaoImpl<T> implements BaseDao<T> ,ApplicationContextAware{
 	}
 	@Override
 	public int updateByHql(String hql,Serializable... params){
-		System.out.println(hql);
 		return getUsableHqlQuery(hql,params).executeUpdate();
 	}
 	@Override
@@ -150,7 +149,6 @@ public class BaseDaoImpl<T> implements BaseDao<T> ,ApplicationContextAware{
 			Serializable s=params[i];
 			Method method=getMethodByParams(s);
 			try {
-				System.out.println(method);
 				method.invoke(query,i, s);
 			} catch (IllegalAccessException e) {
 				e.printStackTrace();

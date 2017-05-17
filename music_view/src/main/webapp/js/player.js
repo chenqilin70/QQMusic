@@ -79,12 +79,12 @@ $(function(){
 		console.log("此时player开启数量是："+getCookie("playerIsOpen"));
 	})();
 	(function(){
+		updatePlayer();
 		setInterval(function(){
 			updatePlayer();
 		}, 1000);
 	})();
 	function updatePlayer(){
-		
 		var playList=getCookie("playList");
 		var nowPlay=getCookie("nowPlay");
 		var openNo=getCookie("playerIsOpen");
@@ -115,6 +115,11 @@ $(function(){
 	}
 	var globalDuration;
 	function updateNowPlay(nowPlay){
+		pageScopeNowPlay=nowPlay;
+		var audio=document.getElementById("mp3Audio");
+		var $playBtn=$(".playMusic");
+		var $nextTr;
+		var $oldPlayTr=$(".musicList tr[playing='true']");
 		$.ajax({
 			url:"player!changeNowPlay.action",
 			type:"GET",
@@ -126,32 +131,75 @@ $(function(){
 			},
 			success:function(data){
 				var jsonData=JSON.parse(data);
-				var $playerBg=$(".playerBg");
+				var audioRoot=$("input[name='img_repository_path']").val()+"/music_m4a";
 				var imgUrl=img_repository_path+"/album_head/T002R300x300M000"+jsonData.albumId+".jpg";
-				
+				var $nowName=$(".nowName");
 				$(".albumHead").attr("src","").attr("src",imgUrl);
-//				$playerBg.css("background-image"
-//						,"url("+imgUrl+")");
 				changeBg(imgUrl);
 				$(".albumCover").parent().attr("href","/music_view/album.action?albumId="+jsonData.albumId);
 				$(".musicName").text(jsonData.musicName).parent().attr("href","/music_view/music.action?musicId="+jsonData.musicId);
 				$(".singerName").text(jsonData.singerName).parent().attr("href","/music_view/singer.action?singerId="+jsonData.singerId);
 				$(".albumName").text(jsonData.albumName).parent().attr("href","/music_view/album.action?albumId="+jsonData.albumId);
-				$(".nowName").text(jsonData.musicName);
-				globalDuration=document.getElementById("mp3Audio").duration;
+				$nextTr=$(".musicList tbody tr[musicid='"+jsonData.musicId+"']");
+				
+				if(jsonData.music==1){
+					afterGetSrc(audioRoot+"/C400"+jsonData.musicId+".m4a")
+					$nowName.text(jsonData.musicName);
+				}else{
+					getRandomMusic(audioRoot);
+					$nowName.html(jsonData.musicName+"&nbsp;&nbsp;&nbsp;&nbsp;(服务器查无此音乐，当前播放随机音乐)");
+				}
+				
 			}
 		});
+		function getRandomMusic(audioRoot){
+			$.ajax({
+				url:"player!getRandomMusicId.action",
+				type:"GET",
+				error:function(){
+					alert("请检查网络！");
+				},
+				success:function(data){
+					afterGetSrc(audioRoot+"/"+data);
+				}
+			
+			});
+		}
+		function updateGlobalDuration(){
+			var durationInterval=window.setInterval(function(){
+				var duration=audio.duration;
+				if(duration){
+					globalDuration=duration;
+					window.clearInterval(durationInterval);
+				}
+			}, 100);
+		}
+		function afterGetSrc(src){
+			if(!audio.paused){
+				$playBtn.trigger("click");
+			}
+			$(audio).attr("src",src);
+			var $oldNum=$oldPlayTr.attr("playing","false").find(".num");
+			$oldNum.css("background-image","").text($oldNum.attr("num"));
+			$nextTr.attr("playing","true").find(".num").text("").css("background-image","url(http://"+window.location.host+"/music_view/img/wave.gif)");
+			$nextTr.find(".opacityLink").unbind().css("opacity","1");
+			registerOpacityLink($oldPlayTr.find(".opacityLink"));
+			updateGlobalDuration();
+			if(audio.paused){
+				$playBtn.trigger("click");
+			}
+		}
+		
 	}
 	
 	function updateNowList(playList){
-		var musicInCookieArr=playList.split(",");
 		var musicInTableArr=new Array();
 		$(".musicList tbody tr").each(function(index,element){
 			var tempMusicId=$(element).attr("musicid");
 			musicInTableArr.push(tempMusicId);
 		});
 		if(musicInTableArr.length==0){
-			//如果界面中没有任何音乐信息，则发送请求，读取musicInCookieArr中所有音乐的信息
+			//如果界面中没有任何音乐信息，则发送请求，读取playList中所有音乐的信息
 			addMusicByStr(playList);
 		}else{
 			//如果界面中已经存在音乐信息，则筛选出界面中没有的，但cookie中有的，再发送请求读取这些信息
@@ -176,11 +224,16 @@ $(function(){
 	
 	function addMusicByStr(playList){
 		var musicsJson=getMusicInfoList(playList);
+		var $tbody=$(".musicList tbody");
+		var oldLength=$tbody.find("tr").length;
 		for(var i in musicsJson){
-			$(".musicList tbody").append("<tr  musicid='"+musicsJson[i].musicId+"' >" +
+			$tbody.append("<tr  musicid='"+musicsJson[i].musicId+"' playing='false' > " +
 					"<td><div class='musicCheckbox' selecteditem='false'> <span class='right'>√</span> </div></td>" +
 					"<td>" +
-						"<a class='opacityLink' musicid='"+musicsJson[i].musicId+"'>"+musicsJson[i].musicName+"</a>" +
+						"<a class='opacityLink' musicid='"+musicsJson[i].musicId+"'>" +
+								" <span class='num' num='"+(oldLength+Number(i)+1)+"'>"+(oldLength+Number(i)+1)+"</span>"+
+								"<span>"+musicsJson[i].musicName+"</span>"+
+						"</a>" +
 						"<div class='shareThisMusic thisMusicBtn'></div>" +
 						"<div class='downLoadThisMusic thisMusicBtn'></div>" +
 						"<div class='addToMenu thisMusicBtn'></div>" +
@@ -304,12 +357,16 @@ $(function(){
 			$allChecBox.find("span").css("display","none");
 		}
 	});
+	function registerOpacityLink($element){
+		$element.css("opacity","0.6")
+		$element.mouseover(opacityLinkMouseover).mouseout(opacityLinkMouseout);
+	}
 	/*设定刷新列表时重新加载的时间--开始*/
 	function opacityLinkMouseover(){
 		$(this).css("opacity","1");
 	}
 	function opacityLinkMouseout(){
-		$(this).css("opacity","0.8");
+		$(this).css("opacity","0.6");
 	}
 	function bodyCheckBoxClick($this){
 		var flag=$this.attr("selecteditem");
@@ -372,7 +429,7 @@ $(function(){
 	}
 	/*设定刷新列表时重新加载的时间--结束*/
 	function refreshListJs(){
-		$(".opacityLink").unbind().mouseover(opacityLinkMouseover).mouseout(opacityLinkMouseout);
+		$(".musicList tbody tr[playing='false'] .opacityLink").unbind().mouseover(opacityLinkMouseover).mouseout(opacityLinkMouseout);
 		$(".musicList tbody .musicCheckbox")
 			.unbind()
 			.click(function(){bodyCheckBoxClick($(this));})
@@ -430,14 +487,18 @@ $(function(){
 		var $circleInBar=$(".circleInBar");
 		t1=setInterval(function(){
 			var percent=((audio.currentTime/globalDuration)*100)+"%";
-			console.log("百分比："+percent);
 			$circleInBar.css("left",percent);
 			var currentMinite=Math.floor(audio.currentTime/60);
 			var currentSecond=Math.floor(audio.currentTime-(currentMinite*60));
 			var allMinite=Math.floor(globalDuration/60);
 			var allSecond=Math.floor(globalDuration-(allMinite*60));
-			$nowTime.text(getBothLetter(currentMinite)+":"+getBothLetter(currentSecond)+"/"+getBothLetter(allMinite)+":"+getBothLetter(allSecond));
+			var denominator=getBothLetter(allMinite)+":"+getBothLetter(allSecond);
+			var numerator=getBothLetter(currentMinite)+":"+getBothLetter(currentSecond);
+			$nowTime.text(numerator+"/"+denominator);
 			$progressBar.css("background","linear-gradient(to right,rgba(255,255,255,1) "+percent+",rgba(255,255,255,0.2) "+percent+")");
+			if(numerator==denominator){
+				nextMusicDispatcher();
+			}
 		}, 1000);
 		function getBothLetter(num){
 			return (num<10?("0"+num):(num+""));
@@ -449,7 +510,6 @@ $(function(){
 	$(".circleInBar").mousedown(function(e){
 		var audio=document.getElementById("mp3Audio");
 		if(audio.ended){
-			console.log("ended")
 			return;
 		}
 		var barWidth=Number($(".progressBar").css("width").replace(/px/,""));
@@ -466,14 +526,12 @@ $(function(){
 			if(newLeft>=0 && newLeft<=barWidth){
 				newPercent=newLeft/barWidth;
 				var percentLeft=(newPercent*100)+"%";
-				console.log($this.css("left"))
 				$this.css("left",percentLeft);
 				$progressBar.css("background","linear-gradient(to right,rgba(255,255,255,1) "+percentLeft+",rgba(255,255,255,0.2) "+percentLeft+")")
 				
 			}
 		});
 		$(document).mouseup(function(){
-			console.log("结束拖动");
 			$(document).unbind('mousemove').unbind('mouseup');
 			if(newPercent!=undefined){
 				audio.currentTime=globalDuration*(newPercent);
@@ -482,8 +540,60 @@ $(function(){
 			continuallyUpdateCircle();
 		});
 	});
-	
-	
+	$(".nextMusic").click(function(){
+		var $oldPlayingTr=$(".musicList tbody").find("tr[playing='true']");
+		var $nextPlyingTr=$oldPlayingTr.next();
+		var nextPlayingId;
+		if($nextPlyingTr.length<=0){
+			nextPlayingId=$(".musicList tbody").find("tr:first").attr("musicid");
+		}else{
+			nextPlayingId=$nextPlyingTr.attr("musicid");
+		}
+		setCookie("nowPlay", nextPlayingId);
+		updateNowPlay(nextPlayingId);
+	});
+	$(".prevMusic").click(function(){
+		var $oldPlayingTr=$(".musicList tbody").find("tr[playing='true']");
+		var $prevPlyingTr=$oldPlayingTr.prev();
+		var prevPlayingId;
+		if($prevPlyingTr.length<=0){
+			prevPlayingId=$(".musicList tbody").find("tr:last").attr("musicid");
+		}else{
+			prevPlayingId=$prevPlyingTr.attr("musicid");
+		}
+		setCookie("nowPlay", prevPlayingId);
+		updateNowPlay(prevPlayingId);
+	});
+	var switchoverModel=getCookie("switchoverModel");
+	if(switchoverModel==null)
+		switchoverModel="circle";
+	function nextMusicDispatcher(){
+		var audio=document.getElementById("mp3Audio");
+		if(switchoverModel=="circle"){//循环
+			$(".nextMusic").trigger("click");
+		}else if(switchoverModel=="sequence"){//顺序
+			var $oldPlayingTr=$(".musicList tbody").find("tr[playing='true']");
+			var $nextPlyingTr=$oldPlayingTr.next();
+			if($nextPlyingTr.length<=0){
+				$(".playMusic").css("background-position","-30px 0");
+				audio.pause();
+			}else{
+				nextPlayingId=$nextPlyingTr.attr("musicid");
+			}
+		}else if(switchoverModel=="random"){//随机
+			
+		}else{//single单曲循环
+			
+		}
+	}
+	$(".barBox").click(function(e){
+		var newOffsetX=e.offsetX;
+		var allX=Number($(this).css("width").replace(/px/,""));
+		var percentLeft=(100*newOffsetX/allX)+"%";
+		$(".circleInBar").css("left",percentLeft);
+		$(this).find(".progressBar").css("background","linear-gradient(to right,rgba(255,255,255,1) "+percentLeft+",rgba(255,255,255,0.2) "+percentLeft+")")
+		$("#mp3Audio")[0].currentTime=globalDuration*(newOffsetX/allX);
+	});
 });
 
 
