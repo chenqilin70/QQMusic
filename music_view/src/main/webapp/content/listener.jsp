@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@page import="java.util.Date"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
@@ -103,7 +104,7 @@
         <s:else>
         	<div class="listenerProfile" align="center">
         		<div class="profileImgBox">
-        			<img class="profileImg" alt="" src="<%=request.getContextPath() %>/img/listener_head/<s:property value='#session.listener.listenerHead==""?"default.jpg":#session.listener.listenerHead'/>">
+        			<img class="profileImg" alt="" src="<%=request.getContextPath() %>/img/listener_head/<s:property value='#session.listener.listenerHead==""?"default.jpg":#session.listener.listenerHead'/>?time=<%=new Date().getTime() %>">
 	        		<div class="updateProfileImg" align="center">
 	        			<span>
 	        				<s:text name="updateProfileImg"></s:text>
