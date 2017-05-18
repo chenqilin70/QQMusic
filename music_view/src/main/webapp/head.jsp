@@ -44,7 +44,6 @@
 				</s:if>
 				<s:else>
 				<input type="hidden" id="isLogin" value="true"/>
-				
 					<div class="lisenerHeadBox" align="center">
 						<img src="<%=request.getContextPath() %>/img/listener_head/<s:property value='#session.listener.listenerHead==""?"default.jpg":#session.listener.listenerHead'/>?time=<%=new Date().getTime() %>" alt='' class='userHeadInHead'>
 						<div class="listenerInfoBox" align="left">
@@ -52,21 +51,21 @@
 							<div class="lisenerNameInfo"><s:a class="defaultStyleLink"><s:property value='#session.listener.username'/></s:a></div>
 							<img class="IconInfo1" src="<%=request.getContextPath() %>/img/svip_g.png" alt="" >
 							<img  class="IconInfo2" src="<%=request.getContextPath() %>/img/sui_g.png" alt="" >
-							<s:a  class="defaultStyleLink logoutLink">[<s:text name="logoutAccount"></s:text>]</s:a>
+							<s:a  href="#" class="defaultStyleLink logoutLink">[<s:text name="logoutAccount"></s:text>]</s:a>
 							<div class="listenerItemsDiv" align="center">
 								<ul class="listenerItem">
 									<li>
-										<s:a class="defaultStyleLink"><s:property value="#session.listener.myMusicMenu.size()"/></s:a>
+										<s:a class="defaultStyleLink"><s:property value="#session.listener.myMusicMenu==null?0:#session.listener.myMusicMenu.size()"/></s:a>
 										<br/>
 										<span><s:text name="musicMenu"/></span>
 									</li>
 									<li class="centerListenerItem">
-										<s:a class="defaultStyleLink"><s:property value="#session.listener.creaSinger.size()"/></s:a>
+										<s:a class="defaultStyleLink"><s:property value="#session.listener.creaSinger==null?0:#session.listener.creaSinger.size()"/></s:a>
 										<br/>
 										<span><s:text name="care"/></span>
 									</li>
 									<li>
-										<s:a class="defaultStyleLink"><s:property value="#session.listener.fans.size()"/></s:a>
+										<s:a class="defaultStyleLink"><s:property value="#session.listener.fans==null?0:#session.listener.fans.size()"/></s:a>
 										<br/>
 										<span><s:text name="fans"/></span>
 									</li>

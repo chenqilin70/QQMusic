@@ -34,9 +34,15 @@ public class ListenerDaoImpl  extends BaseDaoImpl<Listener> implements ListenerD
 			l=(Listener) ls.get(0);
 		}
 		if(password.equals(l.getPassword())){
-			l.getMyMusicMenu().size();
-			l.getCreaSinger().size();
-			l.getFans().size();
+			if(l.getMyMusicMenu()!=null){
+				l.getMyMusicMenu().size();
+			}
+			if(l.getCreaSinger()!=null){
+				l.getCreaSinger().size();
+			}
+			if(l.getFans()!=null){
+				l.getFans().size();
+			}
 			return l;
 		}else{
 			return null;

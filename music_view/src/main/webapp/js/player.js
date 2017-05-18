@@ -1,9 +1,11 @@
 $(function(){
+	
     //判断访问终端
     var browser={
         versions:function(){
             var u = navigator.userAgent, app = navigator.appVersion;
             return {
+            	edge: u.indexOf('Edge') > -1, //Edge内核
                 trident: u.indexOf('Trident') > -1, //IE内核
                 presto: u.indexOf('Presto') > -1, //opera内核
                 webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
@@ -20,7 +22,6 @@ $(function(){
         }(),
         language:(navigator.browserLanguage || navigator.language).toLowerCase()
     }
-	
 	 /*判断是否为最外面的元素被移出了*/
     function isWrapElement(e, thisElement) {
         $relatedElement = e.relatedTarget;
@@ -156,6 +157,9 @@ $(function(){
 			$.ajax({
 				url:"player!getRandomMusicId.action",
 				type:"GET",
+				data:{
+					time:new Date().getTime()
+				},
 				error:function(){
 					alert("请检查网络！");
 				},
@@ -178,7 +182,7 @@ $(function(){
 			if(!audio.paused){
 				$playBtn.trigger("click");
 			}
-			$(audio).attr("src",src);
+			$(audio).attr("src",src).find("source").attr("src",src);
 			var $oldNum=$oldPlayTr.attr("playing","false").find(".num");
 			$oldNum.css("background-image","").text($oldNum.attr("num"));
 			$nextTr.attr("playing","true").find(".num").text("").css("background-image","url(http://"+window.location.host+"/music_view/img/wave.gif)");
@@ -269,9 +273,12 @@ $(function(){
 	}
 	
 	function changeBg(url){
+		var $playerBg=$(".playerBg");
 		if(url){
-			if(!browser.versions.trident){
-				$(".playerBg").attr("class","playerBg playerBg2").css("background-image","url("+url+")");
+			if(browser.versions.trident || browser.versions.edge){
+				$playerBg.css("background-color","rgba(255,255,255,0)");
+			}else{
+				$playerBg.attr("class","playerBg playerBg2").css("background-image","url("+url+")");
 			}
 			RGBaster.colors(url, {
 			  success: function(payload) {
@@ -532,14 +539,15 @@ $(function(){
 			}
 		});
 		$(document).mouseup(function(){
-			$(document).unbind('mousemove').unbind('mouseup');
 			if(newPercent!=undefined){
 				audio.currentTime=globalDuration*(newPercent);
 			}
-			
 			continuallyUpdateCircle();
+			$(document).unbind('mousemove').unbind('mouseup');
+			
 		});
 	});
+	
 	$(".nextMusic").click(function(){
 		var $oldPlayingTr=$(".musicList tbody").find("tr[playing='true']");
 		var $nextPlyingTr=$oldPlayingTr.next();

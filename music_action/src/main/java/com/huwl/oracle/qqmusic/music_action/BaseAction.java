@@ -1,5 +1,7 @@
 package com.huwl.oracle.qqmusic.music_action;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -92,8 +94,13 @@ public class BaseAction extends ActionSupport implements SessionAware{
 		return "";
 	}
 	public void injectUnAndPd(){
-		setUsernameInCookie(getCookieValue("username"));
-		setPasswordInCookie(getCookieValue("password"));
+		try {
+			setUsernameInCookie(URLDecoder.decode(getCookieValue("username"),"UTF-8"));
+			setPasswordInCookie(URLDecoder.decode(getCookieValue("password"),"UTF-8"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	/**
 	 * 根据cookie的名字返回相应的值

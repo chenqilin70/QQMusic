@@ -163,7 +163,7 @@
 			         						src="<s:text name='img_repository_path'/>/album_head/T002R300x300M000<s:property value='albumId'/>.jpg">
 	                                    <img class="cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
 			         				</div>
-		         					<div class="info1"><s:a class="defaultStyleLink"><s:property value="albumName"/></s:a></div>
+		         					<div class="info1"><s:a action="album" class="defaultStyleLink"><s:param name="albumId" value="albumId"></s:param><s:property value="albumName"/></s:a></div>
 		         					<div class="info2"><s:date format="yyyy-MM-dd" name="publishTime"/></div>
 		         				</div>
 		         			</li>

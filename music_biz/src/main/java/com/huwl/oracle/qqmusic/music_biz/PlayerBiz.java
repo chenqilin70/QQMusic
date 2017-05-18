@@ -103,7 +103,8 @@ public class PlayerBiz extends BaseBiz {
 	}
 
 	public InputStream getRandomMusicId(String path) {
-		File musicDir=new File(new File(path).getParent()+"\\qqmusic_img_repository\\music_m4a");
+		File musicDir=new File(new File(path).getParent()+"/qqmusic_img_repository/music_m4a");
+		System.out.println("/n/n/n/n/n/n/n/n"+musicDir.getAbsolutePath()+"/n/n/n/n/n/n/n/n");
 		String[] files=musicDir.list();
 		int ran=new Random().nextInt(files.length);
 		return new ByteArrayInputStream(files[ran].getBytes());

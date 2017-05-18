@@ -85,6 +85,9 @@
         	<result name="signin" type="json">
         		<param name="root">message</param>
         	</result>
+        	<result name="logout" type="stream">
+        		<param name="inputName">inputStream</param>
+        	</result>
         	<allowed-methods>regex:.*</allowed-methods>
         </action>
         <action 

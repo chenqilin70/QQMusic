@@ -1,6 +1,10 @@
 package com.huwl.oracle.qqmusic.music_action;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -38,7 +42,14 @@ public class TemplateAction  extends BaseAction {
 	private String validateCode;
 	private String comfirmPassword;
 	private boolean remenberPwd;
+	private InputStream inputStream;
 	
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
 	public boolean isRemenberPwd() {
 		return remenberPwd;
 	}
@@ -75,6 +86,11 @@ public class TemplateAction  extends BaseAction {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	public String logout(){
+		getRequest().getSession().invalidate();
+		inputStream=new ByteArrayInputStream("true".getBytes());
+		return "logout";
+	}
 	public String signin(){
 		HttpSession session=getRequest().getSession();
 		String codeInSession=(String)session.getAttribute("validateCode");
@@ -85,8 +101,15 @@ public class TemplateAction  extends BaseAction {
 	public String login(){
 		HttpSession session=getRequest().getSession();
 		message="{"+templateBiz.login(username,password,validateCode,session)+"}";
-		Cookie c1=new Cookie("username", username);
-		Cookie c2=new Cookie("password", password);
+		Cookie c1=null;
+		Cookie c2=null;
+		try {
+			c1 = new Cookie("username", URLEncoder.encode(username,"UTF-8"));
+			c2=new Cookie("password", URLEncoder.encode(password,"UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
 		if(remenberPwd){
 			c1.setMaxAge(5*365*24*60*60);
 			c2.setMaxAge(1728000);

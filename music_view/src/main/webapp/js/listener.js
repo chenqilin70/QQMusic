@@ -192,7 +192,7 @@ $(function(){
                 	$uploadWaiting.css("display","none");
                 	$(".chooserMask").css("display","none");
                 	if(message.isSuccess){
-                		$(".profileImg , .userHeadInHead").attr("src","/music_view/img/listener_head/"+message.head+"?time="+new Date().getTime());
+                		$(".profileImg , .userHeadInHead , .lisenerHead").attr("src","/music_view/img/listener_head/"+message.head+"?time="+new Date().getTime());
                 	}else{
                 		alert("请检查网络");
                 	}

@@ -420,6 +420,18 @@ $(function () {
     		
     	}
     });
-    
+    $(".logoutLink").click(function(){
+    	$.ajax({
+    		url:"template!logout.action",
+    		type:"GET",
+    		error:function(){
+    			alert("请检查网路！");
+    		},
+    		success:function(data){
+    			window.location.reload(true);
+    		}
+    	});
+    	return false;
+    });
     
 });

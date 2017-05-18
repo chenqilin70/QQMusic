@@ -129,6 +129,7 @@
 	min-height: 65px;
 	box-shadow: 0 0 10px rgba(183,183,183,.65);
 	background-color: #ffffff;
+	z-index: 2;
 }
 .yearsUl , .albumCompanyUl , .categoryUl{
 	margin-top: 19px;
