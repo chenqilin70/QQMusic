@@ -1,5 +1,4 @@
 $(function(){
-	
     //判断访问终端
     var browser={
         versions:function(){
@@ -61,6 +60,68 @@ $(function(){
 		theme:"my-theme",
 		scrollbarPosition:"outside",
 		axis:"y"
+	});
+	
+	var switchoverModel=Number(getCookie("switchoverModel"));
+	var switchoverModelArr=[{
+		"model":"circle",
+		"position":"0 -205px"
+	},
+	{
+		"model":"single",
+		"position":"0px -232px"
+	},
+	{
+		"model":"sequence",
+		"position":"0px -260px"
+	},
+	{
+		"model":"random",
+		"position":"0 -73px"
+	}];
+	if(switchoverModel==null)
+		switchoverModel=0;
+	$(".loopList").css("background-position",switchoverModelArr[switchoverModel].position).css("display","block");
+	function nextMusicDispatcher(){
+		var audio=document.getElementById("mp3Audio");
+		if(switchoverModel==0){//循环
+			$(".nextMusic").trigger("click");
+		}else if(switchoverModel==2){//顺序
+			var $oldPlayingTr=$(".musicList tbody").find("tr[playing='true']");
+			var $nextPlyingTr=$oldPlayingTr.next();
+			console.log($nextPlyingTr.length)
+			if($nextPlyingTr.length<=0){
+				$(".playMusic").css("background-position","0px 0px");
+				audio.pause();
+			}else{
+				nextPlayingId=$nextPlyingTr.attr("musicid");
+				setCookie("nowPlay", nextPlayingId);
+				updateNowPlay(nextPlayingId);
+			}
+		}else if(switchoverModel==3){//随机
+			var $tbody=$(".musicList tbody");
+			var length=$tbody.find("tr").length;
+			if(length<=0){
+				return;
+			}else{
+				var nextPlayingId =$tbody.find("tr:eq("+Math.floor(Math.random()*length)+")").attr("musicid");
+				setCookie("nowPlay", nextPlayingId);
+				updateNowPlay(nextPlayingId);
+			}
+		}else{//single单曲循环
+			audio.play();
+		}
+	}
+	$(".loopList").click(function(){
+		var $this=$(this);
+		if(switchoverModel==switchoverModelArr.length-1){
+			switchoverModel=0;
+			
+		}else{
+			switchoverModel++;
+		}
+		setCookie("switchoverModel", switchoverModel+"");
+		$this.css("background-position",switchoverModelArr[switchoverModel].position);
 	});
 	
 	var pageScopePlayList;
@@ -189,6 +250,7 @@ $(function(){
 			$nextTr.find(".opacityLink").unbind().css("opacity","1");
 			registerOpacityLink($oldPlayTr.find(".opacityLink"));
 			updateGlobalDuration();
+			$(".downLoadBtn").parent().attr("href",src);
 			if(audio.paused){
 				$playBtn.trigger("click");
 			}
@@ -392,13 +454,13 @@ $(function(){
 	}
 	function bodyCheckBoxMouseover(e,element){
 		if(isWrapElement(e, element)){
-			$(this).css("opacity","1");
+			$(element).css("opacity","1");
 		}
 	}
 	function bodyCheckBoxMouseout(e,element){
 		if(isWrapElement(e, element)){
-			if($(this).attr("selecteditem")=='false'){
-				$(this).css("opacity","0.2");
+			if($(element).attr("selecteditem")=='false'){
+				$(element).css("opacity","0.2");
 			}
 		}
 	}
@@ -502,7 +564,7 @@ $(function(){
 			var denominator=getBothLetter(allMinite)+":"+getBothLetter(allSecond);
 			var numerator=getBothLetter(currentMinite)+":"+getBothLetter(currentSecond);
 			$nowTime.text(numerator+"/"+denominator);
-			$progressBar.css("background","linear-gradient(to right,rgba(255,255,255,1) "+percent+",rgba(255,255,255,0.2) "+percent+")");
+			$progressBar.css("background","linear-gradient(to right,rgba(255,255,255,0.8) "+percent+",rgba(255,255,255,0.2) "+percent+")");
 			if(numerator==denominator){
 				nextMusicDispatcher();
 			}
@@ -534,7 +596,7 @@ $(function(){
 				newPercent=newLeft/barWidth;
 				var percentLeft=(newPercent*100)+"%";
 				$this.css("left",percentLeft);
-				$progressBar.css("background","linear-gradient(to right,rgba(255,255,255,1) "+percentLeft+",rgba(255,255,255,0.2) "+percentLeft+")")
+				$progressBar.css("background","linear-gradient(to right,rgba(255,255,255,0.8) "+percentLeft+",rgba(255,255,255,0.2) "+percentLeft+")")
 				
 			}
 		});
@@ -544,9 +606,9 @@ $(function(){
 			}
 			continuallyUpdateCircle();
 			$(document).unbind('mousemove').unbind('mouseup');
-			
 		});
 	});
+	
 	
 	$(".nextMusic").click(function(){
 		var $oldPlayingTr=$(".musicList tbody").find("tr[playing='true']");
@@ -572,35 +634,77 @@ $(function(){
 		setCookie("nowPlay", prevPlayingId);
 		updateNowPlay(prevPlayingId);
 	});
-	var switchoverModel=getCookie("switchoverModel");
-	if(switchoverModel==null)
-		switchoverModel="circle";
-	function nextMusicDispatcher(){
-		var audio=document.getElementById("mp3Audio");
-		if(switchoverModel=="circle"){//循环
-			$(".nextMusic").trigger("click");
-		}else if(switchoverModel=="sequence"){//顺序
-			var $oldPlayingTr=$(".musicList tbody").find("tr[playing='true']");
-			var $nextPlyingTr=$oldPlayingTr.next();
-			if($nextPlyingTr.length<=0){
-				$(".playMusic").css("background-position","-30px 0");
-				audio.pause();
-			}else{
-				nextPlayingId=$nextPlyingTr.attr("musicid");
-			}
-		}else if(switchoverModel=="random"){//随机
-			
-		}else{//single单曲循环
-			
-		}
-	}
+	
 	$(".barBox").click(function(e){
-		var newOffsetX=e.offsetX;
+		var srcElement=browser.versions.gecko?e.target:window.event.srcElement;
+		if($(srcElement).attr("class")!=undefined  && $(srcElement).attr("class").indexOf("circleInBar")>-1){
+			return;
+		}
+		var newOffsetX=e.offsetX-5;
 		var allX=Number($(this).css("width").replace(/px/,""));
 		var percentLeft=(100*newOffsetX/allX)+"%";
 		$(".circleInBar").css("left",percentLeft);
-		$(this).find(".progressBar").css("background","linear-gradient(to right,rgba(255,255,255,1) "+percentLeft+",rgba(255,255,255,0.2) "+percentLeft+")")
+		$(this).find(".progressBar").css("background","linear-gradient(to right,rgba(255,255,255,0.8) "+percentLeft+",rgba(255,255,255,0.2) "+percentLeft+")")
 		$("#mp3Audio")[0].currentTime=globalDuration*(newOffsetX/allX);
+	});
+	$(".downLoadBtn").click(function(){
+        var form = $("<form>");   //定义一个form表单
+        form.attr('style', 'display:none');   //在form表单中添加查询参数
+        form.attr('target', '');
+        form.attr('method', 'post');
+        form.attr('action', "player!downloadMusic.action");
+        var fileSrc=$("#mp3Audio").attr("src");
+        var fileName=fileSrc.substring(fileSrc.lastIndexOf("/")+1);
+        var input1 = $('<input>');
+        input1.attr('type', 'hidden').attr('name', 'musicFile').attr('value', fileName);
+        var input2 = $('<input>');
+        input2.attr('type', 'hidden').attr('name', 'musicName').attr('value', $(".musicName").text()+fileSrc.substring(fileSrc.lastIndexOf(".")));
+        $('body').append(form);  //将表单放置在web中 
+        form.append(input1);   //将查询参数控件提交到表单上
+        form.append(input2);
+        form.submit();
+        form.remove();
+	});
+	$(".circleOfVolume").mousedown(function(e){
+		var audio=document.getElementById("mp3Audio");
+		var oldMouseX=e.clientX;
+		var $circle=$(this);
+		var oldLeft=Number($circle.css("left").replace(/px/,""))
+		var $document=$(document);
+		var barWidth=Number($circle.parent().css("width").replace(/px/,""));
+		$document.mousemove(function(e){
+			var newMouseX=e.clientX;
+			var offsetX=oldMouseX-newMouseX;
+			var newLeft=oldLeft-offsetX;
+			var $volumeBar=$circle.parent().find(".volume");
+			if(barWidth>newLeft && newLeft>=0){
+				$circle.css("left",newLeft+"px");
+				audio.volume=newLeft/barWidth;
+				$volumeBar.css("background","linear-gradient(to right,rgba(255,255,255,0.8) "+((newLeft/barWidth)*100)+"%,rgba(255,255,255,0.2) "+((newLeft/barWidth)*100)+"%)");
+			}
+			
+		});
+		$document.one("mouseup",function(e){
+			$document.unbind("mousemove");
+		});
+	});
+	$(".volumeBox").click(function(e){
+		var $volumeBox=$(this);
+		var $circle=$(".circleOfVolume");
+		var srcElement=browser.versions.gecko?e.target:window.event.srcElement;
+		var barWidth=Number($circle.parent().css("width").replace(/px/,""));
+		if($(srcElement).attr("class")!=undefined && $(srcElement).attr("class").indexOf("circleOfVolume")==-1){
+			var newLeft=e.offsetX-5;
+			$circle.css("left",newLeft+"px");
+			document.getElementById("mp3Audio").volume=newLeft/barWidth;
+			$volumeBox.find(".volume").css("background","linear-gradient(to right,rgba(255,255,255,0.8) "+((newLeft/barWidth)*100)+"%,rgba(255,255,255,0.2) "+((newLeft/barWidth)*100)+"%)");
+		}
+	});
+	$(".likeBtn").click(function(){
+		$.ajax({
+			url:"",
+			data
+		});
 	});
 });
 

@@ -1,10 +1,19 @@
 package com.huwl.oracle.qqmusic.music_action;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,9 +31,23 @@ public class PlayerAction extends BaseAction{
 	private String result;
 	private String musicIds;
 	private InputStream inputStream;
+	private String musicFile;
+	private String musicName;
 	@Autowired
 	private PlayerBiz playerBiz;
 	
+	public String getMusicName() {
+		return musicName;
+	}
+	public void setMusicName(String musicName) {
+		this.musicName = musicName;
+	}
+	public String getMusicFile() {
+		return musicFile;
+	}
+	public void setMusicFile(String musicFile) {
+		this.musicFile = musicFile;
+	}
 	public InputStream getInputStream() {
 		return inputStream;
 	}
@@ -74,7 +97,22 @@ public class PlayerAction extends BaseAction{
 		inputStream=playerBiz.getRandomMusicId(request.getServletContext().getRealPath(""));
 		 return "getRandomMusicId";
 	}
-	
+	public String downloadMusic(){
+		try {
+			musicName=new String(musicName.getBytes(),"ISO-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+        HttpServletRequest request=getRequest();
+        String file_dir = request.getServletContext().getRealPath(""); // 文件路径
+        File file = new File(new File(file_dir).getParent()+"/qqmusic_img_repository/music_m4a"+ File.separator + musicFile);
+        try {
+			inputStream=new FileInputStream(file);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		return "downloadMusic";
+	}
 	
 	
 	
