@@ -54,17 +54,46 @@ body{
 	top:0;
 	left:0;
 }
-.login , .setting{
+.login , .setting1{
 	float: right;
 	margin-top: 25px;
 	font-size: 14px;
-	opacity:0.3
+	opacity:0.3;
+	cursor: pointer;
+}
+.setting2 , .listenerName , .logout{
+	float: right;
+	font-size: 14px;
+	opacity:0.3;
+	cursor: pointer;
+}
+.topRightCorner{
+	width: 200px;
+	height: 30px;
+	margin-top:19px;
+	float: right;
+}
+.profile{
+	float: right;
+	margin-right:5px;
+	border-radius:50%;
+	width: 30px;
+	height: 30px;
 }
 .login{
 	margin-right: 13px;
 }
-.setting{
+.setting1{
 	margin-right: 65px;
+}
+.logout{
+	margin-right:19px;
+	line-height: 30px;
+	visibility: hidden;
+}
+.setting2 , .listenerName{
+	margin-right:14px;
+	line-height: 30px;
 }
 .centerBox{
 	position:fixed;
@@ -433,6 +462,199 @@ table tr .num{
 	background-repeat: no-repeat;
 	background-position: left;
 }
+/**********************************************************************/
+.totalMask{
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	background-color:rgba(0,0,0,.2);
+	top:0px;
+	left:0px;
+	z-index: 5;
+	border:1px solid gray;
+	display: none;
+	border:none;
+}
+.loginWin{
+	background-color:#ffffff;
+	width:650px;
+	height:435px;
+	margin-top: 157px;
+}
+.loginWin input[type='text'] , .loginWin input[type='password']{
+	color:#333;
+}
+.loginTitl div{
+	position:absolute;
+	width:163px;
+	left: 243.5px;
+	color:#32c27d;
+}
+.loginTitl{
+	border-bottom:1px solid rgb(240,240,240);
+	line-height: 55px;
+	font-size: 16px;
+	color:#32c27d;
+	text-align: center;
+	position: relative;
+	height: 55px;
+}
+.loginBody{
+	height:350px;
+}
+.accountAndPasswordLogin{
+	font-size: 20px;
+	color: #333;
+	line-height: 40px;
+}
+.new_user_sign_in{
+	font-size: 20px;
+	color: #333;
+	line-height: 40px;
+	display:none;
+}
+.loginInput{
+	width: 270px;
+	height: 40px;
+	border:1px solid #d6d6d6;
+	margin-top: 15px;
+	border-radius:3px;
+	position: relative;
+}
+.loginInput  input{
+	border:none;
+	outline: none;
+	height:18px;
+	font-size: 16px;
+	line-height: 18px;
+	width:230px;
+	margin-left: 10px;
+	margin-top: 11px;
+}
+.validateCode{
+	width: 270px;
+	height: 40px;
+	border:1px solid #d6d6d6;
+	margin-top: 15px;
+	border-radius:3px;
+	position: relative;
+}
+.validateCode  input{
+	border:none;
+	outline: none;
+	height:18px;
+	font-size: 16px;
+	line-height: 18px;
+	width:150px;
+	margin-left: 10px;
+	margin-top: 11px;
+}
+.validateImg{
+	height:100%;
+	width: 105px;
+	float: right;
+	border-left: 1px solid #d6d6d6;
+}
+.loginInput i{
+	background-image: url(../img/icon_3_tiny.png);
+	background-position: -117px -161px;
+	display: inline-block;
+	position:relative;
+	top:2px;
+	right:8px;
+	width: 20px;
+	height:20px;
+	cursor: pointer;
+}
+.loginOrSiginSubmit{
+	width: 270px;
+	height: 40px;
+	margin-top: 15px;
+	border-radius:3px;
+	
+}
+.loginOrSiginSubmit input{
+	background-color:#86ce2f;
+	color:#ffffff;
+	border:none;
+	height:100%;
+	width: 100%;
+	font-size: 16px;
+	cursor: pointer;
+	outline: none;
+}
+.comfirmPassword{
+	display: none;
+}
+.loginTail{
+	height:29px;
+	width: 100%;
+}
+.nextAutoLogin{
+	cursor:pointer;
+	float:left;
+	font-size: 12px;
+	color:#333;
+	line-height: 20px;
+	margin-left: 5px;
+}
+.loginCheckbox{
+	cursor:pointer;
+	float:left;
+	height: 18px;
+	width: 18px;
+	margin-left: 10px;
+	background-image: url(../img/icon_3_tiny.png);
+}
+.loginCheckbox[isSelected="true"]{
+	background-position: -92px -162px;
+}
+.loginCheckbox[isSelected="false"]{
+	background-position: -74px -162px;
+}
+.loginTail ul{
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+.loginTail li{
+	text-align:center;
+	float: right;
+	width:77px;
+	height:12px;
+	color:#666;
+	font-size: 12px;
+	line-height: 12px;
+}
+.loginTail .centerLi{
+	border-width:0 1px 0 1px;
+	border-color: #c8c8c8;
+	border-style: solid;
+}
+.closeIcon{
+	height: 12px;
+	width: 12px;
+	display: inline-block;
+	float: right;
+	margin-top:15px;
+	margin-right:15px;
+	background-image: url(../img/icon_popup.png);
+	background-position: 0px -200px;
+	cursor: pointer;
+}
+.loginTail a{
+	text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+.inputMessage{
+	position:absolute;
+	left: 275px;
+	width: 150px;
+	top:11px;
+	font-size: 12px;
+}
+
 
 
 

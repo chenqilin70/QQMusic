@@ -294,7 +294,7 @@ $(function(){
 		var oldLength=$tbody.find("tr").length;
 		for(var i in musicsJson){
 			$tbody.append("<tr  musicid='"+musicsJson[i].musicId+"' playing='false' > " +
-					"<td><div class='musicCheckbox' selecteditem='false'> <span class='right'>√</span> </div></td>" +
+					"<td><div  musicid='"+musicsJson[i].musicId+"' class='musicCheckbox' selecteditem='false'> <span class='right'>√</span> </div></td>" +
 					"<td>" +
 						"<a class='opacityLink' musicid='"+musicsJson[i].musicId+"'>" +
 								" <span class='num' num='"+(oldLength+Number(i)+1)+"'>"+(oldLength+Number(i)+1)+"</span>"+
@@ -701,11 +701,297 @@ $(function(){
 		}
 	});
 	$(".likeBtn").click(function(){
-		$.ajax({
-			url:"",
-			data
-		});
+		var musics=getSelectedMusic().join(",");
+		likeMusic(musics);
 	});
+	function getSelectedMusic(){
+		var $tbody=$(".musicList tbody");
+		var musicList=new Array();
+		$tbody.find(".musicCheckbox[selecteditem='true']").each(function(){
+			musicList.push($(this).attr("musicid"));
+		});
+		return musicList;
+	}
+	function likeMusic(musics){
+		$.ajax({
+			url:"player!likeMusic.action",
+			data:{
+				musics:musics
+			},
+			type:"GET",
+			error:function(){
+				alert("请检查网络!");
+			},
+			success:function(data){
+				alert(data)
+			}
+			
+		});
+	}
+	$(".login").click(function(){
+		$(".totalMask").css("display","block");
+	});
+	/************************************************************************************************/
+	$(".loginInput  input , .validateCode input").focus(function(){
+    	$(this).parent().css("border-color","#a7d2fb");
+    	$(this).parent().css("box-shadow","0px 0px 3px #a7d2fb");
+    });
+    $(".loginInput  input , .validateCode input").blur(function(){
+    	$(this).parent().css("border-color","#d6d6d6");
+    	$(this).parent().css("box-shadow","");
+    });
+    $(".nextAutoLogin , .loginCheckbox").click(function(){
+    	$check=$(".loginCheckbox");
+    	$check.attr("isSelected")==='true'?$check.attr("isSelected","false"):$check.attr("isSelected","true");
+    });
+    $(".closeIcon").click(function(){
+    	$(".totalMask").css("display","none");
+    });
+    $(".closeIcon").mouseover(function(){
+    	$(this).css("background-position","-14px -200px");
+    });
+    $(".closeIcon").mouseout(function(){
+    	$(this).css("background-position","0px -200px");
+    });
+    $(".loginTail a").mouseover(function(){
+    	$(this).css("text-decoration","underline");
+    });
+    $(".loginTail a").mouseout(function(){
+    	$(this).css("text-decoration","none");
+    });
+    $(".signinOrLogin").click(function(){
+    	var oldFor=$("input[name=forWhat]").val();
+    	if(oldFor=="login"){
+    		//显示注册
+    		$(".comfirmPassword").css("display","block");
+    		$("input[name=forWhat]").val("signin");
+    		$(this).text($("#directLogin").val());
+    		$(".accountAndPasswordLogin").css("display","none");
+    		$(".new_user_sign_in").css("display","block");
+    		$(".loginOrSiginSubmit input").val($("#signin").val());
+    		$(".loginTitl div").text(($("#signin").val()));
+    		if($("input[name=username]").val()!==""){
+    			$("input[name=username]").trigger("blur");
+    		}
+    		$("input[name=comfirmPassword]").trigger("blur");
+    	}else{
+    		//显示登录
+    		$(".comfirmPassword").css("display","none");
+    		$("input[name=forWhat]").val("login");
+    		$(this).text($("#new_user_sign_in").val());
+    		$(".accountAndPasswordLogin").css("display","block");
+    		$(".new_user_sign_in").css("display","none");
+    		$(".loginOrSiginSubmit input").val($("#login").val());
+    		$(".loginTitl div").text(($("#login").val()));
+    		$("input[name=username]").parent().find(".inputMessage").text("");
+    		$("input[name=comfirmPassword]").val("").parent().find(".inputMessage").text("");
+    	}
+    	return false;
+    });
+    
+    $(".validateImg").click(function(){
+    	var src=this.src;
+    	this.src=src.substring(0,src.lastIndexOf("=")+1)+new Date().getTime();
+    });
+    $(".loginInput i").mouseover(function(){
+    	$(this).css("background-position", "-140px -161px");
+    });
+    $(".loginInput i").mouseout(function(){
+    	$(this).css("background-position", "-117px -161px");
+    });
+    $(".loginInput i").click(function(){
+    	$(this).parent().find("input").val("");
+    });
+    function usernameBlur(){
+    	if($("input[name=forWhat]").val()=="login"){
+    		return ;
+    	}
+    	$this=$(this);
+    		$.ajax({
+    			url:"template!templateValidate.action",
+    			type:"GET",
+    			data:{
+    				"username":$this.val()
+    			},
+    			error:function(){
+    				alert("请检查网络");
+    			},
+    			success:function(data){
+    				var json=JSON.parse(data);
+    				if(json["username"]==="验证成功"){
+    					$this.parent().find(".inputMessage").css("color","#86ce2f");
+    				}else{
+    					$this.parent().find(".inputMessage").css("color","#e84048");
+    				}
+    				$this.parent().find(".inputMessage").text(json["username"]);
+    			}
+    		});
+    }
+    function passwordBlur(){
+    	if($("input[name=forWhat]").val()=="login"){
+    		return ;
+    	}
+    	var message=isPwdLegal();
+    	if("验证成功"===message){
+    		$(this).parent().find(".inputMessage").css("color","#86ce2f").text(message);
+    	}else{
+    		$(this).parent().find(".inputMessage").css("color","#e84048").text(message);
+    	}
+    	$comfirmPassword=$(".loginBody form input[name=comfirmPassword]");
+    	if($comfirmPassword.parent().find(".inputMessage").text()!=="" && $comfirmPassword.val()!==$(this).val()){
+    		$comfirmPassword.parent().find(".inputMessage").css("color","#e84048").text("密码两次输入不一致");
+    	}
+    }
+    function comfirmPasswordBlur(){
+    	if($(".loginBody form input[name=password]").val()===""){
+    		return;
+    	}
+    	if($(this).val()=== $(".loginBody form input[name=password]").val()){
+    		$(this).parent().find(".inputMessage").css("color","#86ce2f").text("验证成功");
+    	}else{
+    		$(this).parent().find(".inputMessage").css("color","#e84048").text("两次密码输入不一致");
+    	}
+    }
+    function validateCodeBlur(){
+    	$this=$(this);
+		$.ajax({
+			url:"template!templateValidate.action",
+			type:"GET",
+			data:{
+				"validateCode":$this.val()
+			},
+			error:function(){
+				alert("请检查网络");
+			},
+			success:function(data){
+				var json=JSON.parse(data);
+				if(json["validateCode"]==="验证成功"){
+					$this.parent()
+						.find(".inputMessage")
+						.css("color","#86ce2f")
+						.text(json["validateCode"]);
+				}else{
+					$this.val("").parent()
+						.find(".inputMessage")
+						.css("color","#e84048")
+						.text(json["validateCode"]);
+				}
+			}
+		});
+    }
+    function isPwdLegal(){
+		if($("#password").val()=="")
+			return "密码不能为空";
+		else if($("#password").val().length<6 || $("#password").val().length>30)
+			return "密码必须在6-30位之间";
+		else 
+			return "验证成功";
+	}
+    $(".loginBody form input[name=username]").blur(usernameBlur);
+    $(".loginBody form input[name=password]").blur(passwordBlur);
+    $(".loginBody form input[name=comfirmPassword]").blur(comfirmPasswordBlur);
+    $(".loginBody form input[name=validateCode]").blur(validateCodeBlur);
+    $(".loginOrSiginSubmit input").click(function(){
+    	var forWhat=$("input[name=forWhat]").val();
+    	var username=$(".loginBody form input[name=username]").val();
+    	var password=$(".loginBody form input[name=password]").val();
+    	var comfirmPassword=$(".loginBody form input[name=comfirmPassword]").val();
+    	var validateCode=$(".loginBody form input[name=validateCode]").val();
+    	var remenberPwd=$(".loginCheckbox").attr("isSelected");
+    	if("login"===forWhat){
+    		$.ajax({
+    			url:"template!login.action",
+    			type:"POST",
+    			data:{
+    				"username":username,
+    				"password":password,
+    				"validateCode":validateCode,
+    				"remenberPwd":(remenberPwd=='true')
+    			},
+    			error:function(){
+    				alert("请检查网络");
+    			},
+    			success:function(data){
+    				console.log(data);
+    				var json=JSON.parse(data);
+    				console.log(json);
+    				if(json["isSuccess"]==="true"){
+    					window.location.reload();
+    				}else{
+    					if(json["username"]!=="验证成功"){
+    						$("input[name=username]").parent().find(".inputMessage").css("color","#e84048");
+    					}else{
+    						$("input[name=username]").parent().find(".inputMessage").css("color","#86ce2f");
+    					}
+    					if(json["validateCode"]!=="验证成功"){
+    						$("input[name=validateCode]").parent().find(".inputMessage").css("color","#e84048");
+    					}else{
+    						$("input[name=validateCode]").parent().find(".inputMessage").css("color","#86ce2f");
+    					}
+    					$("input[name=username]").parent().find(".inputMessage").text(json["username"]);
+    					$("input[name=validateCode]").parent().find(".inputMessage").text(json["validateCode"]);
+    				}
+    			}
+    		});
+
+    	}else{
+    		$.ajax({
+			url:"template!signin.action",
+			type:"POST",
+			data:{
+				"username":username,
+				"password":password,
+				"comfirmPassword":comfirmPassword,
+				"validateCode":validateCode
+			},
+			error:function(){
+				alert("请检查网络");
+			},
+			success:function(data){
+				var json=JSON.parse(data);
+				if(json["isSuccess"]==="true"){
+					window.location.reload();
+				}else{
+					$("input[name=username]").parent().find(".inputMessage").text(json["username"]);
+					$("input[name=password]").parent().find(".inputMessage").text(json["password"]);
+					$("input[name=comfirmPassword]").parent().find(".inputMessage").text(json["comfirmPassword"]);
+					$("input[name=validateCode]").parent().find(".inputMessage").text(json["validateCode"]);
+				}
+			}
+		});
+    		
+    	}
+    	return false;
+    });
+    $(".login , .setting1, .setting2, .listenerName , .logout").mouseover(function(){
+    	$(this).css("opacity","1");
+    });
+    $(".login , .setting1, .setting2, .listenerName , .logout").mouseout(function(){
+    	$(this).css("opacity","0.3");
+    });
+    $(".topRightCorner").mouseover(function(e){
+    	if(isWrapElement(e, this)){
+    		$(this).find(".logout").css("visibility","visible");
+    	}
+    });
+    $(".topRightCorner").mouseout(function(e){
+    	if(isWrapElement(e,this)){
+    		$(this).find(".logout").css("visibility","hidden");
+    	}
+    });
+    $(".logout").click(function(){
+    	$.ajax({
+    		url:"template!logout.action",
+    		type:"GET",
+    		error:function(){
+    			alert("请检查网路！");
+    		},
+    		success:function(data){
+    			window.location.reload(true);
+    		}
+    	});
+    	return false;
+    });
 });
 
 

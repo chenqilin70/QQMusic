@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ page import="java.util.Date" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
@@ -21,8 +22,21 @@
 </div>
 <div class="contentContainer" align="center">
 	<div class="QQMusicLink"></div>
-	<div class="setting"><s:text name="setting"/></div>
-	<div class="login"><s:text name="login"/></div>
+	<s:if test="#session.listener==null">
+		<div class="setting1"><s:text name="setting"/></div>
+		<div class="login"><s:text name="login"/></div>
+	</s:if>
+	<s:else>
+		<div class="topRightCorner">
+			<div class="logout"><s:text name="logout"></s:text></div>
+			<div class="setting2"><s:text name="setting"/></div>
+			<s:a action="listener" target="_blank">
+				<s:param name="listenerId" value="#session.listener.listenerId"></s:param>
+				<div class="listenerName"><s:property value="#session.listener.username"/></div>
+			</s:a>
+			<img class="profile" alt="" src="<%=request.getContextPath() %>/img/listener_head/<s:property value='#session.listener.listenerHead==""?"default.jpg":#session.listener.listenerHead'/>?time=<%=new Date().getTime() %>">
+		</div>
+	</s:else>
 </div>
 <div class="centerBox">
 	<div class="optBtnGroup">
@@ -123,6 +137,66 @@
 		
 	</div>
 </div>
+<div class="totalMask" align="center">
+		<div class="loginWin">
+			<div class="loginTitl" align="left">
+				<div align="center"><s:text name="login"/></div>
+				<i class="closeIcon"></i>
+			</div>
+			<div class="loginBody">
+				<div class="accountAndPasswordLogin"><s:text name="accountAndPasswordLogin"/></div>
+				<div class="new_user_sign_in"><s:text name="new_user_sign_in"/></div>
+				<input type="hidden" value="<s:text name='new_user_sign_in'/>" id="new_user_sign_in">
+				<input type="hidden" value="<s:text name='directLogin'/>" id="directLogin">
+				<input type="hidden" value="<s:text name='signin'/>" id="signin">
+				<input type="hidden" value="<s:text name='login'/>" id="login">
+				<form>
+					<input type="hidden" name="forWhat" value="login">
+					<div class="loginInput" align="left">
+						<s:textfield 
+							name="username" 
+							placeholder='%{getText("pleaceInputAccount")}' 
+							value="%{usernameInCookie}"></s:textfield>
+						<i></i>
+						<div class="inputMessage" ></div>
+					</div>
+					<div class="loginInput" align="left">
+						<s:password 
+							name="password" 
+							placeholder='%{getText("password")}'
+							value="%{passwordInCookie}"></s:password>
+						<div class="inputMessage" ></div>
+					</div>
+					<div class="loginInput comfirmPassword" align="left">
+						<s:password name="comfirmPassword" placeholder='%{getText("comfirmPassword")}'></s:password>
+						<div class="inputMessage" ></div>
+					</div>
+					<div class="validateCode" align="left">
+						<s:textfield name="validateCode" placeholder='%{getText("validateCode")}'></s:textfield>
+						<img alt="" src='<s:url action='ajax!validateCode'><s:param name="time">time</s:param></s:url>' class="validateImg">
+						<div class="inputMessage" ></div>
+					</div>
+					<div class="loginOrSiginSubmit" align="left">
+						<input type="submit" value="<s:text name='login'/>">
+					</div>
+				</form>
+			</div>
+			<div class="loginTail" align="left">
+				<s:if test="usernameInCookie==null || usernameInCookie==''">
+					<a isSelected="false" class="loginCheckbox"></a>
+				</s:if>
+				<s:else>
+					<a isSelected="true" class="loginCheckbox"></a>
+				</s:else>
+				<div class="nextAutoLogin"><s:text name="nextAutoLogin"></s:text></div>
+				<ul>
+					<li><s:a><s:text name="feedback"/></s:a></li>
+					<li class="centerLi"><s:a class="signinOrLogin"><s:text name="new_user_sign_in"/></s:a></li>
+					<li><s:a><s:text name="forgetPassword"/></s:a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
 
