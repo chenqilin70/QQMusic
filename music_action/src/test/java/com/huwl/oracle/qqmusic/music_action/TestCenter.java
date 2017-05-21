@@ -1,11 +1,15 @@
 package com.huwl.oracle.qqmusic.music_action;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -14,7 +18,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huwl.oracle.qqmusic.music_biz.AlbumBiz;
 import com.huwl.oracle.qqmusic.music_biz.IndexBiz;
@@ -71,21 +74,44 @@ public class TestCenter {
 	}
 	@Test
 	public void testMusic(){
-		System.out.println("13213".split(",").length);
+		File file1=new File("D:/tempFile/1.txt");
+		File file2=new File("D:/tempFile/2.txt");
+		try {
+			ZipOutputStream zout=new ZipOutputStream(new FileOutputStream("D:/1.zip"));
+			ZipEntry entry1=new ZipEntry(file1.getName());
+			zout.putNextEntry(entry1);
+			FileInputStream in=new FileInputStream(file1);
+			BufferedInputStream bin=new BufferedInputStream(in);
+			byte[] barr=new byte[1024];
+			int readSize=0;
+			while((readSize=bin.read(barr))!=-1){
+				zout.write(barr, 0, readSize);
+			}
+			ZipEntry entry2=new ZipEntry(file2.getName());
+			zout.putNextEntry(entry2);
+			FileInputStream in2=new FileInputStream(file2);
+			BufferedInputStream bin2=new BufferedInputStream(in2);
+			while((readSize=bin2.read(barr))!=-1){
+				zout.write(barr, 0, readSize);
+			}
+			zout.flush();
+			bin.close();
+			in.close();
+			bin2.close();
+			in2.close();
+			zout.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
-	
+	@Test
 	public void testExtend(){
-		try {
-			System.out.println(new Character('f').getClass().getDeclaredField("TYPE"));
-			System.out.println("是包装类");
-		}catch (java.lang.NoSuchFieldException e) {
-			System.out.println("不是包装类");
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		playerBiz.batchDownload("C:/Users/aierxuan/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/music_view"
+				,"000000t62JXXEh,000000U31BLK6Z,000002a33Eqj3D,002fSAYe0iix7R");
+		已有音乐的路径存在问题还没解决
 		
 	}
 	

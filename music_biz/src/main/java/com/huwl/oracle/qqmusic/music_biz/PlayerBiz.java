@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +15,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -112,7 +118,6 @@ public class PlayerBiz extends BaseBiz {
 
 	public InputStream getRandomMusicId(String path) {
 		File musicDir=new File(new File(path).getParent()+"/qqmusic_img_repository/music_m4a");
-		System.out.println("/n/n/n/n/n/n/n/n"+musicDir.getAbsolutePath()+"/n/n/n/n/n/n/n/n");
 		String[] files=musicDir.list();
 		int ran=new Random().nextInt(files.length);
 		return new ByteArrayInputStream(files[ran].getBytes());
@@ -136,6 +141,58 @@ public class PlayerBiz extends BaseBiz {
 	public InputStream dislikeMusic(String loginedListenerId, String musics) {
 		String result=listenerDao.dislikeMusic(Integer.parseInt(loginedListenerId),musics.split(","));
 		return new ByteArrayInputStream(result.getBytes());
+	}
+
+	public InputStream batchDownload(String file_dir,String musics) {
+		List<Object[]> result=musicDao.getBatchInfo(musics.split(","));
+		ZipOutputStream zout=null;
+		String zipFileName=UUID.randomUUID().toString();
+		try {
+			File tempDir=new File(new File(file_dir).getParent()+"/tempFile/"+zipFileName+".zip");
+			if(!tempDir.exists())
+				tempDir.mkdirs();
+			zout=new ZipOutputStream(new FileOutputStream(tempDir));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(Object[] oarr:result){
+			String musicId=oarr[0].toString();
+			String musicName=oarr[1].toString();
+			ZipEntry zipEntry=new ZipEntry(musicName+".m4a");
+			try {
+				zout.putNextEntry(zipEntry);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			int music=(int) oarr[1];
+			InputStream in=null;
+			if(music==1){
+				try {
+					in=new FileInputStream(new File(file_dir).getParent()+"/qqmusic_img_repository/music_m4a/"+musicId+".m4a");
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			}else{
+				try {
+					in=getRandomMusicId(file_dir);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			int readSize=0;
+			byte[] bytes=new byte[1024];
+			try {
+				while((readSize=in.read(bytes))!=-1){
+					zout.write(bytes, 0, readSize);
+				}
+				zout.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return null;
 	}
 
 }

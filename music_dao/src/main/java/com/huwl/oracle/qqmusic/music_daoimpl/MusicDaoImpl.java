@@ -1,6 +1,7 @@
 package com.huwl.oracle.qqmusic.music_daoimpl;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -54,7 +55,15 @@ public class MusicDaoImpl  extends BaseDaoImpl<Music> implements MusicDao{
 			hql.append("m.musicId=? or ");
 		}
 		hql=new StringBuffer(hql.substring(0,hql.lastIndexOf("or")));
-		System.out.println(hql);
 		return query(hql.toString(), ids);
+	}
+	@Override
+	public List<Object[]> getBatchInfo(String[] musics) {
+		StringBuffer hql=new StringBuffer("select m.musicId,m.musicName,m.music from Music where ");
+		for(String id:musics){
+			hql.append("m.musicId=? or ");
+		}
+		hql=new StringBuffer(hql.substring(0,hql.lastIndexOf("or")));
+		return query(hql.toString(), musics);
 	}
 }

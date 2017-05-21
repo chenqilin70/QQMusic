@@ -11,4 +11,5 @@ public interface MusicDao extends BaseDao<Music>{
 	List<Object[]> getPlayList(String[] ids);
 	Object[] getSimpleMusicInfo(String nowMusicId);
 	List<Object[]> getMusicInfoList(String[] ids);
+	List<Object[]> getBatchInfo(String[] split);
 }

@@ -1,19 +1,11 @@
 package com.huwl.oracle.qqmusic.music_action;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -34,10 +26,18 @@ public class PlayerAction extends BaseAction{
 	private String musicFile;
 	private String musicName;
 	private String musics;
+	private String batchFileName;
 	private String time;
 	@Autowired
 	private PlayerBiz playerBiz;
 	
+	
+	public String getBatchFileName() {
+		return batchFileName;
+	}
+	public void setBatchFileName(String batchFileName) {
+		this.batchFileName = batchFileName;
+	}
 	public String getTime() {
 		return time;
 	}
@@ -127,6 +127,15 @@ public class PlayerAction extends BaseAction{
 	public String dislikeMusic(){
 		inputStream=playerBiz.dislikeMusic(getLoginedListenerId(),musics);
 		return "likeMusic";
+	}
+	public String batchDownload(){
+		try {
+			batchFileName=new String(("批量下载音乐"+new Date().getTime()+".zip").getBytes(),"ISO-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		inputStream=playerBiz.batchDownload(getRequest().getServletContext().getRealPath(""),musics);
+		return "batchDownload";
 	}
 	
 	

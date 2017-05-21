@@ -9,7 +9,7 @@
 <title>我的音乐</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/jquery.mCustomScrollbar.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/player.css">
- <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/rgbaster.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/player.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.mCustomScrollbar.min.js"></script>

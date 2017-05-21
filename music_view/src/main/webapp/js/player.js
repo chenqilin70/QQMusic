@@ -705,7 +705,11 @@ $(function(){
 		}
 	});
 	$(".collect").click(function(){
-		var musics=getSelectedMusic().join(",");
+		var musicList=getSelectedMusic();
+		if(musicList.length<1){
+			alert("请选择！！")
+		}
+		var musics=musicList.join(",");
 		likeMusic(musics);
 	});
 	function getSelectedMusic(){
@@ -1049,7 +1053,21 @@ $(function(){
     	}else{
     		dislikeMusic(musicid);
     	}
+    });
+    $(".download").click(function(){
+    	var musics=getSelectedMusic().join(",");
+    	var $form = $("<form>")
+			    		.attr("type","post")
+			    		.attr("action","player!batchDownload.action")
+			    		.attr("target","")
+			    		.css("display","none");
+    	var $input1=$("<input>")
+    					.attr("type","hidden")
+    					.attr("value",musics)
+    					.attr("name","musics");
     	
+    	$form.append($input1);
+    	$form.submit();
     });
 });
 
