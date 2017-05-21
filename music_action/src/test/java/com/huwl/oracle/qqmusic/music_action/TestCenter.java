@@ -48,21 +48,21 @@ public class TestCenter {
 	private static ObjectMapper objectMapper;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-//		ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-//		albumDao=(AlbumDao) ac.getBean("albumDao");
-//		baseDao=(BaseDao) ac.getBean("baseDao");
-//		singerDao=(SingerDao)ac.getBean("singerDao");
-//		companyDao=(CompanyDao) ac.getBean("companyDao");
-//		indexBiz=(IndexBiz) ac.getBean("indexBiz");
-//		albumBiz=(AlbumBiz) ac.getBean("albumBiz");
-//		listenerBiz=(ListenerBiz) ac.getBean("listenerBiz");
-//		singerBiz=(SingerBiz) ac.getBean("singerBiz");
-//		listenerDao=(ListenerDao) ac.getBean("listenerDao");
-//		sessionFactory=(SessionFactory) ac.getBean("sessionFactory");
-//		singerDiscoverBiz=(SingerDiscoverBiz) ac.getBean("singerDiscoverBiz");
-//		musicDao=(MusicDao) ac.getBean("musicDao");
-//		playerBiz=(PlayerBiz) ac.getBean("playerBiz");
-//		objectMapper=(ObjectMapper) ac.getBean("objectMapper");
+		ac=new ClassPathXmlApplicationContext("applicationContext.xml");
+		albumDao=(AlbumDao) ac.getBean("albumDao");
+		baseDao=(BaseDao) ac.getBean("baseDao");
+		singerDao=(SingerDao)ac.getBean("singerDao");
+		companyDao=(CompanyDao) ac.getBean("companyDao");
+		indexBiz=(IndexBiz) ac.getBean("indexBiz");
+		albumBiz=(AlbumBiz) ac.getBean("albumBiz");
+		listenerBiz=(ListenerBiz) ac.getBean("listenerBiz");
+		singerBiz=(SingerBiz) ac.getBean("singerBiz");
+		listenerDao=(ListenerDao) ac.getBean("listenerDao");
+		sessionFactory=(SessionFactory) ac.getBean("sessionFactory");
+		singerDiscoverBiz=(SingerDiscoverBiz) ac.getBean("singerDiscoverBiz");
+		musicDao=(MusicDao) ac.getBean("musicDao");
+		playerBiz=(PlayerBiz) ac.getBean("playerBiz");
+		objectMapper=(ObjectMapper) ac.getBean("objectMapper");
 	}
 
 	@AfterClass
@@ -71,12 +71,7 @@ public class TestCenter {
 	}
 	@Test
 	public void testMusic(){
-		try {
-			System.out.println(URLEncoder.encode(" ","UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println("13213".split(",").length);
 	}
 	
 	

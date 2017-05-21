@@ -33,9 +33,23 @@ public class PlayerAction extends BaseAction{
 	private InputStream inputStream;
 	private String musicFile;
 	private String musicName;
+	private String musics;
+	private String time;
 	@Autowired
 	private PlayerBiz playerBiz;
 	
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	public String getMusics() {
+		return musics;
+	}
+	public void setMusics(String musics) {
+		this.musics = musics;
+	}
 	public String getMusicName() {
 		return musicName;
 	}
@@ -85,7 +99,7 @@ public class PlayerAction extends BaseAction{
 		return SUCCESS;
 	}
 	public String changeNowPlay(){
-		result=playerBiz.getMusicInfo(nowMusicId);
+		result=playerBiz.getMusicInfo(getLoginedListenerId(),nowMusicId);
 		return "changeNowPlay";
 	}
 	public String getMusicInfoList(){
@@ -103,15 +117,16 @@ public class PlayerAction extends BaseAction{
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-        HttpServletRequest request=getRequest();
-        String file_dir = request.getServletContext().getRealPath(""); // 文件路径
-        File file = new File(new File(file_dir).getParent()+"/qqmusic_img_repository/music_m4a"+ File.separator + musicFile);
-        try {
-			inputStream=new FileInputStream(file);
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
+		inputStream=playerBiz.downloadMusic(getRequest().getServletContext().getRealPath(""),musicName);
 		return "downloadMusic";
+	}
+	public String likeMusic(){
+		inputStream=playerBiz.likeMusic(getLoginedListenerId(),musics);
+		return "likeMusic";
+	}
+	public String dislikeMusic(){
+		inputStream=playerBiz.dislikeMusic(getLoginedListenerId(),musics);
+		return "likeMusic";
 	}
 	
 	

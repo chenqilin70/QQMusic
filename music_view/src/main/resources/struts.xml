@@ -26,6 +26,9 @@
 	               <param name="inputName">inputStream</param>  
 	               <param name="bufferSize">1024</param>  
 	        </result>  
+	        <result name="likeMusic" type="stream">
+	        	<param name="inputName">inputStream</param>
+	        </result>
     	 	<result name="changeNowPlay" type="json">
     	 		<param name="root">result</param>
     	 	</result>

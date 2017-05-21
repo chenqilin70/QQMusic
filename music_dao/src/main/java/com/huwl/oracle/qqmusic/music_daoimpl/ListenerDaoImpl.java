@@ -1,7 +1,9 @@
 package com.huwl.oracle.qqmusic.music_daoimpl;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.aspectj.lang.annotation.After;
@@ -105,5 +107,41 @@ public class ListenerDaoImpl  extends BaseDaoImpl<Listener> implements ListenerD
 	public boolean updateListenerHead(String fileName,String listenerId) {
 		int flag=updateByHql("update Listener l set l.listenerHead=? where l.listenerId=?", fileName,listenerId);
 		return (flag==1)?true:false;
+	}
+
+	@Override
+	public String likeMusic(Integer listenerId, String[] musics) {
+		boolean result=true;
+		for(String musicId:musics){
+			BigInteger haveLiked=(BigInteger) uniqueSqlQuery("select count(*) from LIS_LI_MU where QQLIS_ID=? and MUSIC_ID=?", listenerId,musicId);
+			if(haveLiked.intValue()==0){
+				int flag=updateBySql("insert into LIS_LI_MU values(?,?) ", listenerId,musicId);
+				if(flag!=1){
+					result=false;
+				}
+			}
+		}
+		return result+"";
+	}
+
+	@Override
+	public boolean isLikeMusic(Integer listenerId, String nowMusicId) {
+		BigInteger result=(BigInteger) uniqueSqlQuery("select count(*) from LIS_LI_MU where QQLIS_ID=? and MUSIC_ID=?", listenerId, nowMusicId);
+		return result.intValue()>0?true:false;
+	}
+
+	@Override
+	public String dislikeMusic(int listenerId, String[] musics) {
+		boolean result=true;
+		for(String musicId:musics){
+			BigInteger haveLiked=(BigInteger) uniqueSqlQuery("select count(*) from LIS_LI_MU where QQLIS_ID=? and MUSIC_ID=?", listenerId,musicId);
+			if(haveLiked.intValue()!=0){
+				int flag=updateBySql("delete from  LIS_LI_MU where QQLIS_ID=? and MUSIC_ID=? ", listenerId,musicId);
+				if(flag!=1){
+					result=false;
+				}
+			}
+		}
+		return result+"";
 	}
 }

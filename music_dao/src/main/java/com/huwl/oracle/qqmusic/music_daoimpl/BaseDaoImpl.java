@@ -76,6 +76,9 @@ public class BaseDaoImpl<T> implements BaseDao<T> ,ApplicationContextAware{
 	public List sqlQuery(String sql,Integer pageSize,Integer pageNo,Serializable... params){
 		return getUsableSqlQuery(sql,params).setFirstResult((pageNo-1)*pageSize).setMaxResults(pageSize).list();
 	}
+	public List sqlQuery(String sql,Serializable... params){
+		return getUsableSqlQuery(sql,params).list();
+	}
 	@Override
 	public Serializable uniqueQuery(String hql, Serializable... params) {
 		return (Serializable) getUsableHqlQuery(hql,params).uniqueResult();

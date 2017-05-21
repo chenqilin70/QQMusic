@@ -32,4 +32,10 @@ public interface ListenerDao  extends BaseDao<Listener>{
 
 	boolean updateListenerHead(String fileName,String listenerId);
 
+	String likeMusic(Integer listenerId, String[] split);
+
+	boolean isLikeMusic(Integer listenerId, String nowMusicId);
+
+	String dislikeMusic(int parseInt, String[] split);
+
 }

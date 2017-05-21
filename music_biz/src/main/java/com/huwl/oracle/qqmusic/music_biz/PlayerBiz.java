@@ -2,6 +2,8 @@ package com.huwl.oracle.qqmusic.music_biz;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
@@ -46,7 +50,7 @@ public class PlayerBiz extends BaseBiz {
 		return result;
 	}
 
-	public String getMusicInfo(String nowMusicId) {
+	public String getMusicInfo(String listenerId,String nowMusicId) {
 		Object[] musicInfo=musicDao.getSimpleMusicInfo(nowMusicId);
 		Map<String,String> map=new HashMap<>();
 		map.put("musicId", musicInfo[0].toString());
@@ -56,6 +60,10 @@ public class PlayerBiz extends BaseBiz {
 		map.put("singerId", musicInfo[4].toString());
 		map.put("singerName", musicInfo[5].toString());
 		map.put("music", musicInfo[6]+"");
+		if(listenerId!=null){
+			boolean isLike=listenerDao.isLikeMusic(Integer.parseInt(listenerId),nowMusicId);
+			map.put("isLike", isLike+"");
+		}
 		String result=null;
 		try {
 			result=objectMapper.writeValueAsString(map);
@@ -108,6 +116,26 @@ public class PlayerBiz extends BaseBiz {
 		String[] files=musicDir.list();
 		int ran=new Random().nextInt(files.length);
 		return new ByteArrayInputStream(files[ran].getBytes());
+	}
+
+	public InputStream downloadMusic(String file_dir,String musicFile) {
+        File file = new File(new File(file_dir).getParent()+"/qqmusic_img_repository/music_m4a"+ File.separator + musicFile);
+        try {
+			return new FileInputStream(file);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+			return null;
+		}
+	}
+
+	public InputStream likeMusic(String loginedListenerId, String musics) {
+		String result=listenerDao.likeMusic(Integer.parseInt(loginedListenerId),musics.split(","));
+		return new ByteArrayInputStream(result.getBytes());
+	}
+
+	public InputStream dislikeMusic(String loginedListenerId, String musics) {
+		String result=listenerDao.dislikeMusic(Integer.parseInt(loginedListenerId),musics.split(","));
+		return new ByteArrayInputStream(result.getBytes());
 	}
 
 }

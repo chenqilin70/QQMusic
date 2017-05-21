@@ -203,7 +203,11 @@ $(function(){
 				$(".singerName").text(jsonData.singerName).parent().attr("href","/music_view/singer.action?singerId="+jsonData.singerId);
 				$(".albumName").text(jsonData.albumName).parent().attr("href","/music_view/album.action?albumId="+jsonData.albumId);
 				$nextTr=$(".musicList tbody tr[musicid='"+jsonData.musicId+"']");
-				
+				if(jsonData.isLike=="true"){
+					$(".likeBtn").attr("class","likeBtn like");
+				}else{
+					$(".likeBtn").attr("class","likeBtn dislike");
+				}
 				if(jsonData.music==1){
 					afterGetSrc(audioRoot+"/C400"+jsonData.musicId+".m4a")
 					$nowName.text(jsonData.musicName);
@@ -296,7 +300,7 @@ $(function(){
 			$tbody.append("<tr  musicid='"+musicsJson[i].musicId+"' playing='false' > " +
 					"<td><div  musicid='"+musicsJson[i].musicId+"' class='musicCheckbox' selecteditem='false'> <span class='right'>√</span> </div></td>" +
 					"<td>" +
-						"<a class='opacityLink' musicid='"+musicsJson[i].musicId+"'>" +
+						"<a class='opacityLink' musicid='"+musicsJson[i].musicId+"' >" +
 								" <span class='num' num='"+(oldLength+Number(i)+1)+"'>"+(oldLength+Number(i)+1)+"</span>"+
 								"<span>"+musicsJson[i].musicName+"</span>"+
 						"</a>" +
@@ -696,11 +700,11 @@ $(function(){
 		if($(srcElement).attr("class")!=undefined && $(srcElement).attr("class").indexOf("circleOfVolume")==-1){
 			var newLeft=e.offsetX-5;
 			$circle.css("left",newLeft+"px");
-			document.getElementById("mp3Audio").volume=newLeft/barWidth;
+			document.getElementById("mp3Audio").volume=(newLeft/barWidth)<0?0:newLeft/barWidth;
 			$volumeBox.find(".volume").css("background","linear-gradient(to right,rgba(255,255,255,0.8) "+((newLeft/barWidth)*100)+"%,rgba(255,255,255,0.2) "+((newLeft/barWidth)*100)+"%)");
 		}
 	});
-	$(".likeBtn").click(function(){
+	$(".collect").click(function(){
 		var musics=getSelectedMusic().join(",");
 		likeMusic(musics);
 	});
@@ -713,20 +717,66 @@ $(function(){
 		return musicList;
 	}
 	function likeMusic(musics){
-		$.ajax({
-			url:"player!likeMusic.action",
-			data:{
-				musics:musics
-			},
-			type:"GET",
-			error:function(){
-				alert("请检查网络!");
-			},
-			success:function(data){
-				alert(data)
-			}
-			
-		});
+		if($("input[name='isLogin']").val()=='true'){
+			$.ajax({
+				url:"player!likeMusic.action",
+				data:{
+					musics:musics
+				},
+				type:"GET",
+				error:function(){
+					alert("请检查网络!");
+				},
+				success:function(data){
+					if(data=='true'){
+						var $successLike=$(".successLike");
+						$successLike.css("display","block");
+						$(".likeBtn").attr("class","likeBtn like");
+						window.setTimeout(function(){
+							$successLike.animate({
+								opacity:"0"
+							},'fast',function(){
+								$successLike.css({
+									"display":"none",
+									"opacity":"1"
+								});
+							});
+						}, 1000);
+						
+					}else{
+						alert("请检查网络!");
+					}
+				}
+				
+			});
+		}else{
+			$(".login").trigger("click");
+		}
+		
+	}
+	function dislikeMusic(musics){
+		if($("input[name='isLogin']").val()=='true'){
+			$.ajax({
+				url:"player!dislikeMusic.action",
+				data:{
+					musics:musics
+				},
+				type:"GET",
+				error:function(){
+					alert("请检查网络!");
+				},
+				success:function(data){
+					if(data=='true'){
+						$(".likeBtn").attr("class","likeBtn dislike");
+					}else{
+						alert("请检查网络!");
+					}
+				}
+				
+			});
+		}else{
+			$(".login").trigger("click");
+		}
 	}
 	$(".login").click(function(){
 		$(".totalMask").css("display","block");
@@ -991,6 +1041,15 @@ $(function(){
     		}
     	});
     	return false;
+    });
+    $(".likeBtn").click(function(){
+    	var musicid=$(".musicList tbody").find("tr[playing='true']").attr("musicid");
+    	if($(this).attr("class").indexOf("dislike")>-1){
+        	likeMusic(musicid);
+    	}else{
+    		dislikeMusic(musicid);
+    	}
+    	
     });
 });
 

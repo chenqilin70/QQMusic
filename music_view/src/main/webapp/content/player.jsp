@@ -23,11 +23,13 @@
 <div class="contentContainer" align="center">
 	<div class="QQMusicLink"></div>
 	<s:if test="#session.listener==null">
+		<input type="hidden" name="isLogin" value="false"/>
 		<div class="setting1"><s:text name="setting"/></div>
 		<div class="login"><s:text name="login"/></div>
 	</s:if>
 	<s:else>
 		<div class="topRightCorner">
+			<input type="hidden" name="isLogin" value="true"/>
 			<div class="logout"><s:text name="logout"></s:text></div>
 			<div class="setting2"><s:text name="setting"/></div>
 			<s:a action="listener" target="_blank">
@@ -95,7 +97,6 @@
 	<audio id="mp3Audio" preload="preload"  height="100" width="100">
 	    <source src="<%=request.getContextPath() %>/mp3/1.mp3" type="audio/mp3" />
 	</audio>
-	
 		<table cellpadding="0" cellspacing="0" border="0">
 			<tbody>
 				<tr>
@@ -121,7 +122,7 @@
 					<td class="otherBtnBox">
 						<div class="otherBtnBoxDiv">
 							<div class="loopList"></div>
-							<div class="likeBtn"></div>
+							<div class="likeBtn dislike"></div>
 							<div class="downLoadBtn"></div>
 							<div class="changeModel"></div>
 							<div class="trumpetIcon"></div>
@@ -196,6 +197,10 @@
 				</ul>
 			</div>
 		</div>
+	</div>
+	<div class="successLike" align="center">
+		<div class="popupIcon"></div>
+		<div class="popupMessage"><s:text name="successLikeMessage"/></div>
 	</div>
 </body>
 </html>

@@ -68,7 +68,7 @@ body{
 	cursor: pointer;
 }
 .topRightCorner{
-	width: 200px;
+	width: 400px;
 	height: 30px;
 	margin-top:19px;
 	float: right;
@@ -346,6 +346,12 @@ body{
 	left: 105px;
 	bottom: 10px;
 	background-image: url(../img/player.png);
+	
+}
+.like{
+	background-position: -30px -95px;
+}
+.dislike{
 	background-position: 0 -95px;
 }
 .downLoadBtn{
@@ -653,6 +659,31 @@ table tr .num{
 	width: 150px;
 	top:11px;
 	font-size: 12px;
+}
+.successLike{
+	position: fixed;
+	top:40%;
+	height: 150px;
+	width: 230px;
+	background-color: rgba(0,0,0,0.8);
+	border-radius:5px;
+	z-index: 5;
+	margin-left: -115px;
+	margin-top:-75px;
+	left: 50%;
+	display: none;
+}
+.popupIcon{
+	height: 46px;
+	width: 46px;
+	background-image: url(../img/icon_popup.png);
+	background-position: 0 -150px;
+	margin-top: 30px;
+}
+.popupMessage{
+	font-size: 14px;
+    font-weight: 400;
+    margin-top: 20px;
 }
 
 
