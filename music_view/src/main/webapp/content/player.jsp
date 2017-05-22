@@ -198,9 +198,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="successLike" align="center">
-		<div class="popupIcon"></div>
+	<div class="successLike messageBox" align="center">
+		<div class="popupIcon successLikeIcon"></div>
 		<div class="popupMessage"><s:text name="successLikeMessage"/></div>
+	</div>
+	<div class="pleaceSelectInfo messageBox" align="center">
+		<div class="popupIcon pleaceSelect"></div>
+		<div class="popupMessage"><s:text name="pleaceSelectInfo"/></div>
 	</div>
 </body>
 </html>

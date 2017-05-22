@@ -17,10 +17,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
@@ -147,36 +144,47 @@ public class PlayerBiz extends BaseBiz {
 		List<Object[]> result=musicDao.getBatchInfo(musics.split(","));
 		ZipOutputStream zout=null;
 		String zipFileName=UUID.randomUUID().toString();
+		File tempDir=null;
 		try {
-			File tempDir=new File(new File(file_dir).getParent()+"/tempFile/"+zipFileName+".zip");
-			if(!tempDir.exists())
-				tempDir.mkdirs();
+			File tempRoot=new File(new File(file_dir).getParent()+"/tempFile");
+			if(!tempRoot.exists())
+				tempRoot.mkdirs();
+			tempDir=new File(tempRoot.getAbsolutePath()+"/"+zipFileName+".zip");
 			zout=new ZipOutputStream(new FileOutputStream(tempDir));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		for(Object[] oarr:result){
+			
+			InputStream in=null;
 			String musicId=oarr[0].toString();
 			String musicName=oarr[1].toString();
-			ZipEntry zipEntry=new ZipEntry(musicName+".m4a");
-			try {
-				zout.putNextEntry(zipEntry);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			int music=(int) oarr[1];
-			InputStream in=null;
-			if(music==1){
+			
+			if(oarr[2]==null){
+				ZipEntry zipEntry=new ZipEntry("(随机音乐)"+musicName+".m4a");
 				try {
-					in=new FileInputStream(new File(file_dir).getParent()+"/qqmusic_img_repository/music_m4a/"+musicId+".m4a");
-				} catch (FileNotFoundException e) {
+					zout.putNextEntry(zipEntry);
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}else{
 				try {
-					in=getRandomMusicId(file_dir);
+					File musicDir=new File(new File(file_dir).getParent()+"/qqmusic_img_repository/music_m4a");
+					String[] files=musicDir.list();
+					int ran=new Random().nextInt(files.length);
+					in=new FileInputStream(new File(file_dir).getParent()+"/qqmusic_img_repository/music_m4a/"+files[ran]);
 				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(1==(Integer)oarr[2]){
+				ZipEntry zipEntry=new ZipEntry(musicName+".m4a");
+				try {
+					zout.putNextEntry(zipEntry);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				try {
+					in=new FileInputStream(new File(file_dir).getParent()+"/qqmusic_img_repository/music_m4a/C400"+musicId+".m4a");
+				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
 			}
@@ -190,9 +198,66 @@ public class PlayerBiz extends BaseBiz {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+			try {
+				in.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
-		return null;
+		try {
+			zout.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		InputStream zipInput=null;
+		try {
+			zipInput= new FileInputStream(tempDir);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		final File willDelete=tempDir;
+		new Thread(){
+			@Override
+			public void run() {
+				while(true){
+					if(!willDelete.exists()){
+						break;
+					}else{
+						boolean flag=willDelete.delete();
+						if(flag){
+							break;
+						}
+					}
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				
+			};
+		}.start();
+		return zipInput;
+	}
+
+	public InputStream downloadThisMusic(String downloadMusicId,String path) {
+		boolean flag=musicDao.hasMusicFile(downloadMusicId);
+		File musicFile=null;
+		if(flag){
+			musicFile=new File(new File(path).getParent()+"/qqmusic_img_repository/music_m4a/C400"+downloadMusicId+".m4a");
+		}else{
+			File musicDir=new File(new File(path).getParent()+"/qqmusic_img_repository/music_m4a");
+			String[] files=musicDir.list();
+			int ran=new Random().nextInt(files.length);
+			musicFile=new File(new File(path).getParent()+"/qqmusic_img_repository/music_m4a/"+files[ran]);
+		}
+		InputStream input=null;
+		try {
+			input = new FileInputStream(musicFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return input;
 	}
 
 }

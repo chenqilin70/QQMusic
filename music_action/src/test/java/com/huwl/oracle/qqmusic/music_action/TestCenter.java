@@ -6,11 +6,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.junit.AfterClass;
@@ -72,7 +74,6 @@ public class TestCenter {
 	public static void tearDownAfterClass() throws Exception {
 		
 	}
-	@Test
 	public void testMusic(){
 		File file1=new File("D:/tempFile/1.txt");
 		File file2=new File("D:/tempFile/2.txt");
@@ -109,10 +110,18 @@ public class TestCenter {
 	
 	@Test
 	public void testExtend(){
-		playerBiz.batchDownload("C:/Users/aierxuan/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/music_view"
+		InputStream in=playerBiz.batchDownload("C:/Users/aierxuan/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/music_view"
 				,"000000t62JXXEh,000000U31BLK6Z,000002a33Eqj3D,002fSAYe0iix7R");
-		已有音乐的路径存在问题还没解决
-		
+		try {
+			FileUtils.copyInputStreamToFile(in, new File("D:/1.zip"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void testArray(){
+		Integer i1=new Integer(1);
+		Integer i2=new Integer(1);
+		System.out.println(i1==1);
 	}
 	
 	

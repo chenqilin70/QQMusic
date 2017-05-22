@@ -660,7 +660,7 @@ table tr .num{
 	top:11px;
 	font-size: 12px;
 }
-.successLike{
+.messageBox{
 	position: fixed;
 	top:40%;
 	height: 150px;
@@ -677,8 +677,13 @@ table tr .num{
 	height: 46px;
 	width: 46px;
 	background-image: url(../img/icon_popup.png);
-	background-position: 0 -150px;
 	margin-top: 30px;
+}
+.successLikeIcon{
+	background-position: 0 -150px;
+}
+.pleaceSelect{
+	background-position: 0 -220px;
 }
 .popupMessage{
 	font-size: 14px;

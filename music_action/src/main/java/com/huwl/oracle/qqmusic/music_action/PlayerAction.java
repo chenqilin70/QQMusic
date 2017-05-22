@@ -27,11 +27,16 @@ public class PlayerAction extends BaseAction{
 	private String musicName;
 	private String musics;
 	private String batchFileName;
+	private String downloadMusicId;
 	private String time;
 	@Autowired
 	private PlayerBiz playerBiz;
-	
-	
+	public String getDownloadMusicId() {
+		return downloadMusicId;
+	}
+	public void setDownloadMusicId(String downloadMusicId) {
+		this.downloadMusicId = downloadMusicId;
+	}
 	public String getBatchFileName() {
 		return batchFileName;
 	}
@@ -117,7 +122,7 @@ public class PlayerAction extends BaseAction{
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		inputStream=playerBiz.downloadMusic(getRequest().getServletContext().getRealPath(""),musicName);
+		inputStream=playerBiz.downloadMusic(getRequest().getServletContext().getRealPath(""),musicFile);
 		return "downloadMusic";
 	}
 	public String likeMusic(){
@@ -136,6 +141,11 @@ public class PlayerAction extends BaseAction{
 		}
 		inputStream=playerBiz.batchDownload(getRequest().getServletContext().getRealPath(""),musics);
 		return "batchDownload";
+	}
+	public String downloadThisMusic(){
+		inputStream=playerBiz.downloadThisMusic(downloadMusicId,getRequest().getServletContext().getRealPath(""));
+		musicName=musicName+".m4a";
+		return "downloadThisMusic";
 	}
 	
 	

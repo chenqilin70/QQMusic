@@ -302,7 +302,7 @@ $(function(){
 					"<td>" +
 						"<a class='opacityLink' musicid='"+musicsJson[i].musicId+"' >" +
 								" <span class='num' num='"+(oldLength+Number(i)+1)+"'>"+(oldLength+Number(i)+1)+"</span>"+
-								"<span>"+musicsJson[i].musicName+"</span>"+
+								"<span class='thisMusicName'>"+musicsJson[i].musicName+"</span>"+
 						"</a>" +
 						"<div class='shareThisMusic thisMusicBtn'></div>" +
 						"<div class='downLoadThisMusic thisMusicBtn'></div>" +
@@ -378,7 +378,7 @@ $(function(){
 			  }
 			});
 		}else{
-			$(".playerBg").attr("class","playerBg playerBg1");
+			$(".playerBg").attr("class","playerBg playerBg1").css("background-image","");
 		}
 	}
 	//在这个方法中不能写阻塞代码，比如alert，否则报错
@@ -500,6 +500,23 @@ $(function(){
 		pageScopeNowPlay=nowPlay;
 		updateNowPlay(nowPlay);
 	}
+	function downLoadThisMusic(){
+		var $this=$(this);
+		var musicid=$this.parent().parent().attr("musicid");
+		var $form=$("<form>").attr("action","player!downloadThisMusic.action")
+							.attr("type","post")
+							.attr("target","")
+							.css("display","none");
+		var $input1=$("<input>").attr("type","hidden")
+								.attr("name","downloadMusicId")
+								.attr("value",musicid);
+		var $input2=$("<input>").attr("type","hidden")
+								.attr("name","musicName")
+								.attr("value",$this.parent().find(".thisMusicName").text());
+		$form.append($input1);
+		$form.append($input2);
+		$form.submit();
+	}
 	/*设定刷新列表时重新加载的时间--结束*/
 	function refreshListJs(){
 		$(".musicList tbody tr[playing='false'] .opacityLink").unbind().mouseover(opacityLinkMouseover).mouseout(opacityLinkMouseout);
@@ -517,6 +534,7 @@ $(function(){
 			.mouseover(function(){thisMusicBtnMouseover(this)})
 			.mouseout(function(){thisMusicBtnMouseout(this)});
 		$(".playThisMusic").click(function(){playThisMusicClick(this);});
+		$(".downLoadThisMusic").click(downLoadThisMusic);
 	}
 	
 	function isAllCheckBoxValOf(val){
@@ -544,6 +562,9 @@ $(function(){
 	
 	$(".playMusic").click(function(){
 		var audio=document.getElementById("mp3Audio");
+		if(audio.src==undefined || audio.src==""){
+			return;
+		}
 		if(audio.paused){
 			$(this).css("background-position","-30px 0");
 			audio.play();
@@ -570,7 +591,10 @@ $(function(){
 			$nowTime.text(numerator+"/"+denominator);
 			$progressBar.css("background","linear-gradient(to right,rgba(255,255,255,0.8) "+percent+",rgba(255,255,255,0.2) "+percent+")");
 			if(numerator==denominator){
-				nextMusicDispatcher();
+				if(numerator!='00:00'){
+					nextMusicDispatcher();
+				}
+				
 			}
 		}, 1000);
 		function getBothLetter(num){
@@ -616,6 +640,9 @@ $(function(){
 	
 	$(".nextMusic").click(function(){
 		var $oldPlayingTr=$(".musicList tbody").find("tr[playing='true']");
+		if($oldPlayingTr.length==0){//列表中没有音乐
+			return;
+		}
 		var $nextPlyingTr=$oldPlayingTr.next();
 		var nextPlayingId;
 		if($nextPlyingTr.length<=0){
@@ -628,6 +655,9 @@ $(function(){
 	});
 	$(".prevMusic").click(function(){
 		var $oldPlayingTr=$(".musicList tbody").find("tr[playing='true']");
+		if($oldPlayingTr.length==0){//列表中没有音乐
+			return;
+		}
 		var $prevPlyingTr=$oldPlayingTr.prev();
 		var prevPlayingId;
 		if($prevPlyingTr.length<=0){
@@ -663,11 +693,9 @@ $(function(){
         input1.attr('type', 'hidden').attr('name', 'musicFile').attr('value', fileName);
         var input2 = $('<input>');
         input2.attr('type', 'hidden').attr('name', 'musicName').attr('value', $(".musicName").text()+fileSrc.substring(fileSrc.lastIndexOf(".")));
-        $('body').append(form);  //将表单放置在web中 
         form.append(input1);   //将查询参数控件提交到表单上
         form.append(input2);
         form.submit();
-        form.remove();
 	});
 	$(".circleOfVolume").mousedown(function(e){
 		var audio=document.getElementById("mp3Audio");
@@ -707,7 +735,7 @@ $(function(){
 	$(".collect").click(function(){
 		var musicList=getSelectedMusic();
 		if(musicList.length<1){
-			alert("请选择！！")
+			showMessageBox($(".pleaceSelectInfo"));
 		}
 		var musics=musicList.join(",");
 		likeMusic(musics);
@@ -719,6 +747,19 @@ $(function(){
 			musicList.push($(this).attr("musicid"));
 		});
 		return musicList;
+	}
+	function showMessageBox($box){
+		$box.css("display","block");
+		window.setTimeout(function(){
+			$box.animate({
+				opacity:"0"
+			},'fast',function(){
+				$box.css({
+					"display":"none",
+					"opacity":"1"
+				});
+			});
+		}, 1000);
 	}
 	function likeMusic(musics){
 		if($("input[name='isLogin']").val()=='true'){
@@ -734,18 +775,8 @@ $(function(){
 				success:function(data){
 					if(data=='true'){
 						var $successLike=$(".successLike");
-						$successLike.css("display","block");
 						$(".likeBtn").attr("class","likeBtn like");
-						window.setTimeout(function(){
-							$successLike.animate({
-								opacity:"0"
-							},'fast',function(){
-								$successLike.css({
-									"display":"none",
-									"opacity":"1"
-								});
-							});
-						}, 1000);
+						showMessageBox($successLike);
 						
 					}else{
 						alert("请检查网络!");
@@ -1055,7 +1086,12 @@ $(function(){
     	}
     });
     $(".download").click(function(){
-    	var musics=getSelectedMusic().join(",");
+    	var musicArr=getSelectedMusic();
+    	if(musicArr.length<1){
+    		showMessageBox($(".pleaceSelectInfo"));
+    		return;
+    	}
+    	var musics=musicArr.join(",");
     	var $form = $("<form>")
 			    		.attr("type","post")
 			    		.attr("action","player!batchDownload.action")
@@ -1069,7 +1105,49 @@ $(function(){
     	$form.append($input1);
     	$form.submit();
     });
+    $(".clearList").click(function(){
+    	var audio=document.getElementById("mp3Audio");
+    	$(".musicList tbody").html("");
+    	audio.pause();
+    	audio.currentTime=0;
+    	var $nowPlayMusic=$(".nowPlayMusic");
+    	$nowPlayMusic.find(".nowTime").text("");
+    	$nowPlayMusic.find(".nowName").text("");
+    	globalDuration=0;
+    	pageScopePlayList=undefined;
+    	pageScopeNowPlay=undefined;
+    	delCookie("nowPlay");
+    	delCookie("playList");
+    	var $musicConsole=$(".musicConsole");
+    	$musicConsole.find(".playMusic").css("background-position","0 0");
+    	$musicConsole.find(".circleInBar").css("left","0");
+    	$musicConsole.find(".progressBar").css("background","linear-gradient(to right,rgba(255,255,255,0.8)  0%,rgba(255,255,255,0.2) 0%)");
+    	$(".albumHead").attr("src","/music_view/img/player_cover.png");
+    	$(".musicName , .singerName , .albumName").text("");
+    	$(".albumCover").parent().removeAttr("href")
+    	$(audio).attr("src","").find("source").attr("src","");
+    });
+    $(".delete").click(function(){
+    	var musicArr=getSelectedMusic();
+    	if(musicArr.length<1){
+    		showMessageBox($(".pleaceSelectInfo"));
+    		return;
+    	}
+    	var $tbody=$(".musicList tbody");
+    	for(var i in musicArr){
+    		$tbody.find("tr[musicid='"+musicArr[i]+"']").remove();
+    	}
+    	$tbody.find("tr").each(function(index,element){
+    		var $num=$(element).find(".num");
+    		$num.attr("num",""+(index+1));
+    		if($(element).attr("playing")=='false'){
+    			$num.text(""+(index+1));
+    		}
+    	});
+    });
+    
 });
+
 
 
 

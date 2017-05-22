@@ -59,11 +59,21 @@ public class MusicDaoImpl  extends BaseDaoImpl<Music> implements MusicDao{
 	}
 	@Override
 	public List<Object[]> getBatchInfo(String[] musics) {
-		StringBuffer hql=new StringBuffer("select m.musicId,m.musicName,m.music from Music where ");
+		StringBuffer hql=new StringBuffer("select m.musicId,m.musicName,m.music from Music m where ");
 		for(String id:musics){
 			hql.append("m.musicId=? or ");
 		}
 		hql=new StringBuffer(hql.substring(0,hql.lastIndexOf("or")));
 		return query(hql.toString(), musics);
+	}
+
+	@Override
+	public boolean hasMusicFile(String downloadMusicId) {
+		Integer music=(Integer) uniqueQuery("select m.music from Music m where m.musicId=?", downloadMusicId);
+		if(music!=null && 1==music){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
