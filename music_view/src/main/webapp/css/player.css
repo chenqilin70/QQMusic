@@ -160,6 +160,41 @@ body{
 	height: 85%;
 	position: relative;
 }
+.rightTable{
+	height: 100%;
+	width: 100%;
+	table-layout: fixed;
+}
+.rightTable ,.rightTable td,.rightTable tr{
+	margin:0;
+	padding:0;
+}
+.rigthTopTd{
+	height: 300px;
+	width: 100%;
+}
+.rightBottomTd{
+	width: 100%;
+}
+.rightBottomTd,.rigthTopTd{
+	position: relative;
+}
+.rigthTopDiv , .rightBottomDiv{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top:0;
+	left:0;
+}
+.rigthTopBox{
+	height: 100%;
+    width: 186px;
+    position: relative;
+    left: -12.5px
+}
+.rightBottomDiv{
+	overflow: hidden;
+}
 .albumHead{
 	width: 186px;
 	height: 186px;
@@ -186,9 +221,22 @@ body{
     text-overflow: ellipsis;
 }
 .lyricBox{
-	width: 186px;
-	height: 40%;
-	margin-top:10%;
+	width: 100%;
+	position: relative;
+	
+}
+.lyricBox p{
+	text-align: center;
+	margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 34px;
+    white-space: nowrap;
+    font-weight: 300;
+    opacity:0.8
+}
+.on{
+	color:#31c27c
 }
 .musicConsole{
 	position: absolute;

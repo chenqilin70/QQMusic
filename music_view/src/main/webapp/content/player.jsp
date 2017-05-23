@@ -64,17 +64,37 @@
 		</div>
 	</div>
 	<div class="rightColumn">
-		<img class="albumHead" 
-			src="<%=request.getContextPath() %>/img/player_cover.png" alt="">
-		<a target="_blank"><img class="albumCover" src="<%=request.getContextPath() %>/img/album_cover.png"></a>
-		<div class="musicInfoBox" align="center">
-			<div><span class="infoTitle"><s:text name="musicName"></s:text>：</span><a target="_blank"  class="defaultPlayerLink"><span class="musicName"></span></a></div>
-			<div><span class="infoTitle"><s:text name="singerName"></s:text>：</span><a target="_blank" class="defaultPlayerLink"><span class="singerName"></span></a></div>
-			<div><span class="infoTitle"><s:text name="albumName"></s:text>：</span><a target="_blank"  class="defaultPlayerLink"><span class="albumName"></span></a></div>
-		</div>
-		<div class="lyricBox">
-			
-		</div>
+	<table class="rightTable" cellspacing="0" cellspadding="0" border="0">
+		<tbody>
+			<tr>
+				<td class="rigthTopTd">
+					<div class="rigthTopDiv"  align="center">
+						<div class="rigthTopBox">
+							<img class="albumHead" 
+								src="<%=request.getContextPath() %>/img/player_cover.png" alt="">
+							<a target="_blank"><img class="albumCover" src="<%=request.getContextPath() %>/img/album_cover.png"></a>
+							<div class="musicInfoBox" align="center">
+								<div><span class="infoTitle"><s:text name="musicName"></s:text>：</span><a target="_blank"  class="defaultPlayerLink"><span class="musicName"></span></a></div>
+								<div><span class="infoTitle"><s:text name="singerName"></s:text>：</span><a target="_blank" class="defaultPlayerLink"><span class="singerName"></span></a></div>
+								<div><span class="infoTitle"><s:text name="albumName"></s:text>：</span><a target="_blank"  class="defaultPlayerLink"><span class="albumName"></span></a></div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="rightBottomTd">
+					<div class="rightBottomDiv">
+						<div class="lyricBox">
+							
+						</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+		
+		
 	</div>
 	<div class="musicList mCS-my-theme">
 		<table  border="0" cellpadding="0" cellspacing="0" align="left">

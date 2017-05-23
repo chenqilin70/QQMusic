@@ -266,10 +266,28 @@ $(function(){
 					nowMusicId:musicid
 				},
 				error:function(){
-					alert("请检查网络！")
+					alert("请检查网络！");
 				},
 				success:function(data){
-					console.log(data);
+					var jsonData=JSON.parse(data);
+					var $lyricBox=$(".lyricBox");
+					$lyricBox.html("");
+					var flag=true;
+					var index=0;
+					for(var node in jsonData){
+						var $p;
+						if(flag){
+							$p=$("<p time='"+node+"' class='on' index='"+index+"'>"+jsonData[node]+"</p>");
+							flag=false;
+						}else{
+							$p=$("<p time='"+node+"' class='off' index='"+index+"'>"+jsonData[node]+"</p>");
+						}
+						
+						$lyricBox.append($p);
+						index++;
+					}
+					var top=Number($(".rightBottomDiv").css("height").replace("px",""))/2
+					$lyricBox.css("top",top+"px")
 				}
 			});
 		}
@@ -593,6 +611,7 @@ $(function(){
 		var $progressBar=$(".progressBar");
 		var $nowTime=$(".nowTime");
 		var $circleInBar=$(".circleInBar");
+		var $rightBottomDiv=$(".rightBottomDiv");
 		t1=setInterval(function(){
 			if(globalDuration==undefined){
 				globalDuration=0;
@@ -612,7 +631,28 @@ $(function(){
 					nextMusicDispatcher();
 				}
 			}
-			console.log(audio.currentTime)
+			var $on=$rightBottomDiv.find(".lyricBox").find(".on");
+			var $ps=$rightBottomDiv.find(".lyricBox p");
+			var $next;
+			$ps.each(function(index,element){
+				var time=Number($(element).attr("time"))
+				if(audio.currentTime<=time){
+					$next=$(element);
+					return false;
+				}
+			})
+			if($next!==undefined && $next.length==1){
+				$on.css("color","#ffffff").attr("class","off");
+				$next.css("color","#31c27c").attr("class","on");
+				var index=Number($next.attr("index"));
+				var boxHeight=index*34
+				var boxPadding=Number($rightBottomDiv.css("height").replace("px",""))/2;
+				var offsetTop=boxHeight-boxPadding;
+				$rightBottomDiv.find(".lyricBox").stop().animate({
+					top:(-offsetTop)+"px"
+				});
+			}
+			
 		}, 1000);
 		function getBothLetter(num){
 			return (num<10?("0"+num):(num+""));
@@ -1150,6 +1190,7 @@ $(function(){
     	$(".musicName , .singerName , .albumName").text("");
     	$(".albumCover").parent().removeAttr("href")
     	$(audio).attr("src","").find("source").attr("src","");
+    	$(".lyricBox").html("");
     });
     $(".delete").click(function(){
     	var musicArr=getSelectedMusic();
@@ -1167,6 +1208,18 @@ $(function(){
     		if($(element).attr("playing")=='false'){
     			$num.text(""+(index+1));
     		}
+    	});
+    });
+    /*此方法还没写完*/
+    $(".lyricBox").mousedown(function(e){
+    	var $lyricBox=$(this)
+    	var oldY=e.offsetY;
+    	$(document).mousemove(function(e){
+    		var newY=e.offsetY;
+    		
+    	});
+    	$(document).one("mouseup",function(e){
+    		$(this).unbind("mouseup").unbind("mousemove");
     	});
     });
     

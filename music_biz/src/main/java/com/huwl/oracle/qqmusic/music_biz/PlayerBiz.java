@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -325,9 +326,13 @@ public class PlayerBiz extends BaseBiz {
 						Pattern p2 = Pattern.compile("\\[\\d{0,2}\\.\\d{0,2}\\]");
 						Matcher m2 = p2.matcher(s);
 						if (m2.find()) {
-							resultMap.put(
-									s.substring(m2.start() + 1, m2.end() - 1),
-									s.substring(m2.end()));
+							String line=s.substring(m2.end());
+							if(!line.isEmpty()){
+								resultMap.put(
+										s.substring(m2.start() + 1, m2.end() - 1),
+										line);
+							}
+							
 						}
 			}
 		}
@@ -337,7 +342,13 @@ public class PlayerBiz extends BaseBiz {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		return new ByteArrayInputStream(result.getBytes());
+		InputStream resultInput=null;
+		try {
+			resultInput = new ByteArrayInputStream(result.getBytes("utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		};
+		return resultInput;
 
 	}
 }
