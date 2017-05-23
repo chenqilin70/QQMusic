@@ -135,8 +135,8 @@ $(function(){
 			pageScopeNowPlayerNo=1;
 			setCookie("playerIsOpen","1");
 		}else{
-			pageScopeNowPlayerNo=(Number(openNo)+1);
-			setCookie("playerIsOpen",(Number(openNo)+1)+"");
+			pageScopeNowPlayerNo=(Number(openNo)+1)<=0?1:(Number(openNo)+1);
+			setCookie("playerIsOpen",pageScopeNowPlayerNo+"");
 		}
 		console.log("此时player开启数量是："+getCookie("playerIsOpen"));
 	})();
@@ -258,6 +258,20 @@ $(function(){
 			if(audio.paused){
 				$playBtn.trigger("click");
 			}
+			var musicid=src.substring(src.indexOf("C400")+4,src.lastIndexOf("."));
+			$.ajax({
+				url:"player!getLyric.action",
+				type:"GET",
+				data:{
+					nowMusicId:musicid
+				},
+				error:function(){
+					alert("请检查网络！")
+				},
+				success:function(data){
+					console.log(data);
+				}
+			});
 		}
 		
 	}
@@ -385,8 +399,8 @@ $(function(){
 	$(window).bind('beforeunload',function(){
 		var openNo=getCookie("playerIsOpen");
 		if(openNo!=null){
-			pageScopeNowPlayerNo=(Number(openNo)-1);
-			setCookie("playerIsOpen",(Number(openNo)-1)+"");
+			pageScopeNowPlayerNo=(Number(openNo)-1)<0?0:(Number(openNo)-1);
+			setCookie("playerIsOpen",pageScopeNowPlayerNo+"");
 			console.log("此时player开启数量是："+getCookie("playerIsOpen"));
 		}
 		
@@ -562,7 +576,7 @@ $(function(){
 	
 	$(".playMusic").click(function(){
 		var audio=document.getElementById("mp3Audio");
-		if(audio.src==undefined || audio.src==""){
+		if(pageScopeNowPlay==undefined){
 			return;
 		}
 		if(audio.paused){
@@ -580,6 +594,9 @@ $(function(){
 		var $nowTime=$(".nowTime");
 		var $circleInBar=$(".circleInBar");
 		t1=setInterval(function(){
+			if(globalDuration==undefined){
+				globalDuration=0;
+			}
 			var percent=((audio.currentTime/globalDuration)*100)+"%";
 			$circleInBar.css("left",percent);
 			var currentMinite=Math.floor(audio.currentTime/60);
@@ -594,8 +611,8 @@ $(function(){
 				if(numerator!='00:00'){
 					nextMusicDispatcher();
 				}
-				
 			}
+			console.log(audio.currentTime)
 		}, 1000);
 		function getBothLetter(num){
 			return (num<10?("0"+num):(num+""));
@@ -682,6 +699,9 @@ $(function(){
 		$("#mp3Audio")[0].currentTime=globalDuration*(newOffsetX/allX);
 	});
 	$(".downLoadBtn").click(function(){
+		if(pageScopeNowPlay==undefined){
+			return;
+		}
         var form = $("<form>");   //定义一个form表单
         form.attr('style', 'display:none');   //在form表单中添加查询参数
         form.attr('target', '');
@@ -1078,6 +1098,9 @@ $(function(){
     	return false;
     });
     $(".likeBtn").click(function(){
+    	if(pageScopeNowPlay==undefined){
+    		return;
+    	}
     	var musicid=$(".musicList tbody").find("tr[playing='true']").attr("musicid");
     	if($(this).attr("class").indexOf("dislike")>-1){
         	likeMusic(musicid);
@@ -1122,6 +1145,7 @@ $(function(){
     	$musicConsole.find(".playMusic").css("background-position","0 0");
     	$musicConsole.find(".circleInBar").css("left","0");
     	$musicConsole.find(".progressBar").css("background","linear-gradient(to right,rgba(255,255,255,0.8)  0%,rgba(255,255,255,0.2) 0%)");
+    	$musicConsole.find(".likeBtn").attr("class","likeBtn dislike")
     	$(".albumHead").attr("src","/music_view/img/player_cover.png");
     	$(".musicName , .singerName , .albumName").text("");
     	$(".albumCover").parent().removeAttr("href")

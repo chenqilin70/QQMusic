@@ -72,7 +72,9 @@
 			<div><span class="infoTitle"><s:text name="singerName"></s:text>：</span><a target="_blank" class="defaultPlayerLink"><span class="singerName"></span></a></div>
 			<div><span class="infoTitle"><s:text name="albumName"></s:text>：</span><a target="_blank"  class="defaultPlayerLink"><span class="albumName"></span></a></div>
 		</div>
-		<div class="lyricBox"></div>
+		<div class="lyricBox">
+			
+		</div>
 	</div>
 	<div class="musicList mCS-my-theme">
 		<table  border="0" cellpadding="0" cellspacing="0" align="left">

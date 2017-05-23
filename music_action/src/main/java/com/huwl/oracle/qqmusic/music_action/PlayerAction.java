@@ -147,6 +147,10 @@ public class PlayerAction extends BaseAction{
 		musicName=musicName+".m4a";
 		return "downloadThisMusic";
 	}
+	public String getLyric(){
+		inputStream=playerBiz.getLyric(nowMusicId);
+		return "getLyric";
+	}
 	
 	
 	

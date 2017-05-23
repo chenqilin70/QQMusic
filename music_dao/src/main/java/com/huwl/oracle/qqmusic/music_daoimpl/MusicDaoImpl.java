@@ -76,4 +76,8 @@ public class MusicDaoImpl  extends BaseDaoImpl<Music> implements MusicDao{
 			return false;
 		}
 	}
+	@Override
+	public String getLyric(String nowMusicId) {
+		return (String) uniqueQuery("select m.lyric from Music m where m.musicId=?", nowMusicId);
+	}
 }

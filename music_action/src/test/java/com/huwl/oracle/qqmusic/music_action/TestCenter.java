@@ -110,19 +110,9 @@ public class TestCenter {
 	
 	@Test
 	public void testExtend(){
-		InputStream in=playerBiz.batchDownload("C:/Users/aierxuan/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/music_view"
-				,"000000t62JXXEh,000000U31BLK6Z,000002a33Eqj3D,002fSAYe0iix7R");
-		try {
-			FileUtils.copyInputStreamToFile(in, new File("D:/1.zip"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		playerBiz.getLyric("00004As11GHaoA");
 	}
-	public void testArray(){
-		Integer i1=new Integer(1);
-		Integer i2=new Integer(1);
-		System.out.println(i1==1);
-	}
+	
 	
 	
 
