@@ -21,7 +21,9 @@
 	<div class="bgMask"></div>
 </div>
 <div class="contentContainer" align="center">
-	<div class="QQMusicLink"></div>
+	<s:a action="index" target="_blank">
+		<div class="QQMusicLink"></div>
+	</s:a>
 	<s:if test="#session.listener==null">
 		<input type="hidden" name="isLogin" value="false"/>
 		<div class="setting1"><s:text name="setting"/></div>
@@ -40,7 +42,7 @@
 		</div>
 	</s:else>
 </div>
-<div class="centerBox">
+<div class="centerBox" align="center">
 	<div class="optBtnGroup">
 		<div class="optBtn collect" align="center">
 			<span><i></i><s:text name="collect"/></span>
@@ -123,32 +125,39 @@
 			<tbody>
 				<tr>
 					<td class="playBtnBox">
-						<div class="prevMusic playBtn"></div>
-						<div class="playMusic playBtn" ></div>
-						<div class="nextMusic playBtn" ></div>
+						<div class="prevMusic playBtn"  title="alt+←"></div>
+						<div class="playMusic playBtn"  title="[空格]"></div>
+						<div class="nextMusic playBtn"  title="alt+→"></div>
 					</td>
 					<td class="progressBox">
 						<div class="progressBoxDiv">
-							<div class="barBox">
+							<div class="barBox"  title="[快进ctril+alt+→][快退ctril+alt+←]">
 								<div class="progressBar">
 									<div class="circleInBar"></div>
 								</div>
 							</div>
-							
+						
 							<div class="nowPlayMusic">
+							<a href="<%=request.getContextPath() %>/music.action?musicId=" target="_blank">
 								<span class="nowName"></span>
+							</a>
+							<span class="minus">-</span>
+							<a href="<%=request.getContextPath() %>/singer.action?singerId=" target="_blank">
+								<span class="nowSingerName"></span>
+							</a>
+								
 								<span class="nowTime"></span>
 							</div>
 						</div>
 					</td>
 					<td class="otherBtnBox">
 						<div class="otherBtnBoxDiv">
-							<div class="loopList"></div>
-							<div class="likeBtn dislike"></div>
-							<div class="downLoadBtn"></div>
-							<div class="changeModel"></div>
-							<div class="trumpetIcon"></div>
-							<div class="volumeBox">
+							<div class="loopList"  title="循环列表[O]"></div>
+							<div class="likeBtn dislike"  title="喜欢[V]"></div>
+							<div class="downLoadBtn"  title="下载[D]"></div>
+							<div class="changeModel notpure" title="打开纯洁模式[C]"></div>
+							<div class="trumpetIcon"  title="关闭声音[M]"></div>
+							<div class="volumeBox"  title="调节音量[增大alt+↑][减小alt+↓]">
 								<div class="volume"></div>
 								<div class="circleOfVolume"></div>
 							</div>
@@ -157,7 +166,10 @@
 				</tr>
 			</tbody>
 		</table>
-		
+	</div>
+	<div class="pureBox">
+		<div class="pureLyricBox">
+		</div>
 	</div>
 </div>
 <div class="totalMask" align="center">
@@ -230,4 +242,3 @@
 	</div>
 </body>
 </html>
-

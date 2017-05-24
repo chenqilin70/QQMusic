@@ -65,23 +65,30 @@ $(function(){
 	var switchoverModel=Number(getCookie("switchoverModel"));
 	var switchoverModelArr=[{
 		"model":"circle",
+		"title":"列表循环[O]",
 		"position":"0 -205px"
 	},
 	{
 		"model":"single",
+		"title":"单曲循环[O]",
 		"position":"0px -232px"
 	},
 	{
 		"model":"sequence",
+		"title":"顺序播放[O]",
 		"position":"0px -260px"
 	},
 	{
 		"model":"random",
+		"title":"随机播放[O]",
 		"position":"0 -73px"
 	}];
 	if(switchoverModel==null)
 		switchoverModel=0;
-	$(".loopList").css("background-position",switchoverModelArr[switchoverModel].position).css("display","block");
+	$(".loopList")
+		.css("background-position",switchoverModelArr[switchoverModel].position)
+		.attr("title",switchoverModelArr[switchoverModel].title)
+		.css("display","block");
 	function nextMusicDispatcher(){
 		var audio=document.getElementById("mp3Audio");
 		if(switchoverModel==0){//循环
@@ -116,12 +123,13 @@ $(function(){
 		var $this=$(this);
 		if(switchoverModel==switchoverModelArr.length-1){
 			switchoverModel=0;
-			
 		}else{
 			switchoverModel++;
 		}
 		setCookie("switchoverModel", switchoverModel+"");
-		$this.css("background-position",switchoverModelArr[switchoverModel].position);
+		$this
+			.css("background-position",switchoverModelArr[switchoverModel].position)
+			.attr("title",switchoverModelArr[switchoverModel].title);
 	});
 	
 	var pageScopePlayList;
@@ -196,6 +204,7 @@ $(function(){
 				var audioRoot=$("input[name='img_repository_path']").val()+"/music_m4a";
 				var imgUrl=img_repository_path+"/album_head/T002R300x300M000"+jsonData.albumId+".jpg";
 				var $nowName=$(".nowName");
+				var $nowSingerName=$(".nowSingerName");
 				$(".albumHead").attr("src","").attr("src",imgUrl);
 				changeBg(imgUrl);
 				$(".albumCover").parent().attr("href","/music_view/album.action?albumId="+jsonData.albumId);
@@ -204,10 +213,12 @@ $(function(){
 				$(".albumName").text(jsonData.albumName).parent().attr("href","/music_view/album.action?albumId="+jsonData.albumId);
 				$nextTr=$(".musicList tbody tr[musicid='"+jsonData.musicId+"']");
 				if(jsonData.isLike=="true"){
-					$(".likeBtn").attr("class","likeBtn like");
+					$(".likeBtn").attr("class","likeBtn like").attr("title","取消喜欢[V]");
 				}else{
-					$(".likeBtn").attr("class","likeBtn dislike");
+					$(".likeBtn").attr("class","likeBtn dislike").attr("title","喜欢[V]");
 				}
+				var oldMusicHref=$nowName.parent().attr("href");
+				$nowName.parent().attr("href",oldMusicHref.substring(0,oldMusicHref.lastIndexOf("=")+1)+jsonData.musicId);
 				if(jsonData.music==1){
 					afterGetSrc(audioRoot+"/C400"+jsonData.musicId+".m4a")
 					$nowName.text(jsonData.musicName);
@@ -215,6 +226,9 @@ $(function(){
 					getRandomMusic(audioRoot);
 					$nowName.html(jsonData.musicName+"&nbsp;&nbsp;&nbsp;&nbsp;(服务器查无此音乐，当前播放随机音乐)");
 				}
+				var oldSingerHref=$nowSingerName.parent().attr("href");
+				$nowSingerName.text(jsonData.singerName).parent().attr("href",oldSingerHref.substring(0,oldSingerHref.lastIndexOf("=")+1)+jsonData.singerId);
+				
 				
 			}
 		});
@@ -270,8 +284,8 @@ $(function(){
 				},
 				success:function(data){
 					var jsonData=JSON.parse(data);
-					var $lyricBox=$(".lyricBox");
-					$lyricBox.html("");
+					var $boxes=$(".lyricBox,.pureLyricBox");
+					$boxes.html("");
 					var flag=true;
 					var index=0;
 					for(var node in jsonData){
@@ -283,11 +297,14 @@ $(function(){
 							$p=$("<p time='"+node+"' class='off' index='"+index+"'>"+jsonData[node]+"</p>");
 						}
 						
-						$lyricBox.append($p);
+						$boxes.append($p);
 						index++;
 					}
-					var top=Number($(".rightBottomDiv").css("height").replace("px",""))/2
-					$lyricBox.css("top",top+"px")
+					$boxes.each(function(index,element){
+						var top=Number($(element).parent().css("height").replace("px",""))/2
+						$(element).css("top",top+"px");
+					});
+					
 				}
 			});
 		}
@@ -606,6 +623,7 @@ $(function(){
 		}
 	});
 	var t1;
+	var rollLyric=true;
 	var continuallyUpdateCircle=(function thisFun(){
 		var audio=document.getElementById("mp3Audio");
 		var $progressBar=$(".progressBar");
@@ -617,7 +635,7 @@ $(function(){
 				globalDuration=0;
 			}
 			var percent=((audio.currentTime/globalDuration)*100)+"%";
-			$circleInBar.css("left",percent);
+			$circleInBar.stop(true,true).css("left",percent);
 			var currentMinite=Math.floor(audio.currentTime/60);
 			var currentSecond=Math.floor(audio.currentTime-(currentMinite*60));
 			var allMinite=Math.floor(globalDuration/60);
@@ -626,33 +644,71 @@ $(function(){
 			var numerator=getBothLetter(currentMinite)+":"+getBothLetter(currentSecond);
 			$nowTime.text(numerator+"/"+denominator);
 			$progressBar.css("background","linear-gradient(to right,rgba(255,255,255,0.8) "+percent+",rgba(255,255,255,0.2) "+percent+")");
+			
 			if(numerator==denominator){
 				if(numerator!='00:00'){
 					nextMusicDispatcher();
 				}
 			}
-			var $on=$rightBottomDiv.find(".lyricBox").find(".on");
-			var $ps=$rightBottomDiv.find(".lyricBox p");
-			var $next;
-			$ps.each(function(index,element){
-				var time=Number($(element).attr("time"))
-				if(audio.currentTime<=time){
-					$next=$(element);
-					return false;
-				}
-			})
-			if($next!==undefined && $next.length==1){
-				$on.css("color","#ffffff").attr("class","off");
-				$next.css("color","#31c27c").attr("class","on");
-				var index=Number($next.attr("index"));
-				var boxHeight=index*34
-				var boxPadding=Number($rightBottomDiv.css("height").replace("px",""))/2;
-				var offsetTop=boxHeight-boxPadding;
-				$rightBottomDiv.find(".lyricBox").stop().animate({
-					top:(-offsetTop)+"px"
+			if(rollLyric){
+				var $on=$rightBottomDiv.find(".lyricBox").find(".on");
+				var $ps=$rightBottomDiv.find(".lyricBox p");
+				var $next;
+				$ps.each(function(index,element){
+					var time1=Number($(element).attr("time"));
+					var time2=Number($(element).prev().attr("time"));
+					if(audio.currentTime<=time1){
+						var gap1=Math.abs((audio.currentTime-time1));
+						var gap2=Math.abs((audio.currentTime-time2));
+						console.log(time2<0.5)
+						if(gap1>gap2 && time2<0.5){
+							$next=$(element).prev();
+						}else{
+							$next=$(element);
+						}
+						return false;
+					}
 				});
+				if($next!==undefined && $next.length==1){
+					$on.css("color","#ffffff").attr("class","off");
+					$next.css("color","#31c27c").attr("class","on");
+					var index=Number($next.attr("index"));
+					var boxHeight=index*34
+					var boxPadding=Number($rightBottomDiv.css("height").replace("px",""))/2;
+					var offsetTop=boxHeight-boxPadding;
+					$rightBottomDiv.find(".lyricBox").stop(true,true).animate({
+						top:(-offsetTop)+"px"
+					});
+				}
+				//纯净模式的滚动↓
+				var $pureLyricBox=$(".pureLyricBox");
+				var $next;
+				$pureLyricBox.find("p").each(function(index,element){
+					var time1=Number($(element).attr("time"));
+					var time2=Number($(element).prev().attr("time"));
+					if(audio.currentTime<=time1){
+						var gap1=Math.abs((audio.currentTime-time1));
+						var gap2=Math.abs((audio.currentTime-time2));
+						if(gap1>gap2){
+							$next=$(element).prev();
+						}else{
+							$next=$(element);
+						}
+						return false;
+					}
+				});
+				if($next!==undefined && $next.length==1){
+					$pureLyricBox.find(".on").css("color","#ffffff").attr("class","off");
+					$next.css("color","#31c27c").attr("class","on");
+					var index=Number($next.attr("index"));
+					var boxHeight=index*58
+					var boxPadding=Number($pureLyricBox.parent().css("height").replace("px",""))/2;
+					var offsetTop=boxHeight-boxPadding;
+					$pureLyricBox.stop(true,true).animate({
+						top:(-offsetTop)+"px"
+					});
+				}
 			}
-			
 		}, 1000);
 		function getBothLetter(num){
 			return (num<10?("0"+num):(num+""));
@@ -764,6 +820,10 @@ $(function(){
 		var oldLeft=Number($circle.css("left").replace(/px/,""))
 		var $document=$(document);
 		var barWidth=Number($circle.parent().css("width").replace(/px/,""));
+		if(audio.muted){
+			audio.muted=false;
+			$(".trumpetIcon").css("background-position","0px -143px");
+		}
 		$document.mousemove(function(e){
 			var newMouseX=e.clientX;
 			var offsetX=oldMouseX-newMouseX;
@@ -788,7 +848,12 @@ $(function(){
 		if($(srcElement).attr("class")!=undefined && $(srcElement).attr("class").indexOf("circleOfVolume")==-1){
 			var newLeft=e.offsetX-5;
 			$circle.css("left",newLeft+"px");
-			document.getElementById("mp3Audio").volume=(newLeft/barWidth)<0?0:newLeft/barWidth;
+			var audio=document.getElementById("mp3Audio");
+			if(audio.muted){
+				audio.muted=false;
+				$(".trumpetIcon").css("background-position","0px -143px");
+			}
+			audio.volume=(newLeft/barWidth)<0?0:newLeft/barWidth;
 			$volumeBox.find(".volume").css("background","linear-gradient(to right,rgba(255,255,255,0.8) "+((newLeft/barWidth)*100)+"%,rgba(255,255,255,0.2) "+((newLeft/barWidth)*100)+"%)");
 		}
 	});
@@ -835,7 +900,7 @@ $(function(){
 				success:function(data){
 					if(data=='true'){
 						var $successLike=$(".successLike");
-						$(".likeBtn").attr("class","likeBtn like");
+						$(".likeBtn").attr("class","likeBtn like").attr("title","取消喜欢[V]");
 						showMessageBox($successLike);
 						
 					}else{
@@ -862,7 +927,7 @@ $(function(){
 				},
 				success:function(data){
 					if(data=='true'){
-						$(".likeBtn").attr("class","likeBtn dislike");
+						$(".likeBtn").attr("class","likeBtn dislike").attr("title","喜欢[V]");
 					}else{
 						alert("请检查网络!");
 					}
@@ -1144,6 +1209,7 @@ $(function(){
     	var musicid=$(".musicList tbody").find("tr[playing='true']").attr("musicid");
     	if($(this).attr("class").indexOf("dislike")>-1){
         	likeMusic(musicid);
+        	
     	}else{
     		dislikeMusic(musicid);
     	}
@@ -1185,12 +1251,13 @@ $(function(){
     	$musicConsole.find(".playMusic").css("background-position","0 0");
     	$musicConsole.find(".circleInBar").css("left","0");
     	$musicConsole.find(".progressBar").css("background","linear-gradient(to right,rgba(255,255,255,0.8)  0%,rgba(255,255,255,0.2) 0%)");
-    	$musicConsole.find(".likeBtn").attr("class","likeBtn dislike")
+    	$musicConsole.find(".likeBtn").attr("class","likeBtn dislike").attr("title","喜欢[V]")
     	$(".albumHead").attr("src","/music_view/img/player_cover.png");
     	$(".musicName , .singerName , .albumName").text("");
     	$(".albumCover").parent().removeAttr("href")
     	$(audio).attr("src","").find("source").attr("src","");
     	$(".lyricBox").html("");
+    	$(".pureLyricBox").html("");
     });
     $(".delete").click(function(){
     	var musicArr=getSelectedMusic();
@@ -1210,19 +1277,117 @@ $(function(){
     		}
     	});
     });
-    /*此方法还没写完*/
     $(".lyricBox").mousedown(function(e){
-    	var $lyricBox=$(this)
-    	var oldY=e.offsetY;
+    	var $lyricBox=$(this);
+    	var oldY=e.screenY;
+    	var oldTop=Number($lyricBox.css("top").replace("px",""));
+    	rollLyric=false;
     	$(document).mousemove(function(e){
-    		var newY=e.offsetY;
+    		var newY=e.screenY;
+    		var newTop=oldTop-(oldY-newY);
+    		$lyricBox.css("top",newTop+"px");
+    		oldY=newY;
+    		oldTop=newTop;
     		
     	});
     	$(document).one("mouseup",function(e){
+    		rollLyric=true;
     		$(this).unbind("mouseup").unbind("mousemove");
     	});
     });
-    
+    $(".trumpetIcon").click(function(e){
+    	var audio=$("#mp3Audio")[0];
+    	if(audio.muted){
+    		audio.muted=false;
+    		$(this).css("background-position","0 -143px").attr("title","打开声音[M]");
+    	}else{
+    		audio.muted=true;
+    		$(this).css("background-position","0 -181px").attr("title","关闭声音[M]");
+    	}
+    });
+    $(".nowName , .nowSingerName").mouseover(function(e){
+    	if(isWrapElement(e, this)){
+    		$(this).css("opacity","1");
+    	}
+    }).mouseout(function(e){
+    	if(isWrapElement(e, this)){
+    		$(this).css("opacity","0.8");
+    	}
+    });
+    $(".QQMusicLink").mouseover(function(e){
+    	if(isWrapElement(e, this)){
+    		$(this).css("opacity","1");
+    	}
+    }).mouseout(function(e){
+    	if(isWrapElement(e, this)){
+    		$(this).css("opacity","0.3");
+    	}
+    });
+    $(document).keydown(function(e){
+    	var e=window.event || e;
+    	var key=e.key.toLowerCase();
+    	console.log(e)
+    	if(key=="o"){
+    		$(".loopList").trigger("click");
+    	}else if(key=="v"){
+    		$(".likeBtn").trigger("click");
+    	}else if(key=="d"){
+    		$(".downLoadBtn").trigger("click");
+    	}else if(key=="c"){
+    		$(".changeModel").trigger("click");
+    	}else if(key=="m"){
+    		$(".trumpetIcon").trigger("click");
+    	}else if(key==" "){
+    		$(".playMusic").trigger("click");
+    	}else if(key=="arrowright"){
+    		var audio=$("#mp3Audio")[0];
+    		if(e.altKey){
+    			if(e.shiftKey){
+    				var currentTime=audio.currentTime;
+    				var duration=audio.duration;
+    				currentTime+=20;
+    				if(currentTime<duration){
+    					audio.currentTime=currentTime;
+    				}else{
+    					audio.currentTime=duration-0.5;
+    				}
+    			}else{
+    				$(".nextMusic").trigger("click");
+    			}
+    		}
+    	}else if(key=="arrowleft"){
+    		var audio=$("#mp3Audio")[0];
+    		if(e.altKey){
+    			if(e.shiftKey){
+    				var currentTime=audio.currentTime;
+    				currentTime-=20;
+    				if(currentTime>0){
+    					audio.currentTime=currentTime;
+    				}else{
+    					audio.currentTime=0;
+    				}
+    			}else{
+    				$(".prevMusic").trigger("click");
+    			}
+    		}
+    	}
+    });
+    $(".changeModel").click(function(){
+    	var $this=$(this);
+    	var $clazz=$this.attr("class");
+    	var $centerBox=$(".centerBox");
+    	var $willOptionDiv=$centerBox.find(".optBtnGroup , .rightColumn , .musicList");
+    	var $pureBox=$(".pureBox");
+    	if($clazz.indexOf("notpure")>-1){//非纯净模式
+    		$this.attr("class","changeModel pure").attr("title","关闭纯净模式[C]");
+    		$willOptionDiv.css("display","none");
+    		$pureBox.css("display","block");
+    	}else{//纯净模式
+    		$this.attr("class","changeModel notpure").attr("title","打开纯净模式[C]");
+    		$willOptionDiv.css("display","block");
+    		$pureBox.css("display","none");
+    	}
+    })
 });
 
 
