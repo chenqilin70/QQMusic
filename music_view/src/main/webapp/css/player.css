@@ -747,7 +747,6 @@ table tr .num{
 .pureBox{
 	width: 100%;
 	height: 80%;
-	border:1px solid red;
 	overflow: hidden;
 	display: none;
 }

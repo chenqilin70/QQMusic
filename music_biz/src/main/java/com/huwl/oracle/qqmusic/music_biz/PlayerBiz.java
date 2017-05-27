@@ -317,13 +317,12 @@ public class PlayerBiz extends BaseBiz {
 				return (i0 - i1) > 0 ? 1 : -1;
 			}
 		};
-		System.out.println(comparator);
 		Map resultMap = new TreeMap<>(comparator);
 		for (String s : lyrics) {
 			if (s.indexOf("[ti:") == -1 && s.indexOf("[by:") == -1
 					&& s.indexOf("[al:") == -1 && s.indexOf("[ar:") == -1
 					&& s.indexOf("[offset:") == -1) {
-						Pattern p2 = Pattern.compile("\\[\\d{0,2}\\.\\d{0,2}\\]");
+						Pattern p2 = Pattern.compile("\\[\\d{0,3}\\.\\d{0,2}\\]");
 						Matcher m2 = p2.matcher(s);
 						if (m2.find()) {
 							String line=s.substring(m2.end());

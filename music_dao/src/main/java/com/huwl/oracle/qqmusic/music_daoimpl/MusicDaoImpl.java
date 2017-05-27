@@ -80,4 +80,25 @@ public class MusicDaoImpl  extends BaseDaoImpl<Music> implements MusicDao{
 	public String getLyric(String nowMusicId) {
 		return (String) uniqueQuery("select m.lyric from Music m where m.musicId=?", nowMusicId);
 	}
+
+	@Override
+	public Object[] getMainMusicInfo(String musicId) {
+		return 
+				(Object[]) query("select m.musicId,m.musicName,s.singerId,s.singerName,a.albumId,a.albumName,a.language,a.genres,c.companyId,a.publishTime,m.lyric from Music m left join m.album a left join a.company c left join a.singer s where m.musicId=?", musicId).get(0);
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -110,7 +111,7 @@ public class TestCenter {
 	
 	@Test
 	public void testExtend(){
-		playerBiz.getLyric("00004As11GHaoA");
+		System.out.println(Arrays.asList(musicDao.getMainMusicInfo("000oW8J53xPhZA")));;
 	}
 	
 	

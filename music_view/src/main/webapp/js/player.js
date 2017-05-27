@@ -96,7 +96,6 @@ $(function(){
 		}else if(switchoverModel==2){//顺序
 			var $oldPlayingTr=$(".musicList tbody").find("tr[playing='true']");
 			var $nextPlyingTr=$oldPlayingTr.next();
-			console.log($nextPlyingTr.length)
 			if($nextPlyingTr.length<=0){
 				$(".playMusic").css("background-position","0px 0px");
 				audio.pause();
@@ -283,25 +282,39 @@ $(function(){
 					alert("请检查网络！");
 				},
 				success:function(data){
-					var jsonData=JSON.parse(data);
 					var $boxes=$(".lyricBox,.pureLyricBox");
 					$boxes.html("");
-					var flag=true;
-					var index=0;
-					for(var node in jsonData){
-						var $p;
-						if(flag){
-							$p=$("<p time='"+node+"' class='on' index='"+index+"'>"+jsonData[node]+"</p>");
-							flag=false;
-						}else{
-							$p=$("<p time='"+node+"' class='off' index='"+index+"'>"+jsonData[node]+"</p>");
+					if(data=='false'){						
+						$boxes.append("<p style='opacity:0.5' time='0' class='off' index='0'>"+"此&nbsp;&nbsp;&nbsp;&nbsp;歌&nbsp;&nbsp;&nbsp;&nbsp;曲&nbsp;&nbsp;&nbsp;&nbsp;暂&nbsp;&nbsp;&nbsp;&nbsp;无&nbsp;&nbsp;&nbsp;&nbsp;歌&nbsp;&nbsp;&nbsp;&nbsp;词"+"</p>");
+					}else{
+						var jsonData=JSON.parse(data);
+						var flag=true;
+						var index=0;
+						for(var node in jsonData){
+							var $p;
+							if(flag){
+								$p=$("<p time='"+node+"' class='on' index='"+index+"'>"+jsonData[node]+"</p>");
+								flag=false;
+							}else{
+								$p=$("<p time='"+node+"' class='off' index='"+index+"'>"+jsonData[node]+"</p>");
+							}
+							$boxes.append($p);
+							index++;
 						}
-						
-						$boxes.append($p);
-						index++;
+						var $pConllection=$(".pureLyricBox p");
+						var pCount=$pConllection.length;
+						$pConllection.each(function(i,element){
+							if(i<8){
+								$(element).css("opacity",""+((i+1)*0.125));
+							}else if(pCount-8<i){
+								var opacity=0.125*(pCount-i);
+								$(element).css("opacity",""+opacity);
+							}
+							
+						});
 					}
 					$boxes.each(function(index,element){
-						var top=Number($(element).parent().css("height").replace("px",""))/2
+						var top=Number($(element).parent().css("height").replace("px",""))/2;
 						$(element).css("top",top+"px");
 					});
 					
@@ -660,7 +673,6 @@ $(function(){
 					if(audio.currentTime<=time1){
 						var gap1=Math.abs((audio.currentTime-time1));
 						var gap2=Math.abs((audio.currentTime-time2));
-						console.log(time2<0.5)
 						if(gap1>gap2 && time2<0.5){
 							$next=$(element).prev();
 						}else{
@@ -1122,9 +1134,7 @@ $(function(){
     				alert("请检查网络");
     			},
     			success:function(data){
-    				console.log(data);
     				var json=JSON.parse(data);
-    				console.log(json);
     				if(json["isSuccess"]==="true"){
     					window.location.reload();
     				}else{
@@ -1277,10 +1287,14 @@ $(function(){
     		}
     	});
     });
-    $(".lyricBox").mousedown(function(e){
+    var t2;
+    $(".lyricBox , .pureLyricBox").mousedown(function(e){
     	var $lyricBox=$(this);
     	var oldY=e.screenY;
     	var oldTop=Number($lyricBox.css("top").replace("px",""));
+    	if(t2!==undefined){
+    		window.clearTimeout(t2);
+    	}
     	rollLyric=false;
     	$(document).mousemove(function(e){
     		var newY=e.screenY;
@@ -1291,10 +1305,13 @@ $(function(){
     		
     	});
     	$(document).one("mouseup",function(e){
-    		rollLyric=true;
+    		t2=window.setTimeout(function(){
+    			rollLyric=true;
+    		}, 2000);
     		$(this).unbind("mouseup").unbind("mousemove");
     	});
     });
+    
     $(".trumpetIcon").click(function(e){
     	var audio=$("#mp3Audio")[0];
     	if(audio.muted){
@@ -1326,7 +1343,6 @@ $(function(){
     $(document).keydown(function(e){
     	var e=window.event || e;
     	var key=e.key.toLowerCase();
-    	console.log(e)
     	if(key=="o"){
     		$(".loopList").trigger("click");
     	}else if(key=="v"){
