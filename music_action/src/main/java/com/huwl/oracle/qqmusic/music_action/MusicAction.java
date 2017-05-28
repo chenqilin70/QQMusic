@@ -1,5 +1,6 @@
 package com.huwl.oracle.qqmusic.music_action;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -12,6 +13,7 @@ public class MusicAction  extends BaseAction{
 	private boolean siteNavEnable=true;
 	private String musicId;
 	private Music music;
+	@Autowired
 	private MusicBiz musicBiz;
 	public String getMusicId() {
 		return musicId;
@@ -26,6 +28,13 @@ public class MusicAction  extends BaseAction{
 		this.siteNavEnable = siteNavEnable;
 	}
 	
+	
+	public Music getMusic() {
+		return music;
+	}
+	public void setMusic(Music music) {
+		this.music = music;
+	}
 	@Override
 	public String execute() throws Exception {
 		music=musicBiz.getMusicById(musicId);

@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -23,9 +26,10 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huwl.oracle.qqmusic.music_dao.BaseDao;
 import com.huwl.oracle.qqmusic.music_model.LanOfSinger;
-import com.huwl.oracle.qqmusic.music_model.Listener;
 import com.huwl.oracle.qqmusic.music_model.Singer;
 @Repository("baseDao")
 public class BaseDaoImpl<T> implements BaseDao<T> ,ApplicationContextAware{
@@ -33,6 +37,8 @@ public class BaseDaoImpl<T> implements BaseDao<T> ,ApplicationContextAware{
 	private SessionFactory sessionFactory;
 	@Autowired
 	public SimpleDateFormat simpleDateFormat;
+	@Autowired
+	protected ObjectMapper objectMapper;
 	public ApplicationContext applicationContext;
 	public Configuration configuration;
 	public Class type;
@@ -63,6 +69,52 @@ public class BaseDaoImpl<T> implements BaseDao<T> ,ApplicationContextAware{
 	@Override
 	public List query(String hql,Serializable... params) {
 		return getUsableHqlQuery(hql,params).list();
+	}
+	/*
+	 * 此方法只能用于查询基本数据类型的属性
+	 * 此方法暂时还未使用，已废弃
+	 * */
+	@Deprecated
+	@Override
+	public List keyValQuery(String hql, Serializable... params) throws Exception {
+		List queryResult=query(hql, params);
+		String upperHql=hql.toUpperCase();
+		int selectIndex=upperHql.indexOf("SELECT");
+		int fromIndex=upperHql.indexOf("FROM");
+		List resultList=new ArrayList<Map>();
+		if(selectIndex!=-1 && fromIndex!=-1 ){
+			String[] cols=hql.substring(selectIndex+6, fromIndex).split(",");
+			for(Object o:queryResult){
+				Map resultMap=new HashMap<>();
+				Object[] objArr=getObjectArr(o);
+				for(int i=0;i<cols.length;i++){
+					String col=cols[i].trim();
+					if(objArr[i] instanceof Serializable){
+						if(resultMap.containsKey(col)){
+							resultMap.put(col, objArr[i]);
+						}else{
+							resultMap.put(col.substring(col.indexOf(".")+1), objArr[i]);
+						}
+						
+					}else{
+						throw new Exception("jsonQuery方法只能用于查询基本数据类型的属性");
+					}
+				}
+				resultList.add(resultMap);
+			}
+		}else{
+			throw new Exception("jsonQuery方法只能用于查询基本数据类型的属性");
+		}
+		return resultList;
+	}
+	public static Object[] getObjectArr(Object o){
+		Object[] objArr;
+		if(o.getClass()==Object[].class){
+			objArr=(Object[]) o;
+		}else{
+			objArr=new Object[]{o};
+		}
+		return objArr;
 	}
 	@Override
 	public List query(String hql,Integer limit,Serializable... params) {
@@ -196,6 +248,16 @@ public class BaseDaoImpl<T> implements BaseDao<T> ,ApplicationContextAware{
 			return pc;
 		}
 	}
+	public PersistentClass getPersistentClass(Class clazz) {
+		synchronized (BaseDaoImpl.class) {
+			PersistentClass pc = getConfiguration().getClassMapping(clazz.getSimpleName());
+			if (pc == null) {
+				configuration = configuration.addClass(clazz);
+				pc = configuration.getClassMapping(clazz.getName());
+			}
+			return pc;
+		}
+	}
 	public Configuration getConfiguration() {
 		if (configuration == null) {
 			// 取sessionFactory的时候要加上&
@@ -240,4 +302,11 @@ public class BaseDaoImpl<T> implements BaseDao<T> ,ApplicationContextAware{
 		long count=(Long) uniqueQuery("select count(*) from "+getType().getName()+" o where o."+getIdFieldName()+"=?", id);
 		return count>0?true:false;
 	}
+	@Override
+	public void evict(Object o) {
+		Session session=sessionFactory.getCurrentSession();
+		session.evict(o);
+	}
+	
+	
 }

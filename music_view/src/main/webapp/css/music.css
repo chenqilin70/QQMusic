@@ -1,5 +1,165 @@
-.container{
-    background-image: url(../img/bg_detail.jpg);
-    background-position: 0px -58px;
-    background-repeat: repeat-x;
+*{
+	color:#333;
 }
+.musicContent{
+	width: 1200px;
+    min-height: 862px;
+}
+.musicBaseInfoBox{
+	height: 320px;
+	width: 100%;
+}
+.albumHead{
+	width: 250px;
+	height: 250px;
+}
+.albumHead{
+	float: left;
+	margin-top: 41px;
+}
+.musicBaseInfoList{
+	height: 320px;
+	float: left;
+	width: 950px;
+}
+.musicBaseTable{
+	table-layout: fixed;
+	margin-top:51px;
+	height: 180px;
+	width: 610px;
+	float: left;
+	margin-left: 54px;
+	margin-right: 280px;
+}
+.musicBaseTable td{
+	padding:0;
+	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.musicNameTd{
+	font-size: 31px;
+    line-height: 50px;
+    height:50px;
+    font-weight: 400;
+    
+}
+.personIcon{
+	background-image: url(../img/icon_sprite.png);
+	background-position: -20px -240px;
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	vertical-align: -4px;
+	margin-right: 3px;
+}
+.singerNameTd{
+	line-height: 28px;
+	font-size: 16px;
+	height: 28px;
+}
+.albumNameTd,.languageTd{
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 36px;
+	height: 36px;
+}
+.genreTd,.companyTd{
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 20px;
+	height: 20px;
+}
+.publishTimeTd{
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 35px;
+    vertical-align: top;
+}
+.controlTr,.controlTd2,.controlTd1{
+	height: 0px;
+}
+.controlTd1{
+	height: 0px;
+	width: 176px;
+}
+.musicOptionBtn{
+	width: 122px;
+	height: 38px;
+	float: left;
+	margin-right: 5px;
+	cursor: pointer;
+	border-radius:3px;
+	outline: none;
+	font-size: 14px;
+}
+.musicOptionBtn i{
+	display:inline-block;
+	width: 16px;
+	height: 16px;
+	background-image: url(../img/icon_sprite.png);
+	vertical-align: -3px;
+	margin-right: 5px;
+}
+.playIcon{
+	background-position: -80px -220px;
+}
+.collectIcon{
+	background-position: -60px 0;
+}
+.moreIcon{
+	background-position: -20px -80px;
+}
+.playBtn{
+	margin-left: 55px;
+	background-color: #31C27C;
+	border:none;
+}
+.playBtn span{
+	color:#fff;
+}
+.collectBtn,.moreBtn{
+	background-color: #fff;
+	border:1px solid #C9C9C9;
+}
+.bottomBox{
+	width: 100%;
+	height: 500px;
+}
+.lyricBox{
+	float: left;
+	width: 800px;
+}
+.otherInfoBox{
+	float: right;
+	width: 290px;
+	height: 100px;
+}
+.lyricIcon{
+	display:inline-block;
+	width: 16px;
+	height: 16px;
+	background-image: url(../img/icon_sprite.png);
+	background-position: -100px -40px;
+	margin-left: 10px;
+    margin-bottom: -1px;
+}
+.lyricBox h2{
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 19px;
+}
+#lyricMainBody{
+	font-size: 14px;
+	line-height: 26px;
+	color:#000;
+}
+
+
+
+
+
+
+
+

@@ -8,7 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -21,10 +23,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huwl.oracle.qqmusic.music_biz.AlbumBiz;
 import com.huwl.oracle.qqmusic.music_biz.IndexBiz;
 import com.huwl.oracle.qqmusic.music_biz.ListenerBiz;
+import com.huwl.oracle.qqmusic.music_biz.MusicBiz;
 import com.huwl.oracle.qqmusic.music_biz.PlayerBiz;
 import com.huwl.oracle.qqmusic.music_biz.SingerBiz;
 import com.huwl.oracle.qqmusic.music_biz.SingerDiscoverBiz;
@@ -51,6 +55,7 @@ public class TestCenter {
 	private static SingerDiscoverBiz singerDiscoverBiz;
 	private static MusicDao musicDao;
 	public static PlayerBiz playerBiz;
+	public static MusicBiz musicBiz;
 	private static ObjectMapper objectMapper;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -69,49 +74,17 @@ public class TestCenter {
 		musicDao=(MusicDao) ac.getBean("musicDao");
 		playerBiz=(PlayerBiz) ac.getBean("playerBiz");
 		objectMapper=(ObjectMapper) ac.getBean("objectMapper");
+		musicBiz=(MusicBiz) ac.getBean("musicBiz");
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		
 	}
-	public void testMusic(){
-		File file1=new File("D:/tempFile/1.txt");
-		File file2=new File("D:/tempFile/2.txt");
-		try {
-			ZipOutputStream zout=new ZipOutputStream(new FileOutputStream("D:/1.zip"));
-			ZipEntry entry1=new ZipEntry(file1.getName());
-			zout.putNextEntry(entry1);
-			FileInputStream in=new FileInputStream(file1);
-			BufferedInputStream bin=new BufferedInputStream(in);
-			byte[] barr=new byte[1024];
-			int readSize=0;
-			while((readSize=bin.read(barr))!=-1){
-				zout.write(barr, 0, readSize);
-			}
-			ZipEntry entry2=new ZipEntry(file2.getName());
-			zout.putNextEntry(entry2);
-			FileInputStream in2=new FileInputStream(file2);
-			BufferedInputStream bin2=new BufferedInputStream(in2);
-			while((readSize=bin2.read(barr))!=-1){
-				zout.write(barr, 0, readSize);
-			}
-			zout.flush();
-			bin.close();
-			in.close();
-			bin2.close();
-			in2.close();
-			zout.close();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 	
 	@Test
 	public void testExtend(){
-		System.out.println(Arrays.asList(musicDao.getMainMusicInfo("000oW8J53xPhZA")));;
+		musicBiz.getMusicById("000002a33Eqj3D");
 	}
 	
 	

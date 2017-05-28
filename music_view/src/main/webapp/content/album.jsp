@@ -165,7 +165,7 @@
                                     <td class="songSetHeight songTd"><s:property value="#status.index+1" /></td>
                                     
                                         <td class="songNameTd songTd">
-                                            <s:a action="song" class="defaultStyleLink">
+                                            <s:a action="music" class="defaultStyleLink">
                                                 <s:param name="musicId" value="musicId"></s:param>
                                                <s:property value="musicName" />
                                             </s:a>

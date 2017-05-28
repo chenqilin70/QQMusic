@@ -293,7 +293,6 @@ public class PlayerBiz extends BaseBiz {
 				.replace("&#10;", "\r\n").replace("&#32;", " ")
 				.replace("&#45;", " ").replace("&#41;", " ")
 				.replace("&#40;", " ").replace("&#13;", " ");
-		System.out.println(lyric);
 		Pattern p = Pattern.compile("\\[\\d\\d:\\d\\d\\.\\d\\d\\]");
 		Matcher matcher = p.matcher(lyric);
 		int index = 0;

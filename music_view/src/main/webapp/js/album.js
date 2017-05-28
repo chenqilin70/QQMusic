@@ -1,6 +1,5 @@
 $(function(){
-	$(".musicPlace").attr("selectedItem","true");
-	$(".musicPlace").css("background-color","#31C27C").css("color","#fff");
+	$(".musicPlace").attr("selectedItem","true").css("background-color","#31C27C").css("color","#fff");
 	
      /*判断是否为最外面的元素被移出了*/
     function isWrapElement(e, thisElement) {
