@@ -35,8 +35,8 @@ public class LyricCatcher {
 	public static void main(String[] args) {
 		final MusicDao dao = (MusicDao) new ClassPathXmlApplicationContext(
 				"applicationContext.xml").getBean("musicDao");
-		Long count=dao.getCount();
-		int threadCount=50;
+		Long count=dao.getNullLyricCount();
+		int threadCount=10;
 		final int pageSize=(int) ((count/threadCount)+1);
 		for( int i=1;i<=threadCount;i++){
 			final int pageNo=i;
@@ -48,7 +48,7 @@ public class LyricCatcher {
 					while(flag){
 						flag=false;
 						try {
-							ids=dao.getIdBasePage(pageSize, pageNo);
+							ids=dao.getNullLyricIdBasePage(pageSize, pageNo);
 						} catch (Exception e) {
 							System.out.println(pageNo+"线程出了错1 ，正在重复执行");
 							flag=true;
@@ -60,7 +60,9 @@ public class LyricCatcher {
 								, "null.properties", "null.properties", null);
 						int start=html.indexOf("songid=")+7;
 						int end=html.indexOf("&",start);
-						System.out.print("\n"+id+"-->");
+						if(start-7==-1 || end==-1){
+							continue;
+						}
 						String result=html.substring(start, end);
 						System.out.println(result);
 						String jsonStr=getStr("https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric.fcg"

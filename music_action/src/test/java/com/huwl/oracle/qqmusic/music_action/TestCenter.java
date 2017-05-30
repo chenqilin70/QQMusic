@@ -1,21 +1,5 @@
 package com.huwl.oracle.qqmusic.music_action;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
-
-import org.apache.commons.io.FileUtils;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.junit.AfterClass;
@@ -23,7 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huwl.oracle.qqmusic.music_biz.AlbumBiz;
 import com.huwl.oracle.qqmusic.music_biz.IndexBiz;
@@ -37,7 +20,9 @@ import com.huwl.oracle.qqmusic.music_dao.BaseDao;
 import com.huwl.oracle.qqmusic.music_dao.CompanyDao;
 import com.huwl.oracle.qqmusic.music_dao.ListenerDao;
 import com.huwl.oracle.qqmusic.music_dao.MusicDao;
+import com.huwl.oracle.qqmusic.music_dao.MusicVideoDao;
 import com.huwl.oracle.qqmusic.music_dao.SingerDao;
+import com.huwl.oracle.qqmusic.music_model.MusicVideo;
 
 public class TestCenter {
 	public static ClassPathXmlApplicationContext ac;
@@ -57,6 +42,7 @@ public class TestCenter {
 	public static PlayerBiz playerBiz;
 	public static MusicBiz musicBiz;
 	private static ObjectMapper objectMapper;
+	private static MusicVideoDao musicVideoDao;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		ac=new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -75,6 +61,7 @@ public class TestCenter {
 		playerBiz=(PlayerBiz) ac.getBean("playerBiz");
 		objectMapper=(ObjectMapper) ac.getBean("objectMapper");
 		musicBiz=(MusicBiz) ac.getBean("musicBiz");
+		musicVideoDao=(MusicVideoDao) ac.getBean("musicVideoDao");
 	}
 
 	@AfterClass
@@ -84,7 +71,7 @@ public class TestCenter {
 	
 	@Test
 	public void testExtend(){
-		musicBiz.getMusicById("000002a33Eqj3D");
+		System.out.println(musicDao.getNullLyricCount());
 	}
 	
 	

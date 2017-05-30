@@ -1,5 +1,6 @@
 package com.huwl.oracle.qqmusic.music_daoimpl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -26,5 +27,14 @@ public class MusicVideoDaoImpl   extends BaseDaoImpl<MusicVideo> implements Musi
 	@Override
 	public List<MusicVideo> getMVBySinger(String singerId, Integer limit) {
 		return query("FROM MusicVideo m WHERE m.singer.singerId=?",limit,singerId);
+	}
+	@Override
+	public MusicVideo getRelatedMV(String singerId, String musicName) {
+		List<MusicVideo> result=query("from MusicVideo v where v.singer.singerId=? and v.videoName like ?",singerId ,"%"+musicName+"%");
+		if(result.size()==0){
+			return null;
+		}else{
+			return result.get(0);
+		}
 	}
 }

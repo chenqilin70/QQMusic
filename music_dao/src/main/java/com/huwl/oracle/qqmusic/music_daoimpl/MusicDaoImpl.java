@@ -80,6 +80,19 @@ public class MusicDaoImpl  extends BaseDaoImpl<Music> implements MusicDao{
 	public String getLyric(String nowMusicId) {
 		return (String) uniqueQuery("select m.lyric from Music m where m.musicId=?", nowMusicId);
 	}
+
+	@Override
+	public List<Serializable> getNullLyricIdBasePage(Integer pageSize,
+			Integer pageNo) {
+		String hql="SELECT m.musicId FROM Music m where m.lyric is null";
+		return query(hql, pageSize, pageNo);
+	}
+	
+	@Override
+	public Long getNullLyricCount() {
+		String hql="SELECT COUNT(*) FROM  Music m where m.lyric is null";
+		return (Long) uniqueQuery(hql);
+	}
 }
 
 

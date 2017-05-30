@@ -1,5 +1,6 @@
 package com.huwl.oracle.qqmusic.music_dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.huwl.oracle.qqmusic.music_model.Music;
@@ -14,4 +15,6 @@ public interface MusicDao extends BaseDao<Music>{
 	List<Object[]> getBatchInfo(String[] split);
 	boolean hasMusicFile(String downloadMusicId);
 	String getLyric(String nowMusicId);
+	List<Serializable> getNullLyricIdBasePage(Integer pageSize,Integer pageNo);
+	Long getNullLyricCount();
 }

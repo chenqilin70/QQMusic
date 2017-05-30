@@ -9,6 +9,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.huwl.oracle.qqmusic.music_model.Album;
 import com.huwl.oracle.qqmusic.music_model.Company;
 import com.huwl.oracle.qqmusic.music_model.Music;
+import com.huwl.oracle.qqmusic.music_model.MusicMenu;
+import com.huwl.oracle.qqmusic.music_model.MusicVideo;
 import com.huwl.oracle.qqmusic.music_model.Singer;
 @Controller("musicBiz")
 public class MusicBiz extends BaseBiz {
@@ -38,8 +40,12 @@ public class MusicBiz extends BaseBiz {
 					.replaceAll("(&#10;)+", "<br/>");
 		}
 		music.setLyric(lyric);
-		System.out.println(lyric);
+		album.setDesc(album.getDesc().replace("\n", "<br>"));
 		return music;
+	}
+
+	public MusicVideo getRelatedMV(String singerId, String musicName) {
+		return musicVideoDao.getRelatedMV(singerId,musicName);
 	}
 	
 

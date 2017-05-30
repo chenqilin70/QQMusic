@@ -12,8 +12,7 @@ import com.huwl.oracle.qqmusic.music_biz.PlayerBiz;
 public class Main {
 
 	public static void main(String[] args) {
-		String test="bababalskdfjldskfjldskfjbabaskljfdldsbalkj";
-		System.out.println(test.replaceAll("(ba)+", "-"));
+		System.out.println(2>>2);
 
 	}
 

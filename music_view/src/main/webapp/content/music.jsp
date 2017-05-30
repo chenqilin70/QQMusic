@@ -84,7 +84,39 @@
         			</div>
         			<input type="hidden" name='lyric' value="<s:property value='music.lyric'/>">
         		</div>
-        		<div class="otherInfoBox"></div>
+        		<div class="otherInfoBox">
+        			<s:if test="music.album.desc!=null && music.album.desc.length!=0">
+        				<div class="briefIntroTitle"><s:text name="briefIntro"/></div>
+	        			<p class="briefIntroText"></p>
+        				<input type="hidden" class="descValue" value="<s:property value="music.album.desc"/>"/>
+        				<div class="otherAlbumDescBox">
+                            <div class="bubbleIcon"></div>
+                            <p class="albumMoreDesc">
+                                <span class="albumDescTitle">
+                                    <s:text name="albumDesc"/>
+                                </span>
+                                <br/>
+                                <p class="descContent"></p>
+                           </p>
+                        </div>
+                        <div align="left" class="moreInfoBox"><span class="moreInfo">[<s:text name="more"></s:text>]</span></div>
+        			</s:if>
+        			<s:if test="relatedMV!=null">
+        				<div class="briefIntroTitle"><s:text name="relatedMV"/></div>
+        				<div class="mvHeadBox">
+        					<img class="mvHead" alt="" src="<s:text name='img_repository_path'/>/mv_head/<s:property value='relatedMV.videoId'/>.jpg">
+        					<img class="playCover" src='<%=request.getContextPath()%>/img/cover_play.png'></img>
+        				</div>
+        				<div align="left"><s:a action=''  class="mvTextLink mvName" title='%{relatedMV.videoName }'><s:property value='relatedMV.videoName'/></s:a></div>
+        				<div align="left">
+        					<s:a action='singer' class="mvTextLink mvSinger" title='%{music.album.singer.singerName }'>
+	        					<s:param name='singerId' value='music.album.singer.singerId'/>
+	        					<s:property value='music.album.singer.singerName'/>
+        					</s:a>
+        				</div>
+        			</s:if>
+        		</div>
+        		
         	</div>
         	
         </div>

@@ -9,4 +9,5 @@ public interface MusicVideoDao  extends BaseDao<MusicVideo>{
 	Long getMVCountBySinger(String singerId);
 	List<MusicVideo> getMVBySinger(String singerId);
 	List<MusicVideo> getMVBySinger(String singerId,Integer limit);
+	MusicVideo getRelatedMV(String singerId, String musicName);
 }
