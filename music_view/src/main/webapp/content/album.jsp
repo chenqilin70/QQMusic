@@ -7,7 +7,7 @@
 <html>
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><s:property value="album.albumName"/>-QQ音乐 - 听我想听的歌！</title>
+        <title><s:property value="album.albumName"/>-<s:text name="QQMusic"></s:text> - <s:text name='listenWhatIWanna'/>！</title>
         <!-- 导库，开始 -->
         <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.0.min.js"></script>
         <!-- 导库，结束 -->

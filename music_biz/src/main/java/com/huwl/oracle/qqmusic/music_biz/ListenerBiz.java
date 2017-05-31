@@ -11,12 +11,13 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.huwl.oracle.qqmusic.music_model.Album;
 import com.huwl.oracle.qqmusic.music_model.Listener;
 
-@Controller("listenerBiz")
+@Service("listenerBiz")
 public class ListenerBiz extends BaseBiz{
 	public static double BOX_WIDTH=600,BOX_HEIGHT=450,BOX_RATIO=BOX_WIDTH/BOX_HEIGHT;
 	public Integer getLikeMusicCount(String loginedListenerId) {

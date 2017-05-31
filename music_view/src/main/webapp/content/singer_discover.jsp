@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>歌手列表-QQ音乐-听我想听的歌！</title>
+        <title>歌手列表-<s:text name="QQMusic"></s:text>-<s:text name='listenWhatIWanna'/>！</title>
         <!-- 导库，开始 -->
         <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.0.min.js"></script>
         <sx:head />

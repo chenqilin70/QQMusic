@@ -19,6 +19,9 @@
     		<exception-mapping result="500" exception="java.lang.Exception"></exception-mapping>
     	</global-exception-mappings>
     	 -->
+    	 <action name="mv" class="mvAction">
+    	 	<result name="success">/content/mv.jsp</result>
+    	 </action>
     	 <action name="music" class="musicAction">
     	 	<result name="success">/content/music.jsp</result>
     	 </action>

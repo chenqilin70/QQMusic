@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.huwl.oracle.qqmusic.music_model.Album;
@@ -12,7 +13,7 @@ import com.huwl.oracle.qqmusic.music_model.Music;
 import com.huwl.oracle.qqmusic.music_model.MusicMenu;
 import com.huwl.oracle.qqmusic.music_model.MusicVideo;
 import com.huwl.oracle.qqmusic.music_model.Singer;
-@Controller("musicBiz")
+@Service("musicBiz")
 public class MusicBiz extends BaseBiz {
 
 	public Music getMusicById(String musicId) {

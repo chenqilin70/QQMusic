@@ -37,4 +37,9 @@ public class MusicVideoDaoImpl   extends BaseDaoImpl<MusicVideo> implements Musi
 			return result.get(0);
 		}
 	}
+
+	@Override
+	public MusicVideo getMusicVideo(String mvId) {
+		return getObjectById(mvId);
+	}
 }

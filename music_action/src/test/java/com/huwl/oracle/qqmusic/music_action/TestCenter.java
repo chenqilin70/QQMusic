@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huwl.oracle.qqmusic.music_biz.AlbumBiz;
 import com.huwl.oracle.qqmusic.music_biz.IndexBiz;
 import com.huwl.oracle.qqmusic.music_biz.ListenerBiz;
+import com.huwl.oracle.qqmusic.music_biz.MVBiz;
 import com.huwl.oracle.qqmusic.music_biz.MusicBiz;
 import com.huwl.oracle.qqmusic.music_biz.PlayerBiz;
 import com.huwl.oracle.qqmusic.music_biz.SingerBiz;
@@ -43,6 +44,7 @@ public class TestCenter {
 	public static MusicBiz musicBiz;
 	private static ObjectMapper objectMapper;
 	private static MusicVideoDao musicVideoDao;
+	private static MVBiz mvBiz;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		ac=new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -62,6 +64,7 @@ public class TestCenter {
 		objectMapper=(ObjectMapper) ac.getBean("objectMapper");
 		musicBiz=(MusicBiz) ac.getBean("musicBiz");
 		musicVideoDao=(MusicVideoDao) ac.getBean("musicVideoDao");
+		mvBiz=(MVBiz) ac.getBean("mvBiz");
 	}
 
 	@AfterClass
@@ -71,7 +74,7 @@ public class TestCenter {
 	
 	@Test
 	public void testExtend(){
-		System.out.println(musicDao.getNullLyricCount());
+		System.out.println(mvBiz.getMusicVideo("900eY8ZThHa").getVideoName());
 	}
 	
 	

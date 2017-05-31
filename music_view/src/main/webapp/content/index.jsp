@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>QQ音乐 - 中国最新最全免费正版高品质音乐平台！</title>
+        <title><s:text name="QQMusic"></s:text> - 中国最新最全免费正版高品质音乐平台！</title>
         <!-- 导库，开始 -->
         <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.0.min.js"></script>
         <sx:head />
