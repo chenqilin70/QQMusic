@@ -336,6 +336,7 @@
     text-overflow: ellipsis;
     margin-top: 10px;
     color:#333;
+    cursor: pointer
 }
 .info2{
 	color:#999999;

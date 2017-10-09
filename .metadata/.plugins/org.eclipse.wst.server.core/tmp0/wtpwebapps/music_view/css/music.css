@@ -1,0 +1,271 @@
+*{
+	color:#333;
+}
+.musicContent{
+	width: 1200px;
+    min-height: 862px;
+}
+.musicBaseInfoBox{
+	height: 320px;
+	width: 100%;
+}
+.albumHead{
+	width: 250px;
+	height: 250px;
+}
+.albumHead{
+	float: left;
+	margin-top: 41px;
+}
+.musicBaseInfoList{
+	height: 320px;
+	float: left;
+	width: 950px;
+}
+.musicBaseTable{
+	table-layout: fixed;
+	margin-top:51px;
+	height: 180px;
+	width: 610px;
+	float: left;
+	margin-left: 54px;
+	margin-right: 280px;
+}
+.musicBaseTable td{
+	padding:0;
+	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.musicNameTd{
+	font-size: 31px;
+    line-height: 50px;
+    height:50px;
+    font-weight: 400;
+    
+}
+.personIcon{
+	background-image: url(../img/icon_sprite.png);
+	background-position: -20px -240px;
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	vertical-align: -4px;
+	margin-right: 3px;
+}
+.singerNameTd{
+	line-height: 28px;
+	font-size: 16px;
+	height: 28px;
+}
+.albumNameTd,.languageTd{
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 36px;
+	height: 36px;
+}
+.genreTd,.companyTd{
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 20px;
+	height: 20px;
+}
+.publishTimeTd{
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 35px;
+    vertical-align: top;
+}
+.controlTr,.controlTd2,.controlTd1{
+	height: 0px;
+}
+.controlTd1{
+	height: 0px;
+	width: 176px;
+}
+.musicOptionBtn{
+	width: 122px;
+	height: 38px;
+	float: left;
+	margin-right: 5px;
+	cursor: pointer;
+	border-radius:3px;
+	outline: none;
+	font-size: 14px;
+}
+.musicOptionBtn i{
+	display:inline-block;
+	width: 16px;
+	height: 16px;
+	background-image: url(../img/icon_sprite.png);
+	vertical-align: -3px;
+	margin-right: 5px;
+}
+.playIcon{
+	background-position: -80px -220px;
+}
+.collectIcon{
+	background-position: -60px 0;
+}
+.moreIcon{
+	background-position: -20px -80px;
+}
+.playBtn{
+	margin-left: 55px;
+	background-color: #31C27C;
+	border:none;
+}
+.playBtn span{
+	color:#fff;
+}
+.collectBtn,.moreBtn{
+	background-color: #fff;
+	border:1px solid #C9C9C9;
+}
+.bottomBox{
+	width: 100%;
+	height: 500px;
+}
+.lyricBox{
+	float: left;
+	width: 800px;
+}
+.otherInfoBox{
+	float: right;
+	width: 290px;
+	min-height: 100px;
+	position: relative;
+}
+.lyricIcon{
+	display:inline-block;
+	width: 16px;
+	height: 16px;
+	background-image: url(../img/icon_sprite.png);
+	background-position: -100px -40px;
+	margin-left: 10px;
+    margin-bottom: -1px;
+}
+.lyricBox h2{
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 19px;
+}
+#lyricMainBody{
+	font-size: 14px;
+	line-height: 26px;
+	color:#000;
+}
+.briefIntroTitle{
+	font-size: 20px;
+    font-weight: 400;
+    line-height: 35px;
+    text-align: left;
+}
+.briefIntroText{
+	width:290px;
+	height:88px;
+	margin-top:9px;
+	margin-bottom:0;
+	font-size: 14px;
+	line-height: 22px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+.moreInfo{
+	font-size: 14px;
+	cursor: pointer;
+}
+.moreInfoBox{
+	margin-bottom: 33px;
+}
+.mvHeadBox{
+	position: relative;
+	width: 290px;
+	height: 163.688px;
+	overflow: hidden;
+	cursor: pointer
+}
+.mvHead{
+	width: 290px;
+	position: absolute;
+	top:0px;
+	left:0px;
+}
+.mvTextLink{
+    text-decoration: none;
+    font-size: 14px;
+}
+.mvName{
+	color:#333
+}
+.mvSinger{
+	color:#999
+}
+.playCover{
+	position: absolute;
+	height: 49px;
+	width:49px;
+	left:120.5px;
+	top:57.344px;
+	display:none;
+	opacity:1;
+}
+.otherAlbumDescBox{
+    width: 580px;
+   position: absolute;
+    top: 80px;
+   right:310px;
+    background: #fff;
+    box-shadow: 0 0 4px rgba(0,0,0,.35);
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    display: none;
+    z-index: 2;
+    text-align: left;
+}
+.bubbleIcon{
+    position: absolute;
+    right: -10px;
+    top: 50px;
+    border-left: 1px solid white;
+    height: 18px;
+    width: 10px;
+    background-image: url(../img/popup_arrow.png);
+}
+.albumMoreDesc{
+    margin: 30px 5px 30px 10px;
+    width:563px;
+    font-size: 14px;
+    line-height: 22px;
+    
+}
+.albumDescTitle{
+    font-size: 20px;
+    line-height: 22px;
+    color: #333;
+    margin-left: 15px;
+}
+.descContent{
+    font-size: 14px;
+    margin: 16px 5px 40px 30px;
+    padding-right:20px;
+    overflow-y: scroll;
+}
+.descContent::-webkit-scrollbar{
+    width:8px;
+    background-color:#ffffff;
+} 
+.descContent::-webkit-scrollbar-thumb {
+    background-color:rgb(221,221,221);
+    border-radius:8px;
+}
+
+
+
+
+
+
+
+

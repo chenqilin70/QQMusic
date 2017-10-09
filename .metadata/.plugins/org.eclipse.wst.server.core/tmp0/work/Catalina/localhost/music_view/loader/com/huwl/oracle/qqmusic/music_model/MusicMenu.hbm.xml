@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-30 10:30:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.huwl.oracle.qqmusic.music_model.MusicMenu" table="MUME">
+        <id name="menuId" type="java.lang.String">
+            <column name="MENU_ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="creator" class="com.huwl.oracle.qqmusic.music_model.Listener" fetch="join">
+            <column name="CREATOR_ID" />
+        </many-to-one>
+        <property name="menuName" type="java.lang.String">
+            <column name="MENU_NAME" />
+        </property>
+        <property name="menuType" type="java.lang.String">
+            <column name="MENU_TYPE" />
+        </property>
+        <set name="musics" table="MUSIC_MENU_MAPPING" inverse="false" >
+            <key>
+                <column name="MENU_ID" />
+            </key>
+            <many-to-many column="MUSIC_ID" class="com.huwl.oracle.qqmusic.music_model.Music"></many-to-many>
+        </set>
+        <property name="labels" type="java.lang.String">
+            <column name="LABELS" />
+        </property>
+        <property name="listenTimes" type="java.lang.Integer">
+            <column name="LISTEN_TIMES" />
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="CREATE_DATE" />
+        </property>
+        <property name="isRecommend" type="java.lang.Boolean">
+            <column name="ISRECOMMEND" />
+        </property>
+        <property name="image" type="java.lang.String">
+            <column name="IMAGE" />
+        </property>
+        <property name="info" type="java.lang.String">
+            <column name="INFO" />
+        </property>
+    </class>
+</hibernate-mapping>

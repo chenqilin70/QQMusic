@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-30 10:30:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.huwl.oracle.qqmusic.music_model.Listener" table="QQLISTENER">
+        <id name="listenerId" type="java.lang.String">
+            <column name="QQLIS_ID" />
+            <generator class="native" />
+        </id>
+        <property name="password" type="java.lang.String">
+        	<column name="PASSWORD"></column>
+        </property>
+        <property name="username" type="java.lang.String">
+        	<column name="USERNAME"></column>
+        </property>
+        <property name="listenerHead" type="java.lang.String">
+        	<column name="LIS_HEAD"></column>
+        </property>
+        <set name="carePeople" table="LIS_FOLLOWER" inverse="false" >
+            <key>
+                <column name="QQLIS_ID" />
+            </key>
+            <many-to-many column="IS_FOLLOWED" class="com.huwl.oracle.qqmusic.music_model.Listener" />
+        </set>
+        <set name="creaSinger" table="LIS_SIN" inverse="false" >
+            <key>
+                <column name="QQLIS_ID" />
+            </key>
+            <many-to-many column="SINGER_ID" class="com.huwl.oracle.qqmusic.music_model.Singer" />
+        </set>
+        <set name="fans" table="LISTENER" inverse="false" >
+            <key>
+                <column name="QQLIS_ID" />
+            </key>
+            <one-to-many class="com.huwl.oracle.qqmusic.music_model.Listener" />
+        </set>
+        <!-- 此处列名起的失误，将错就错 -->
+        <property name="isPublic" type="java.lang.Boolean">
+            <column name="ISPUBL_IC" />
+        </property>
+        <set name="likeMusic" table="LIS_LI_MU" inverse="false" >
+            <key>
+                <column name="QQLIS_ID" />
+            </key>
+            <many-to-many column="MUSIC_ID" class="com.huwl.oracle.qqmusic.music_model.Music"></many-to-many>
+        </set>
+        <set name="likeMusicMenu" table="LIS_LI_MU_ME" inverse="false" >
+            <key>
+                <column name="QQLIS_ID" />
+            </key>
+            <many-to-many column="MENU_ID" class="com.huwl.oracle.qqmusic.music_model.MusicMenu"></many-to-many>
+        </set>
+        <set name="likeAlbum" table="LIS_LI_AL" inverse="false" >
+            <key>
+                <column name="QQLIS_ID" />
+            </key>
+            <many-to-many column="ALBUM_ID" class="com.huwl.oracle.qqmusic.music_model.Album"></many-to-many>
+        </set>
+        <set name="likeMusicVideo" table="LIS_MU_VI" inverse="false" >
+            <key>
+                <column name="QQLIS_ID" />
+            </key>
+            <many-to-many column="ALBUM_ID" class="com.huwl.oracle.qqmusic.music_model.MusicVideo"></many-to-many>
+        </set>
+        <set name="myMusicMenu" table="MUME" inverse="false" >
+            <key>
+                <column name="CREATOR_ID" />
+            </key>
+            <one-to-many class="com.huwl.oracle.qqmusic.music_model.MusicMenu" />
+        </set>
+        <set name="myVideo" table="VIDEO" inverse="false" >
+            <key>
+                <column name="QQLIS_ID" />
+            </key>
+            <one-to-many class="com.huwl.oracle.qqmusic.music_model.Video" />
+        </set>
+    </class>
+</hibernate-mapping>

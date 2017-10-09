@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-5-4 20:40:15 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.huwl.oracle.qqmusic.music_model.LanOfSinger" table="LAN_OF_SINGER">
+        <id name="ids" type="java.lang.String">
+            <column name="IDS" />
+            <generator class="identity" />
+        </id>
+        <property name="singerId" type="java.lang.String">
+            <column name="SINGER_ID" />
+        </property>
+        <property name="singerName" type="java.lang.String">
+            <column name="SINGER_NAME" />
+        </property>
+        <property name="language" type="java.lang.String">
+            <column name="LANGUAGE" />
+        </property>
+    </class>
+</hibernate-mapping>

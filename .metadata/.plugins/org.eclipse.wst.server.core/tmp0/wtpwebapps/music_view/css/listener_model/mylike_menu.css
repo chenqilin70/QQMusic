@@ -1,0 +1,32 @@
+.myLikeUl{
+	margin:16px 0 0 0;
+	padding:0;
+	list-style: none;
+	font-size: 16px;
+	font-weight:400;
+	color:#333;
+	height:21px;
+}
+.myLikeUl li{
+	float: left;
+	margin-right: 58.5px;
+}
+.presentItem{
+	color:#31c27c;
+	cursor: pointer;
+	text-decoration: none;
+}
+.nullImg{
+	margin-top: 88px;
+}
+.gotoMusicPlace{
+	color:#31c27c;
+	cursor: pointer;
+	text-decoration: none;
+}
+.nothingBeFound{
+	font-size: 20px;
+	color:#666666;
+	text-align: center;
+	margin-top: 27px;
+}

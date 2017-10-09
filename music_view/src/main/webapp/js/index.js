@@ -462,6 +462,8 @@ $(function(){
     		$img.attr("src","");
     		$img.attr("src",oldSrc.replace(oldId,json[i].albumId));
     		$td.attr("albumId",json[i].albumId);
+    		//修改超链接
+    		$img.parent().find("a").attr("href","/music_view/album.action?albumId="+json[i].albumId);
     		//修改文字
     		var $mask=$($("[maskPos=leftMask]").get(i-12));
     		$mask.attr("albumId",json[i].albumId);
@@ -469,6 +471,7 @@ $(function(){
     		$mask.find(".singerName").text(json[i].singer.singerName);
     		//修改超链接
     		$mask.find(".musicName").parent().attr("href","/music_view/album.action?albumId="+json[i].albumId);
+    		$mask.find(".singerName").parent().attr("href","/music_view/singer.action?singerId="+json[i].singer.singerId);
     	}
     	for(var i=0;i<15;i++){
     		//修改图片
@@ -479,6 +482,8 @@ $(function(){
     		$img.attr("src","");
     		$img.attr("src",oldSrc.replace(oldId,json[i].albumId));
     		$td.attr("albumId",json[i].albumId);
+    		//修改超链接
+    		$img.parent().find("a").attr("href","/music_view/album.action?albumId="+json[i].albumId);
     		//修改文字
     		var $mask=$($("[maskPos=centerMask]").get(i));
     		$mask.attr("albumId",json[i].albumId);
@@ -486,6 +491,7 @@ $(function(){
     		$mask.find(".singerName").text(json[i].singer.singerName);
     		//修改超链接
     		$mask.find(".musicName").parent().attr("href","/music_view/album.action?albumId="+json[i].albumId);
+    		$mask.find(".singerName").parent().attr("href","/music_view/singer.action?singerId="+json[i].singer.singerId);
     	}
     	for(var i=0;i<3;i++){
     		//修改图片
@@ -496,6 +502,8 @@ $(function(){
     		$img.attr("src","");
     		$img.attr("src",oldSrc.replace(oldId,json[i].albumId));
     		$td.attr("albumId",json[i].albumId);
+    		//修改超链接
+    		$img.parent().find("a").attr("href","/music_view/album.action?albumId="+json[i].albumId);
     		//修改文字
     		var $mask=$($("[maskPos=rightMask]").get(i));
     		$mask.attr("albumId",json[i].albumId);
@@ -503,6 +511,7 @@ $(function(){
     		$mask.find(".singerName").text(json[i].singer.singerName);
     		//修改超链接
     		$mask.find(".musicName").parent().attr("href","/music_view/album.action?albumId="+json[i].albumId);
+    		$mask.find(".singerName").parent().attr("href","/music_view/singer.action?singerId="+json[i].singer.singerId);
     	}
     }
     function registerDistrictLi($this){
@@ -534,10 +543,4 @@ $(function(){
     	 registerDistrictLi($(this),e);
     });
 
-    
-    
-    
-    
-    
-    
 });

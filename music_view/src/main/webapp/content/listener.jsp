@@ -139,10 +139,10 @@
 	        	<div class="bottomItem">
 	        		<ul>
 	        			<li class="myLikeLi"><s:a class="bottomItemLink"><s:text name="myLike"/></s:a></li>
-	        			<li><s:a class="bottomItemLink"><s:text name="menuMadeByMe"/></s:a></li>
-	        			<li><s:a class="bottomItemLink"><s:text name="care"/></s:a></li>
-	        			<li><s:a class="bottomItemLink"><s:text name="fans"/></s:a></li>
-	        			<li><s:a class="bottomItemLink"><s:text name="videoUploadedByMe"/></s:a></li>
+	        			<li><span class="bottomItemLink"><s:text name="menuMadeByMe"/></span></li>
+	        			<li><span class="bottomItemLink"><s:text name="care"/></span></li>
+	        			<li><span class="bottomItemLink"><s:text name="fans"/></span></li>
+	        			<li><span class="bottomItemLink"><s:text name="videoUploadedByMe"/></span></li>
 	        		</ul>
 	        		<i class="publicIcon"></i>
 	        	</div>
@@ -197,6 +197,5 @@
         <!-- 模板尾，开始 -->
         <jsp:include page="/foot.jsp"></jsp:include>
         <!-- 模板尾，结束 -->
-        <s:debug></s:debug>
     </body>
 </html>

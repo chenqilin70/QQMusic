@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-30 10:30:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.huwl.oracle.qqmusic.music_model.Album" table="ALBUM"  >
+        <id name="albumId" type="java.lang.String" >
+            <column name="ALBUM_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="isRecommened" type="java.lang.Boolean">
+        	<column name="IS_RECOMMENED"></column>
+        </property>
+        <property name="albumName" type="java.lang.String">
+        	<column name="ALBUM_NAME"></column>
+        </property>
+        <property name="desc" type="text">
+            <column name="ALBUM_DESC" />
+        </property>
+        <property name="genres" type="java.lang.String">
+            <column name="GENRES" />
+        </property>
+        <property name="language" type="java.lang.String">
+            <column name="LANGUAGE" />
+        </property>
+        <property name="isFree" type="java.lang.Boolean">
+            <column name="ISFREE" />
+        </property>
+        <property name="albumType" type="java.lang.String">
+            <column name="ALBUM_TYPE" />
+        </property>
+        <many-to-one name="company" class="com.huwl.oracle.qqmusic.music_model.Company" cascade="all">
+            <column name="COMPANY_ID" />
+        </many-to-one>
+        <property name="publishTime" type="timestamp">
+            <column name="PUBLISH_TIME" />
+        </property>
+        <property name="com" type="java.lang.String">
+            <column name="TEMP_COM_ID" />
+        </property>
+        <many-to-one name="singer" class="com.huwl.oracle.qqmusic.music_model.Singer"  cascade="all">
+            <column name="SINGER_ID" />
+        </many-to-one>
+        <set name="musics" table="MUSIC"  inverse="false"  cascade="all" >
+            <key>
+                <column name="ALBUM_ID" />
+            </key>
+            <one-to-many  class="com.huwl.oracle.qqmusic.music_model.Music" />
+        </set>
+        <property name="isShield" type="java.lang.Boolean">
+        	<column name="IS_SHIELD" />
+        </property>
+    </class>
+</hibernate-mapping>

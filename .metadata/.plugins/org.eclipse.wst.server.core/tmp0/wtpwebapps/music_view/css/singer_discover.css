@@ -1,0 +1,265 @@
+.container{
+	background-image: url(../img/bg_detail.jpg);
+    background-position: 0px -58px;
+    background-repeat: repeat-x;
+    color:#333;
+}
+.defaultStyleLink{
+    text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+.singersBg{
+	height: 376px;
+	width:100%;
+	background-image: url(../img/bg_singer.jpg);
+	background-position: 50% 50%;
+	min-width: 1050px;
+}
+.TitleInSingerBg{
+	font-size: 60px;
+	color:#ffffff;
+	line-height: 70px;
+	font-weight: 300;
+	padding-top: 97px;
+	cursor: default;
+}
+.TipInSingerBg{
+	font-size: 26px;
+	color:#ffffff;
+	font-weight: 300;
+	line-height: 30px;
+	cursor: default;
+	padding-top: 14px;
+	
+}
+.loginBtnInBg{
+	height: 46px;
+	width: 172px;
+	border-width: 1px;
+	border-color: rgba(255,255,255,0.2);
+	border-style: solid;
+	line-height: 46px;
+	color:#ffffff;
+	font-size: 18px;
+	margin-top:19px;
+	cursor: pointer;
+	position: relative;
+	border-radius:3px;
+}
+.lightBorder{
+	height: 100%;
+	width: 100%;
+	border-width: 1px;
+	border-color: rgb(255,255,255);
+	border-style: solid;
+	opacity:0;
+	position: absolute;
+	top:0;
+	left: 0;
+	border-radius:3px;
+}
+.yourFocusSingerWillDisplayHear{
+	font-size: 60px;
+	color:#ffffff;
+	line-height: 70px;
+	font-weight: 300;
+	padding-top: 138px;
+	cursor: default;
+}
+.quicklyEnjoinSong{
+	font-size: 26px;
+	color:#ffffff;
+	font-weight: 300;
+	line-height: 30px;
+	cursor: default;
+	padding-top: 23px;
+}
+.myFocus{
+	color:#ffffff;
+	font-size: 18px;
+	line-height: 20px;
+	padding-top: 60px;
+}
+.myFocusBox{
+	width:750px;
+	height: 150px;
+	margin-top: 48px;
+	overflow: hidden;
+	white-space:nowrap;
+	font-size: 0;
+	display: inline-block;
+	position: relative;
+}
+.focusSingerUl{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top:0;
+	left:0;
+}
+.focusSingerUl li{
+	height: 150px;
+	width: 150px;
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+}
+.focusSingerUl li img{
+	height: 150px;
+	width: 150px;
+}
+.focusSingerMask{
+	height: 140px;
+	width: 140px;
+	background-color: rgb(0,0,0);
+	position: absolute;
+	top:0px;
+	left: 0px;
+	z-index: 1;
+	border:5px solid rgba(0,0,0,0.5);
+	opacity:0.5;
+}
+.showAll{
+	color: #ffffff;
+	font-size: 18px;
+	line-height: 150px;
+	display: block;
+	position: absolute;
+	top:0px;
+	left:0px;
+	height: 150px;
+	width: 150px;
+	z-index: 3
+}
+.maskBorder{
+	height: 140px;
+	width: 140px;
+	border:5px solid #31c27c;
+	position: absolute;
+	top:0;
+	left: 0;
+	z-index: 2;
+	display: none;
+}
+.moveUl{
+	height: 150px;
+	width: 150px;
+	display: inline-block;
+}
+.moveUl div{
+	height: 53px;
+	width: 25px;
+	margin:48.5px 62.5px 48.5px 62.5px;
+	background-image: url(../img/slider_arrow.png);
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+.toLeft div{
+	background-position: 0px 0px;
+}
+.toRight div{
+	background-position: -25px 0px;
+}
+.focusSingerHeads{
+	font-size: 0px;
+}
+.tag{
+	height: 1px;
+	width: 30px;
+	background-color: rgba(255,255,255,0.3);
+}
+.tagsUl{
+	list-style: none;
+	height: 21px;
+	margin: 0;
+	padding: 0;
+	margin-top: 25px;
+	font-size: 0px;
+}
+.tagsUl li{
+	display:inline-block;
+	height: 1px;
+	width: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+.singerDiscoverContent{
+	width: 1200px;
+}
+.conditionBox{
+	width: 1198px;
+	max-width:1198px;
+	background-color: #fbfbfd;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	border:1px solid #fbfbfd;
+}
+.category{
+	margin: 34px 0px 0px 39px;;
+	padding: 0px;
+	list-style: none;
+}
+.categoryBox{
+	height:39px;
+}
+.optionItem{
+	float: left;
+	font-size: 14px;
+	padding-left: 8px;
+	padding-right: 8px;
+	margin-right: 12px;
+	height: 25px;
+	line-height: 25px;
+	margin-bottom: 14px;
+}
+.AllItem , .hotItem{
+	margin-right: 28px;
+	float: left;
+	font-size: 14px;
+	padding-left: 8px;
+	padding-right: 8px;
+	height: 25px;
+	line-height: 25px;
+	margin-bottom: 14px;
+}
+.letter{
+	margin: 7px 0px 20px 39px;;
+	padding: 0px;
+	list-style: none;
+	height: 39px;
+	
+}
+.letter .optionItem{
+	font-weight: 300;
+} 
+.singersBox{
+	min-height: 500px;
+}
+.loading{
+	margin-top: 200px;
+	margin-right: 550px;
+	margin-left: 550px;
+}
+.conditionBox li{
+	text-decoration: none;
+    outline: none;
+    color: inherit;
+    color:#333;
+}
+.conditionBox li[selectedItem='true']{
+	background-color: #31c27c;
+	color:#ffffff;
+}
+
+
+
+
+
+
+
+

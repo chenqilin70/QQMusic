@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <constant name="struts.devMode" value="true"></constant>
+    <constant name="struts.custom.i18n.resources" value="global" />
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+    <constant name="struts.multipart.maxSize" value="5242880"></constant>
+    <package name="qqmusic" extends="struts-default">
+    	<result-types>
+        	<result-type name="json" class="org.apache.struts2.json.JSONResult"></result-type>
+        </result-types>
+    	<global-results>
+    		<result name="500" type="redirect">/500.jsp</result>
+    	</global-results>
+    	<!-- 
+    	<global-exception-mappings>
+    		<exception-mapping result="500" exception="java.lang.Exception"></exception-mapping>
+    	</global-exception-mappings>
+    	 -->
+    	 <action name="mv" class="mvAction">
+    	 	<result name="success">/content/mv.jsp</result>
+    	 </action>
+    	 <action name="music" class="musicAction">
+    	 	<result name="success">/content/music.jsp</result>
+    	 </action>
+    	 <action name="player" class="playerAction">
+	    	<result name="downloadMusic" type="stream">  
+	               <param name="contentType">application/x-download</param>  
+	               <param name="contentDisposition">attachment;fileName="${musicName}"</param>  
+	               <param name="inputName">inputStream</param>  
+	               <param name="bufferSize">1024</param>  
+	        </result>  
+	        <result name="likeMusic" type="stream">
+	        	<param name="inputName">inputStream</param>
+	        </result>
+    	 	<result name="changeNowPlay" type="json">
+    	 		<param name="root">result</param>
+    	 	</result>
+    	 	<result name="getMusicInfoList" type="json">
+    	 		<param name="root">result</param>
+    	 	</result>
+    	 	<result name="getRandomMusicId" type="stream">
+    	 		<param name="inputName">inputStream</param>
+    	 	</result>
+    	 	<result name="batchDownload" type="stream">
+    	 		<param name="contenType">application/x-download</param>
+    	 		<param name="contentDisposition">attachment;fileName="${batchFileName}"</param>
+    	 		<param name="inputName">inputStream</param> 
+    	 		<param name="bufferSize">1024</param>
+    	 	</result>
+    	 	<result name="downloadThisMusic" type="stream">
+    	 		<param name="contenType">application/x-download</param>
+    	 		<param name="contentDisposition">attachment;fileName="${musicName}"</param>
+    	 		<param name="inputName">inputStream</param> 
+    	 		<param name="bufferSize">1024</param>
+    	 	</result>
+    	 	<result name="getLyric" type="stream">
+    	 		<param name="inputName">inputStream</param>
+    	 	</result>
+    	 	<result name="success">/content/player.jsp</result>
+    	 	<allowed-methods>regex:.*</allowed-methods>
+    	 </action>
+        <action name="index" class="indexAction">
+            <result name="success">/content/index.jsp</result>
+        </action>
+        <action name="album" class="albumAction">
+        	<result name="collectAlbum" type="stream">
+        		<param name="inputName">inputStream</param>
+        	</result>
+        	<result name="success">/content/album.jsp</result>
+        	<allowed-methods>regex:.*</allowed-methods>
+        </action>
+        <action name="album_discover" class="albumDiscoverAction">
+        	<result name="updateAlbumList">/content/album_discover_content.jsp</result>
+        	<result name="success">/content/album_discover.jsp</result>
+        	<allowed-methods>regex:.*</allowed-methods>
+        </action>
+        <action name="singer_discover" class="singerDiscoverAction">
+        	<result name="updateSingerList">/content/singer_discover_content.jsp</result>
+        	<result name="success">/content/singer_discover.jsp</result>
+        	<allowed-methods>regex:.*</allowed-methods>
+        </action>
+        <action name="singer" class="singerAction">
+        	<result name="addCareSinger" type="stream">
+        		<param name="inputName">inputStream</param>
+        	</result>
+        	<result name="success">/content/singer.jsp</result>
+        	<allowed-methods>regex:.*</allowed-methods>
+        </action>
+        <action name="listener" class="listenerAction">
+        	<result name="MYLIKE_MUSIC">/content/listener_model/mylike_music.jsp</result>
+        	<result name="MYLIKE_ALBUM">/content/listener_model/mylike_album.jsp</result>
+        	<result name="MYLIKE_MENU">/content/listener_model/mylike_menu.jsp</result>
+        	<result name="MYLIKE_MV">/content/listener_model/mylike_mv.jsp</result>
+        	<result name="uploadHead" type="json" >
+        		<param name="root">message</param>
+        	</result>
+        	<result name="input">/error.jsp</result>
+        	<result name="unLogin" type="stream">
+        		<param name="inputName">inputStream</param>
+        	</result>
+        	<result name="success">/content/listener.jsp</result>
+        	<allowed-methods>regex:.*</allowed-methods>
+        </action>
+        <action name="template" class="templateAction">
+	        
+        	<result name="registerValidate"  type="json">
+        		<param name="root">message</param>
+        	</result>
+        	<result name="login"  type="json">
+        		<param name="root">message</param>
+        	</result>
+        	<result name="signin" type="json">
+        		<param name="root">message</param>
+        	</result>
+        	<result name="logout" type="stream">
+        		<param name="inputName">inputStream</param>
+        	</result>
+        	<allowed-methods>regex:.*</allowed-methods>
+        </action>
+        <action 
+       		 name="ajax" 
+       		 class="com.huwl.oracle.qqmusic.music_action.AjaxAction">
+       		 <result name="updateNewMusic" type="json">
+       		 	<param name="root">result</param>
+       		 </result>
+       		 <result name="validateCode" type="stream">
+	       		 <param name="contentType">image/jpeg</param>
+	       		 <param name="Pragma">no-cache</param>
+       		 	<param name="Cache-Control">no-cache</param>
+       		 	<param name="inputName">validateCodeImgInputStream</param>
+       		 </result>
+       		 <allowed-methods>regex:.*</allowed-methods>
+        </action>
+        
+        <action name="testError" >
+        	<result>/testErrorPage.jsp</result>
+        </action>
+        <!-- 此为404错误，放在最后 -->
+        <action name="*">
+        	<result type="redirect">/404.jsp</result>
+        </action>
+        
+    </package>
+    
+</struts>
+

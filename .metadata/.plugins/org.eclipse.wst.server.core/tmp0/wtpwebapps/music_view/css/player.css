@@ -1,0 +1,784 @@
+*{
+	font-family:  "Microsoft YaHei";
+	color:#ffffff;
+}
+body{
+	background-color: rgb(0,0,0)
+}
+.playerBg1{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top:0;
+	left:0;
+	background-repeat: no-repeat;
+	background-size:cover;
+	background-position: 50% 50%;
+	background-color: #1B1B1C;
+}
+.playerBg2{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top:0;
+	left:0;
+	background-repeat: no-repeat;
+	background-size:cover;
+	background-position: 50% 50%;
+	background-color: #1B1B1C;
+	opacity:.6;
+	-webkit-filter:blur(65px);
+	-ms-filter: blur(65px);
+	-moz-filter:blur(65px);
+	filter:blur(65px);
+}
+.bgMask{
+	width: 100%;
+	height: 100%;
+	background-color:rgba(60,60,60,0.3);
+}
+.QQMusicLink{
+	height:21px;
+	width:78px;
+	float: left;
+	font-weight: 300;
+	margin-left: 20px;
+	margin-top: 20px;
+	background-image:url(../img/player_logo.png);
+	opacity:0.3;
+}
+.contentContainer{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top:0;
+	left:0;
+}
+.login , .setting1{
+	float: right;
+	margin-top: 25px;
+	font-size: 14px;
+	opacity:0.3;
+	cursor: pointer;
+}
+.setting2 , .listenerName , .logout{
+	float: right;
+	font-size: 14px;
+	opacity:0.3;
+	cursor: pointer;
+}
+.topRightCorner{
+	width: 400px;
+	height: 30px;
+	margin-top:19px;
+	float: right;
+}
+.profile{
+	float: right;
+	margin-right:5px;
+	border-radius:50%;
+	width: 30px;
+	height: 30px;
+}
+.login{
+	margin-right: 13px;
+}
+.setting1{
+	margin-right: 65px;
+}
+.logout{
+	margin-right:19px;
+	line-height: 30px;
+	visibility: hidden;
+}
+.setting2 , .listenerName{
+	margin-right:14px;
+	line-height: 30px;
+}
+.centerBox{
+	position:fixed;
+	height: 81%;
+	width: 84.5%;
+	top:11%;
+	left:7.5%;
+	min-width: 1010px;
+}
+.optBtn{
+	width: 120px;
+	height: 38px;
+	margin-right: 10px;
+	float: left;
+	border-radius:3px;
+	position: relative;
+	cursor: pointer;
+}
+.btnBorder{
+	height: 100%;
+	width: 100%;
+	border-radius:3px;
+	border:1px solid #ffffff;
+	opacity:0.3;
+	position: absolute;
+	top:0;
+	left:0;
+}
+.optBtn span{
+	line-height: 38px;
+	opacity:0.8;
+	font-size: 14px;
+}
+.optBtn i{
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	background-repeat: no-repeat;
+	background-image: url(../img/icon_sprite.png);
+	margin-right: 5px;
+	vertical-align:-3px;
+	
+}
+.collect i{
+	background-position: -60px -20px
+}
+.addTo i{
+	background-position: -20px -20px
+}
+.download i{
+	background-position: -40px -240px;
+}
+.delete i{
+	background-position: -100px -20px;
+}
+.clearList i{
+	height:17px;
+	width:17px;
+	background-position: -40px -300px;
+}
+.rightColumn{
+	float: right;
+	width: 255px;
+	height: 85%;
+	position: relative;
+}
+.rightTable{
+	height: 100%;
+	width: 100%;
+	table-layout: fixed;
+}
+.rightTable ,.rightTable td,.rightTable tr{
+	margin:0;
+	padding:0;
+}
+.rigthTopTd{
+	height: 300px;
+	width: 100%;
+}
+.rightBottomTd{
+	width: 100%;
+}
+.rightBottomTd,.rigthTopTd{
+	position: relative;
+}
+.rigthTopDiv , .rightBottomDiv{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top:0;
+	left:0;
+}
+.rigthTopBox{
+	height: 100%;
+    width: 186px;
+    position: relative;
+    left: -12.5px
+}
+.rightBottomDiv{
+	overflow: hidden;
+}
+.albumHead{
+	width: 186px;
+	height: 186px;
+}
+.albumCover{
+	height: 186px;
+	position: absolute;
+	top:0;
+	left: 0;
+	z-index: 2;
+}
+.musicInfoBox{
+	width: 186px;
+	height: 100px;
+	font-size: 14px;
+	line-height: 26px;
+	margin-top: 11px;
+	
+}
+.musicInfoBox div{
+	width:186px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.lyricBox{
+	width: 100%;
+	position: relative;
+	cursor: pointer;
+}
+.lyricBox p{
+	text-align: center;
+	margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 34px;
+    white-space: nowrap;
+    font-weight: 300;
+    opacity:0.8
+}
+.on{
+	color:#31c27c
+}
+.musicConsole{
+	position: absolute;
+	bottom: 0px;
+	height: 10%;
+	width: 100%;
+}
+.musicList{
+	width: 73.5%;
+	height: 80%;
+	float: left;
+	min-width: 743px;
+	min-height: 298px;
+	position: relative;
+	margin-top: 20px;
+}
+
+.mCS-my-theme.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ 
+	background-color: rgba(0,0,0,0.2); 
+	width:7px;
+}
+.mCS-my-theme.mCSB_scrollTools .mCSB_draggerRail{ 
+	background-color: rgba(255,255,255,0); 
+} 
+.musicList table{
+	table-layout: fixed;
+	width:100%;
+	text-align: left;
+	font-weight: 300;
+	cursor: default;
+}
+
+.musicList th{
+	font-weight: 300;
+	font-size: 14px;
+}
+.musicTh,.singerTh,.songTimeTh{
+	opacity:0.6;
+} 
+.musicList table td , .musicList table th{
+	height: 50px;
+	border-top:1px solid rgba(255,255,255,0.02);
+	font-size: 14px;
+	line-height: 50px;
+}
+.checkBoxTh{
+	width: 3.6%;
+}
+.musicTh{
+	width: 60%;
+}
+.singerTh{
+	width: 26.2%;
+}
+.musicCheckbox{
+	height: 14px;
+	width: 14px;
+	border-radius:2px;
+	color:#ffffff;
+	margin:0;
+	opacity: 0.2;
+	border:1px solid #ffffff;
+	line-height: 14px;
+	
+}
+.playBtn{
+	background-image:url(../img/player.png);
+	background-repeat: no-repeat;
+	bottom: 20px;
+}
+.prevMusic{
+	height: 20px;
+	width: 19px;
+	margin-bottom: -10px;
+	position: absolute;
+	background-position: 0 -29px;
+}
+.playMusic{
+	height: 29px;
+	width: 21px;
+	margin-bottom: -14.5px;
+	position: absolute;
+	left: 76px;
+	background-position: 0 0;
+}
+.nextMusic{
+	height: 20px;
+	width: 19px;
+	margin-bottom: -10px;
+	position: absolute;
+	left: 153px;
+	background-position: 0 -52px;
+	margin-right: 34px;
+}
+.progressBar{
+	height: 2px;
+	width: 100%;
+	margin-top:5px;
+	background: linear-gradient(to right,rgba(255,255,255,0.8) 0%,rgba(255,255,255,0.2) 0%);
+}
+.barBox{
+	height:12px;
+	position:absolute;
+	bottom: 10px;
+	width: 100%;
+	cursor: pointer;
+}
+.nowPlayMusic{
+	height: 20px;
+	width: 100%;
+	position:absolute;
+	bottom: 21px;
+	font-size: 14px;
+}
+.nowName,.nowSingerName,.minus{
+	float: left;
+	opacity:0.8;
+}
+.nowTime{
+	float: right;
+	opacity:0.8;
+}
+.musicConsole table{
+	width: 100%;
+	height: 100%;
+	table-layout: fixed;
+}
+.playBtnBox{
+	width: 206px;
+	height: 100%;
+}
+.otherBtnBox{
+	width: 400px;
+	height: 100%;
+}
+.progressBoxDiv , .otherBtnBoxDiv{
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+.loopList{
+	width: 26px;
+	height: 22px;
+	position: absolute;
+	left: 55px;
+	bottom: 10px;
+	background-image: url(../img/player.png);
+	background-position: 0 -205px;
+	display: none;
+	
+}
+.likeBtn{
+	width: 23px;
+	height: 21px;
+	position: absolute;
+	left: 105px;
+	bottom: 10px;
+	background-image: url(../img/player.png);
+	
+}
+.like{
+	background-position: -30px -95px;
+}
+.dislike{
+	background-position: 0 -95px;
+}
+.downLoadBtn{
+	width: 21px;
+	height: 21px;
+	position: absolute;
+	left: 155px;
+	bottom: 10px;
+	background-image: url(../img/player.png);
+	background-position: 0 -120px;
+}
+.changeModel{
+	width: 74px;
+	height: 26px;
+	position: absolute;
+	left: 200px;
+	bottom: 10px;
+	background-image: url(../img/player.png);
+}
+.pure{
+	background-position: 0 -311px;
+}
+.notpure{
+	background-position: 0 -282px;
+}
+.trumpetIcon{
+	width: 26px;
+	height: 21px;
+	position: absolute;
+	left: 300px;
+	bottom: 10px;
+	background-image: url(../img/player.png);
+	background-position: 0 -143px;
+}
+.volumeBox{
+	width: 81px;
+	height: 12px;
+	position: absolute;
+	left: 336px;
+	bottom: 14px;
+	cursor: pointer;
+}
+.volume{
+	margin-top:5px;
+	height: 2px;
+	background: linear-gradient(to right,rgba(255,255,255,0.8) 100%,rgba(255,255,255,0.2) 100%);
+}
+.circleOfVolume{
+	border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 1px;
+    left: 81px;
+    cursor: pointer;
+}
+.opacityLink{
+	text-decoration: none;
+	opacity:0.6;
+	cursor: pointer;
+}
+.right{
+	display: inline-block;
+	height: 14px;
+	width: 14px;
+	line-height: 14px;
+	margin-left: 2px;
+	display:none;
+}
+.thisMusicBtn{
+	float: right;
+	height: 36px;
+	width: 36px;
+	background-image: url(../img/icon_list_menu.png);
+	margin-right: 10px;
+	display:none;
+	margin-top: 7px;
+	cursor: pointer;
+}
+.playThisMusic{
+	background-position: -80px 0;
+}
+.shareThisMusic{
+	background-position: -80px -40px;
+}
+.downLoadThisMusic{
+	background-position: -80px -120px;
+}
+.addToMenu{
+	background-position: -80px -80px;
+}
+.playBtn , .loopList , .likeBtn , .downLoadBtn ,.changeModel , .trumpetIcon , .volume{
+	opacity:0.8;
+	cursor: pointer;
+}
+.defaultPlayerLink{
+	text-decoration: none;
+	opacity:0.6;
+	cursor: pointer;
+}
+.infoTitle{
+	opacity:0.6;	
+}
+.circleInBar{
+	border-radius:50%;
+	width: 10px;
+	height: 10px;
+	background-color: #ffffff;
+	position: absolute;
+	top:1px;
+	left:0;
+	cursor: pointer;
+}
+table tr .num{
+	display: inline-block;
+	height: 10px;
+	width:21px;
+	background-repeat: no-repeat;
+	background-position: left;
+}
+/**********************************************************************/
+.totalMask{
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	background-color:rgba(0,0,0,.2);
+	top:0px;
+	left:0px;
+	z-index: 5;
+	border:1px solid gray;
+	display: none;
+	border:none;
+}
+.loginWin{
+	background-color:#ffffff;
+	width:650px;
+	height:435px;
+	margin-top: 157px;
+}
+.loginWin input[type='text'] , .loginWin input[type='password']{
+	color:#333;
+}
+.loginTitl div{
+	position:absolute;
+	width:163px;
+	left: 243.5px;
+	color:#32c27d;
+}
+.loginTitl{
+	border-bottom:1px solid rgb(240,240,240);
+	line-height: 55px;
+	font-size: 16px;
+	color:#32c27d;
+	text-align: center;
+	position: relative;
+	height: 55px;
+}
+.loginBody{
+	height:350px;
+}
+.accountAndPasswordLogin{
+	font-size: 20px;
+	color: #333;
+	line-height: 40px;
+}
+.new_user_sign_in{
+	font-size: 20px;
+	color: #333;
+	line-height: 40px;
+	display:none;
+}
+.loginInput{
+	width: 270px;
+	height: 40px;
+	border:1px solid #d6d6d6;
+	margin-top: 15px;
+	border-radius:3px;
+	position: relative;
+}
+.loginInput  input{
+	border:none;
+	outline: none;
+	height:18px;
+	font-size: 16px;
+	line-height: 18px;
+	width:230px;
+	margin-left: 10px;
+	margin-top: 11px;
+}
+.validateCode{
+	width: 270px;
+	height: 40px;
+	border:1px solid #d6d6d6;
+	margin-top: 15px;
+	border-radius:3px;
+	position: relative;
+}
+.validateCode  input{
+	border:none;
+	outline: none;
+	height:18px;
+	font-size: 16px;
+	line-height: 18px;
+	width:150px;
+	margin-left: 10px;
+	margin-top: 11px;
+}
+.validateImg{
+	height:100%;
+	width: 105px;
+	float: right;
+	border-left: 1px solid #d6d6d6;
+}
+.loginInput i{
+	background-image: url(../img/icon_3_tiny.png);
+	background-position: -117px -161px;
+	display: inline-block;
+	position:relative;
+	top:2px;
+	right:8px;
+	width: 20px;
+	height:20px;
+	cursor: pointer;
+}
+.loginOrSiginSubmit{
+	width: 270px;
+	height: 40px;
+	margin-top: 15px;
+	border-radius:3px;
+	
+}
+.loginOrSiginSubmit input{
+	background-color:#86ce2f;
+	color:#ffffff;
+	border:none;
+	height:100%;
+	width: 100%;
+	font-size: 16px;
+	cursor: pointer;
+	outline: none;
+}
+.comfirmPassword{
+	display: none;
+}
+.loginTail{
+	height:29px;
+	width: 100%;
+}
+.nextAutoLogin{
+	cursor:pointer;
+	float:left;
+	font-size: 12px;
+	color:#333;
+	line-height: 20px;
+	margin-left: 5px;
+}
+.loginCheckbox{
+	cursor:pointer;
+	float:left;
+	height: 18px;
+	width: 18px;
+	margin-left: 10px;
+	background-image: url(../img/icon_3_tiny.png);
+}
+.loginCheckbox[isSelected="true"]{
+	background-position: -92px -162px;
+}
+.loginCheckbox[isSelected="false"]{
+	background-position: -74px -162px;
+}
+.loginTail ul{
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+.loginTail li{
+	text-align:center;
+	float: right;
+	width:77px;
+	height:12px;
+	color:#666;
+	font-size: 12px;
+	line-height: 12px;
+}
+.loginTail .centerLi{
+	border-width:0 1px 0 1px;
+	border-color: #c8c8c8;
+	border-style: solid;
+}
+.closeIcon{
+	height: 12px;
+	width: 12px;
+	display: inline-block;
+	float: right;
+	margin-top:15px;
+	margin-right:15px;
+	background-image: url(../img/icon_popup.png);
+	background-position: 0px -200px;
+	cursor: pointer;
+}
+.loginTail a{
+	text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+.inputMessage{
+	position:absolute;
+	left: 275px;
+	width: 150px;
+	top:11px;
+	font-size: 12px;
+}
+.messageBox{
+	position: fixed;
+	top:40%;
+	height: 150px;
+	width: 230px;
+	background-color: rgba(0,0,0,0.8);
+	border-radius:5px;
+	z-index: 5;
+	margin-left: -115px;
+	margin-top:-75px;
+	left: 50%;
+	display: none;
+}
+.popupIcon{
+	height: 46px;
+	width: 46px;
+	background-image: url(../img/icon_popup.png);
+	margin-top: 30px;
+}
+.successLikeIcon{
+	background-position: 0 -150px;
+}
+.pleaceSelect{
+	background-position: 0 -220px;
+}
+.popupMessage{
+	font-size: 14px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+.pureBox{
+	width: 100%;
+	height: 80%;
+	overflow: hidden;
+	display: none;
+}
+.pureLyricBox{
+	width: 100%;
+	position: relative;
+	cursor: pointer;
+}
+.pureLyricBox p{
+	text-align: center;
+	margin: 0;
+    padding: 0;
+    font-size: 22px;
+    line-height: 58px;
+    white-space: nowrap;
+    font-weight: 300;
+    opacity:0.8
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

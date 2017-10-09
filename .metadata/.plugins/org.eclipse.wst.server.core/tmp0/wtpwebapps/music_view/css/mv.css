@@ -1,0 +1,12 @@
+*{
+	color:#333;
+}
+.container{
+	height: 750px;
+	background-color: #333333;
+}
+.mvContent{
+	width: 1200px;
+	min-height: 100px;
+	background-color: 1px solid red;
+}

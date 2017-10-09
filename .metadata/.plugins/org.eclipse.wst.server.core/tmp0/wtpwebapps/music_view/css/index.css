@@ -1,0 +1,414 @@
+body{
+    margin:0;
+}
+.head{
+    height:142px;
+    width:100%;
+    background:#ffffff;
+}
+.newMusic{
+    height:734px;
+    width:100%;
+    background-image:url(../img/bg_index_new.jpg);
+    background-position:center;
+    position: relative;
+}
+
+.newMusicContainer{
+    width:1200px;
+    border:1px solid rgba(0,0,0,0);
+    height:100%;
+}
+.modelTitle{
+    font-size:45px;
+    margin-top: 72px;
+    font-family: poppin,'PingFang SC',Tahoma,Arial,\5FAE\8F6F\96C5\9ED1,sans-serif;
+    font-weight:100;
+    letter-spacing:3px;
+    width: 490px;
+}
+.newMusicTitle{
+    color:#fff;
+}
+.newMusicLeftLine{
+     background-color: #464646;
+}
+.leftLine{
+    width:72px;
+    height:1px;
+    float: left;
+    margin-top:30px;
+}
+.newMusicRightLine{
+    background-color: #464646;
+}
+.rightLine{
+    width:72px;
+    height:1px;
+    float: right;
+    
+    margin-top:30px;
+}
+.district{
+    line-height:20px;
+    height: 20px;
+    position: relative;
+    
+}
+.district ul{
+    list-style: none;
+    margin:0;
+    padding: 0;
+    margin-left: 380px;
+    margin-top: 39px;
+}
+.district li{
+    float: left;
+    margin-right:70px;
+    font-size:16px;
+    cursor: pointer;
+}
+.district li[selectedItem=false]{
+    color:#999999;
+}
+.district li[selectedItem=true]{
+    color:#FFFFFF;
+}
+.allDistrict{
+    text-align:left;
+    color:#ffffff;
+    float: right;
+    margin-top:-2px;
+    font-size: 15px;
+    cursor:pointer;
+}
+.allDistrictIcon{
+    float: right;
+    display:block;
+    width:13px;
+    height:20px;
+    background-image:url(../img/icon_sprite.png);
+    background-position:-36px -258px;
+    cursor:pointer;
+}
+.showNewMusicBox{
+    background:rgba(0,0,0,0);
+    width: 1200px;
+    height:415px;
+    margin-top:28px;
+    overflow: hidden;
+}
+.showNewMusicTable{
+    width: 1200px;
+    height:415px;
+    table-layout: fixed;
+    background-color: rgba(0,0,0,0);
+    position: relative;
+    left:-1200px;
+}
+.contralHeight{
+    height:300px;
+}
+.contralWidth{
+    position: relative;
+    width:300px;
+    cursor: pointer;
+}
+.contralWidth > div{
+    height: 300px;
+    width: 300px;
+    overflow: hidden;
+}
+.albumImgInNewMusic{
+    width:300px;
+    height: 300px;
+    position: relative;
+}
+.musicMask{
+   padding:0px 50px 0px 50px;
+    font-size: 16px;
+    line-height: 28px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+}
+.musicMask a{
+    text-decoration: none;
+}
+.singularMask{
+    background-color: rgba(0,0,0,0.6);
+}
+.evenMask{
+    background-color: rgba(0,0,0,0.8);
+}
+.musicName{
+    color: #fff;
+}
+.singerName{
+    color: #999999
+}
+.musicMask i{
+    display: inline;
+    position: absolute;
+    height: 20px;
+    width:20px;
+    background-image: url(../img/icon_sprite.png);
+    background-repeat: no-repeat;
+    background-position: -180px -100px;
+    margin-top: 3px;
+    margin-left: 7px;
+    opacity: 0;
+    
+}
+.imgMask{
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    top:0px;
+    left:0px;
+    background-color: rgb(0,0,0);
+    opacity: 0;
+}
+.cover_play{
+    position: absolute;
+    top: 125px;
+    left: 125px;
+    height:50px;
+    opacity: 0;
+}
+.left{
+    position: absolute;
+    height:101%;
+    width:50%;
+}
+.right{
+    position: absolute;
+    height:101%;
+    width:50%;
+    left: 50%;
+}
+.toLeft{
+    background: rgba(255,255,255,0.3);
+    width:72px ; 
+    height: 110px ;
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    top: 316.5px;
+    cursor: pointer;
+}
+.toLeft i{
+    display: block;
+    height:20px;
+    width: 10px;
+    background-image: url(../img/icon_sprite.png);
+    background-position: -180px 0px;
+    margin-top: 45px;
+    margin-left: 31px;
+}
+.toRight{
+    background: rgba(255,255,255,0.3);
+    width:72px ; 
+    height: 110px ;
+    top: 0px;
+    margin-top: 316.5px;
+    z-index: 1;
+    position: absolute;
+    right: 0px;
+    cursor: pointer;
+}
+.toRight i{
+    display: block;
+    height:20px;
+    width: 10px;
+    background-image: url(../img/icon_sprite.png);
+    background-position: -160px 0px;
+    margin-top: 45px;
+    margin-right: 31px;
+    float: right;
+}
+
+@keyframes active
+{
+0%   {background:rgba(255,255,255,0.3);}
+100%  {background:rgb(49,194,124)}
+}
+@keyframes shadow
+{
+0%  {background:rgb(49,194,124)}
+100%   {background:rgba(255,255,255,0.3);}
+}
+.newMusicTab{
+    position: relative;
+    margin: 25px 0px 0px 530px;
+    padding: 0px;
+    list-style: none;
+    height:21px;
+}
+.newMusicTab li{
+ float: left;
+ height: 1px;
+ width: 30px;
+ margin-right: 10px;
+ cursor: pointer;
+ padding-top: 10px;
+ padding-bottom: 10px;
+}
+.newMusicTab li div{
+    height: 100%;
+    width: 100%;
+}
+.newMusicTab li[selectedItem=true] div{
+    background-color: rgb(255,255,255);
+}
+.newMusicTab li[selectedItem=false] div{
+    background-color: rgba(255,255,255,0.5);
+}
+.hotRecommended{
+    height:610px;
+    width:100%;
+    background:#ffffff;
+    position: relative;
+}
+.contentContainer{
+    width:1200px;
+    border:1px solid rgba(0,0,0,0);
+    height:100%;
+}
+.hotRecomTitle{
+    color: rgb(21,21,21)
+}
+.hotRecomLeftLine{
+    background-color: rgb(230,230,230);
+}
+.hotRecomRightLine{
+    background-color: rgb(230,230,230);
+}
+.carouselPic{
+ width: 1200px ;
+ height: 300px;
+ margin-top: 45px;
+ overflow: hidden;
+ position: relative;
+}
+.hotRecomSinglePic{
+    height: 243px;
+    width: 607.5px;
+    position: absolute;
+    top: 150px;
+    margin-top: -121.5px;
+    opacity: 0.5;
+}
+.leftBtn{
+    background: rgb(214,214,214);
+    width:72px ; 
+    height: 110px ;
+    position: absolute;
+    z-index: 3;
+    left: 0px;
+    cursor: pointer;
+}
+.hotRecomLeftBtn{
+    top: 250px;
+}
+.leftBtn i{
+    display: block;
+    height:20px;
+    width: 10px;
+    background-image: url(../img/icon_sprite.png);
+    background-position: -180px 0px;
+    margin-top: 45px;
+    margin-left: 31px;
+}
+.rightBtn{
+    background: rgb(214,214,214);
+    width:72px ; 
+    height: 110px ;
+    top: 0px;
+    z-index: 1;
+    position: absolute;
+    right: 0px;
+    cursor: pointer;
+}
+.hotRecomRightBtn{
+    margin-top:250px;
+}
+.rightBtn i{
+    display: block;
+    height:20px;
+    width: 10px;
+    background-image: url(../img/icon_sprite.png);
+    background-position: -160px 0px;
+    margin-top: 45px;
+    margin-right: 31px;
+    float: right;
+}
+@keyframes activeSlideBtn
+{
+0%   {background:rgb(214,214,214);}
+100%  {background:rgb(49,194,124)}
+}
+@keyframes shadowSlideBtn
+{
+0%  {background:rgb(49,194,124)}
+100%   {background:rgb(214,214,214);}
+}
+.hotRecomTab{
+    position: relative;
+    margin: 50px 0px 0px 405px;
+    padding: 0px;
+    list-style: none;
+    height:21px;
+}
+.hotRecomTab li{
+ float: left;
+ height: 1px;
+ width: 30px;
+ margin-right: 10px;
+ cursor: pointer;
+ padding-top: 10px;
+ padding-bottom: 10px;
+}
+.hotRecomTab li div{
+    height: 100%;
+    width: 100%;
+}
+.hotRecomTab li[selectedItem=true] div{
+    background-color: rgb(0,0,0);
+}
+.hotRecomTab li[selectedItem=false] div{
+    background-color: rgb(185,185,185);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.rankingList{
+    height:830px;
+    width:100%;
+    background:black;
+}
+.hotMusicMenu{
+    height:760px;
+    width:100%;
+    background:#ffffff;
+    position: relative;
+}
+.hotMusicLeftBtn{
+    top:325px;
+}
+.hotMusicRightBtn{
+    margin-top: 325px;
+}
+

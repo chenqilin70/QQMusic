@@ -64,10 +64,13 @@
                                 	<a><s:text name="Japan"></s:text></a>
                                 </li>
                             </ul>
-                            <div class="toAll">
-                                <i class="allDistrictIcon"></i>
-                                <a class="allDistrict" ><s:text name="All"></s:text></a>
-                            </div>
+                            <s:a action="album_discover">
+                            	<div class="toAll">
+	                                <i class="allDistrictIcon"></i>
+	                                <span class="allDistrict" ><s:text name="All"></s:text></span>
+                            	</div>
+                            </s:a>
+                            
                         </div>
                         <!--推荐专辑的表格-->
                         <div class="showNewMusicBox">
@@ -75,13 +78,18 @@
                                 <tbody>
                                     <tr>
                                     	<s:iterator value="chineseAlbums" begin="12" end="15" var="album" status="status">
+                                            <s:url action="album" var="albumUrl">
+	                                            <s:param name="albumId"><s:property value='albumId'/></s:param>
+	                                        </s:url>
                                             <s:if test="#status.odd">
                                                 <td albumId="<s:property value='albumId'/>" class="contralWidth contralHeight" >
                                                     <div>
                                                         <img src="<s:text name='img_repository_path'/>/album_head/T002R300x300M000<s:property value='albumId'/>.jpg" 
-                                                        	class="mostLeft albumImgInNewMusic">
-                                                        <div class="imgMask" align="center"> </div>
-                                                        <img class="cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
+                                                        	class="mostLeft albumImgInNewMusic"/>
+                                                        <s:a href="%{albumUrl}">
+	                                                        <div class="imgMask" align="center"> </div>
+	                                                        <img class="cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
+                                                    	</s:a>
                                                     </div>
                                                 </td>
                                                 </s:if>
@@ -90,8 +98,10 @@
                                                     <div >
                                                         <img src="<s:text name='img_repository_path'/>/album_head/T002R300x300M000<s:property value='albumId'/>.jpg" 
                                                         	class="mostLeft albumImgInNewMusic">
-                                                        <div class="imgMask" align="center"></div>
-                                                        <img class="cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
+                                                        <s:a href="%{albumUrl}">
+	                                                        <div class="imgMask" align="center"> </div>
+	                                                        <img class="cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
+                                                    	</s:a>"cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
                                                     </div>
                                                 </td>
                                                 </s:else>
@@ -99,13 +109,18 @@
                                     </s:iterator>
                                         <!--开始正式的for循环-->
                                      <s:iterator value="chineseAlbums" begin="0" end="15" var="album" status="status">
+                                            <s:url action="album" var="albumUrl">
+	                                            <s:param name="albumId"><s:property value='albumId'/></s:param>
+	                                        </s:url>
                                             <s:if test="#status.odd">
                                                 <td albumId="<s:property value='albumId'/>" class="contralWidth contralHeight" >
                                                     <div>
                                                         <img   src="<s:text name='img_repository_path'/>/album_head/T002R300x300M000<s:property value='albumId'/>.jpg" 
                                                         	class="mostCenter albumImgInNewMusic">
-                                                        <div class="imgMask" align="center"> </div>
-                                                        <img class="cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
+                                                        <s:a href="%{albumUrl}">
+	                                                        <div class="imgMask" align="center"> </div>
+	                                                        <img class="cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
+                                                    	</s:a>
                                                     </div>
                                                 </td>
                                                 </s:if>
@@ -114,31 +129,40 @@
                                                     <div >
                                                         <img   src="<s:text name='img_repository_path'/>/album_head/T002R300x300M000<s:property value='albumId'/>.jpg" 
                                                         	class="mostCenter albumImgInNewMusic">
-                                                        <div class="imgMask" align="center"></div>
-                                                        <img class="cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
+                                                        <s:a href="%{albumUrl}">
+	                                                        <div class="imgMask" align="center"> </div>
+	                                                        <img class="cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
+                                                    	</s:a>
                                                     </div>
                                                 </td>
                                                 </s:else>
                                     </s:iterator>
                                      <!--forEach循环结束后还需要加一个和前四列一样的td，这样保证滑动是连续的-->
                                      <s:iterator value="chineseAlbums" begin="0" end="3" var="album" status="status">
+                                            <s:url action="album" var="albumUrl">
+	                                            <s:param name="albumId"><s:property value='albumId'/></s:param>
+	                                        </s:url>
                                             <s:if test="#status.odd">
                                                 <td albumId="<s:property value='albumId'/>" class="contralWidth contralHeight" >
                                                     <div>
                                                         <img   src="<s:text name='img_repository_path'/>/album_head/T002R300x300M000<s:property value='albumId'/>.jpg" 
                                                         	class="mostRight albumImgInNewMusic">
-                                                        <div class="imgMask" align="center"> </div>
-                                                        <img class="cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
+                                                        <s:a href="%{albumUrl}">
+	                                                        <div class="imgMask" align="center"> </div>
+	                                                        <img class="cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
+                                                    	</s:a>
                                                     </div>
                                                 </td>
                                                 </s:if>
                                                 <s:else>
                                                 <td  albumId="<s:property value='albumId'/>" class="contralWidth" >
                                                     <div >
-                                                        <img   src="<s:text name='img_repository_path'/>/album_head/T002R300x300M000<s:property value='albumId'/>.jpg"
+                                                        <img src="<s:text name='img_repository_path'/>/album_head/T002R300x300M000<s:property value='albumId'/>.jpg"
                                                         	 class="mostRight albumImgInNewMusic">
-                                                        <div class="imgMask" align="center"></div>
-                                                        <img class="cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
+                                                        <s:a href="%{albumUrl}">
+	                                                        <div class="imgMask" align="center"> </div>
+	                                                        <img class="cover_play" src="<%=request.getContextPath()%>/img/cover_play.png" />
+                                                    	</s:a>
                                                     </div>
                                                 </td>
                                                 </s:else>
@@ -156,14 +180,18 @@
                                                     
                                                     <s:a href="%{albumUrl}"><span class="musicName"><s:property value='albumName'/></span></s:a><i class="moreIcon"></i>
                                                     <br>
-                                                    <a><span class="singerName"><s:property value='singer.singerName'/></span></a>
+                                                    <a href="<%=request.getContextPath()%>/singer.action?singerId=<s:property value='singer.singerId'/>">
+                                                    	<span class="singerName"><s:property value='singer.singerName'/></span>
+                                                    </a>
                                                 </td>
                                          </s:if>
                                          <s:else>
                                          <td  albumId="<s:property value='albumId'/>" class="evenMask  musicMask"  maskPos='leftMask'  align="center">
                                              <s:a href="%{albumUrl}"><span class="musicName"><s:property value='albumName'/></span></s:a><i class="moreIcon"></i>
                                                 <br>
-                                                <a><span class="singerName"><s:property value='singer.singerName'/></span></a>
+                                                <a href="<%=request.getContextPath()%>/singer.action?singerId=<s:property value='singer.singerId'/>">
+                                                	<span class="singerName"><s:property value='singer.singerName'/></span>
+                                                </a>
                                             </td>
                                          </s:else>
                                     </s:iterator>
@@ -176,14 +204,18 @@
                                                 <td  albumId="<s:property value='albumId'/>" class="singularMask musicMask" maskPos='centerMask' align="center">
                                                     <s:a href="%{albumUrl}"><span class="musicName"><s:property value='albumName'/></span></s:a><i class="moreIcon"></i>
                                                     <br>
-                                                    <a><span class="singerName"><s:property value='singer.singerName'/></span></a>
+                                                    <a href="<%=request.getContextPath()%>/singer.action?singerId=<s:property value='singer.singerId'/>">
+                                                    	<span class="singerName"><s:property value='singer.singerName'/></span>
+                                                    </a>
                                                 </td>
                                             </s:if>
                                             <s:else>
                                                 <td  albumId="<s:property value='albumId'/>" class="evenMask  musicMask" maskPos='centerMask' align="center">
                                                     <s:a href="%{albumUrl}"><span class="musicName"><s:property value='albumName'/></span></s:a><i class="moreIcon"></i>
                                                     <br>
-                                                    <a><span class="singerName"><s:property value='singer.singerName'/></span></a>
+                                                    <a href="<%=request.getContextPath()%>/singer.action?singerId=<s:property value='singer.singerId'/>">
+                                                    	<span class="singerName"><s:property value='singer.singerName'/></span>
+                                                    </a>
                                                 </td>
                                             </s:else>
                                          </s:iterator>
@@ -196,14 +228,18 @@
                                              <td  albumId="<s:property value='albumId'/>" class="singularMask musicMask" maskPos='rightMask' align="center">
                                                  <s:a href="%{albumUrl}"><span class="musicName"><s:property value='albumName'/></span></s:a><i class="moreIcon"></i>
                                                  <br>
-                                                 <a><span class="singerName"><s:property value='singer.singerName'/></span></a>
+                                                 <a href="<%=request.getContextPath()%>/singer.action?singerId=<s:property value='singer.singerId'/>">
+                                                 	<span class="singerName"><s:property value='singer.singerName'/></span>
+                                                 </a>
                                              </td>
                                          </s:if>
                                          <s:else>
                                              <td  albumId="<s:property value='albumId'/>" class="evenMask  musicMask"  maskPos='rightMask'  align="center">
                                                  <s:a href="%{albumUrl}"><span class="musicName"><s:property value='albumName'/></span></s:a><i class="moreIcon"></i>
                                                  <br>
-                                                 <a><span class="singerName"><s:property value='singer.singerName'/></span></a>
+                                                 <a href="<%=request.getContextPath()%>/singer.action?singerId=<s:property value='singer.singerId'/>">
+                                                 	<span class="singerName"><s:property value='singer.singerName'/></span>
+                                                 </a>
                                              </td>
                                          </s:else>
                                     </s:iterator>
@@ -276,6 +312,5 @@
         <!-- 模板尾，开始 -->
         <jsp:include page="/foot.jsp"></jsp:include>
         <!-- 模板尾，结束 -->
-        <s:debug></s:debug>
     </body>
 </html>

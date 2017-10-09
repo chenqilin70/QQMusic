@@ -1,0 +1,124 @@
+.nullImg{
+	margin-top: 88px;
+}
+
+.nothingBeFound{
+	font-size: 20px;
+	color:#666666;
+	text-align: center;
+	margin-top: 27px;
+}
+.likeAlbumTable{
+	table-layout: fixed;	
+	margin-top: 4px;
+}
+.likeAlbumTable td{
+	width:224px;
+	height:349px;
+}
+.notFirstAlbumTd{
+	border-left: 20px solid rgba(255,255,255,0);
+}
+.albumBox{
+	height:100%;
+	width:224px;
+	overflow: hidden;
+	position: relative;
+}
+.moreAlbumOption{
+	position: absolute;
+	top:238px;
+	left:204px;
+	height: 20px;
+	width: 20px;
+	background-image: url(../../img/icon_sprite.png);
+	background-position:-80px -40px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	opacity:0;
+}
+.albumBox .imgContainer{
+	height: 224px;
+	width:224px;
+}
+.imgContainer{
+	position:relative;
+	cursor: pointer;
+	overflow: hidden;
+}
+.albumHead{
+	height: 224px;
+	width:224px;
+	position: relative;
+}
+.info1{
+	font-size:14px;
+	line-height:22px;
+	width: 200px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 13px;
+    font-weight:300;
+    color:#333;
+}
+.info2{
+	font-size:14px;
+	line-height:22px;
+	width: 200px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 0;
+    text-decoration:none;
+	color:#999999;
+}
+.albumBox .cover_play{
+	top: 87px;
+    left: 87px;
+    height:50px;
+}
+.cover_play{
+    position: absolute;
+    opacity: 0;
+}
+.likeAlbumSingerLink{
+	text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+.pageBtn{
+	display: inline-block;
+	height:50px;
+	text-align: center;
+	vertical-align: center;
+	line-height: 50px;
+	cursor: pointer;
+	margin-right: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.nowPage{
+	background-color:#31c27c;
+	color:#ffffff;
+}
+.pageBtnBox{
+	margin-bottom: 60px;
+	color:#a2a2a2;
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

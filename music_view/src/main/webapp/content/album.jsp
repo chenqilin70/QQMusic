@@ -240,6 +240,5 @@
     <!-- 模板尾，开始 -->
     <jsp:include page="/foot.jsp" flush=""></jsp:include>
         <!-- 模板尾，结束 -->
-        <s:debug></s:debug>
 </body>
 </html>

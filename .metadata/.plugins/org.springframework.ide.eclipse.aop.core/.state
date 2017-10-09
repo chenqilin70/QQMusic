@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="music_biz"/>
+<aop-project name="music_filter"/>
+<aop-project name="music_view"/>
+<aop-project name="music_dao"/>
+<aop-project name="music_action"/>
+<aop-project name="music_catcher"/>
+</aop-reference-model>

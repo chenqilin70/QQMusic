@@ -1,0 +1,758 @@
+*{
+    font-family:  "Microsoft YaHei"
+}
+body , html{
+    overflow-x:hidden;
+}
+body{
+    margin:0;
+}
+body::-webkit-scrollbar{
+    width:10px;
+    height:10px;
+    background-color:#ffffff;
+} 
+body::-webkit-scrollbar-thumb {
+    background-color:#CCCCCC;
+    border-radius:8px;
+}
+
+.head{
+    width:100%;
+    background:#ffffff;
+    overflow: visible;
+}
+.content{
+    width:1200px;
+    height:100%;
+    overflow: visible;
+}
+.siteModel{
+    height:90px;
+    width:100%;
+}
+.logoImg{
+    float:left;
+    margin-top:19px;
+    margin-right:35px;
+    cursor:pointer;
+}
+.model{
+    float:left;
+    height:100%;
+    line-height:90px;
+    font-size:18px;
+    cursor:pointer;
+}
+.model[selectedItem="true"]{
+	background-color:#31C27C;
+	color: #fff
+}
+.model[selectedItem="false"]{
+	background-color:#ffffff;
+	color: #333333
+}
+.musicPlace{
+    width:95px;
+}
+.myMusic{
+    width:112px;
+}
+.downloadClient{
+    width:130px;
+}
+.vip{
+    width:66px;
+}
+.searchBox{
+    border:1px solid #C9C9C9;
+    border-radius:3px;
+    width:250px;
+    height:37px;
+    float:left;
+    margin-top:26.5px;
+    margin-left:28px;
+    font-size:12px;
+    position:relative;
+}
+.searchInput{
+    margin-left:15px;
+    float:left;
+    border:none;
+    height:35px;
+    width:200px;
+    outline:none;
+}
+.searchBtn{
+    float:left;
+    width:32px;
+    height:100%;
+    border:none;
+    outline:none;
+    background-color:#ffffff;
+    cursor:pointer;
+
+}
+.searchIcon{
+    width:18px;
+    height:18px;
+    margin-top:10px;
+    background-image:url(../img/icon_sprite.png);
+    background-position:0px -40px;
+    position:relative;
+    left:-5px;
+}
+.searchList{
+    width:100%;
+    background-color:#ffffff;
+    position:absolute;
+    top:38px;
+    left:-1px;
+    border-width:0px 1px 1px 1px;
+    border-style:solid;
+    border-color:#C9C9C9;
+    height:0px;
+    overflow:hidden;
+    display:none;
+    z-index: 2
+
+}
+.searchRankUl{
+    width:100%;
+    margin:5px 0px 0px 0px;
+    padding:0;
+    list-style:none;
+    text-align:left;
+}
+.searchRankUl li{
+    text-align:left;
+    height:35px;
+    width:250px;
+    color: #333;
+    line-height:35px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size:14px;
+    overflow:visible;
+    cursor:pointer;
+}
+.searchRankUl li .searchSeq{
+    color:#FF8C79;
+    margin-left:14px;
+}
+.searchCount{
+    float:right;
+    font-size:12px;
+    color:rgb(153,153,153);
+    margin-right:15px;
+}
+.historySearch{
+    height:35px;
+    width:250px;
+    color:rgb(153,153,153);
+    font-size:14px;
+    line-height:35px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.historySearch span{
+    margin-left:14px;
+}
+.trashCan{
+    width:20px;
+    height:20px;
+    float:right;
+    margin-right:15px;
+    margin-top:5px;
+    background-image:url(../img/icon_sprite.png);
+    background-repeat:no-repeat;
+    background-position:-98px 2px;
+    cursor:pointer;
+}
+.login{
+    background:#ffffff;
+    margin-left:19px;
+    color:#333333;
+    font-size:16px;
+    float:left;
+    height:100%;
+    width:38px;
+    line-height:90px;
+    cursor:pointer;
+}
+.lisenerHeadBox{
+	background:#ffffff;
+    margin-left:19px;
+    float:left;
+    height:100%;
+    width:38px;
+    line-height:90px;
+    cursor:pointer;
+    overflow: visible;
+    position: relative;
+    
+}
+.greenJewel{
+    float:left;
+    width:115px;
+    height:40px;
+    background-color:#31C27C;
+    margin-top:24px;
+    margin-left:21px;
+    border:none;
+    border-radius:3px;
+    padding:0;
+    color:#ffffff;
+    font-size:13px;
+    outline:none;
+    margin-right:9px;
+    cursor:pointer;
+}
+.payPackage{
+    float:right;
+    width:88px;
+    height:40px;
+    background-color:#ffffff;
+    border-radius:3px;
+    border:1px solid #C9C9C9;
+    padding:0;
+    color:#333333;
+    font-size:13px;
+    outline:none;
+    margin-top:24px;
+    cursor:pointer;
+}
+.siteNav{
+    height:50px;
+    width:100%;
+     border-top:1px solid #F2F2F2;
+}
+.siteNav ul{
+    list-style:none;
+    padding:0;
+    margin:15px 0px 0px 256px;
+}
+.navItem{
+    float:left;
+    font-size:15px;
+    margin-right:56px;
+    cursor:pointer;
+}
+.navItem[selectedItem=true]{
+	color:#31C27C;
+}
+.foot{
+    height:470px;
+    width:100%;
+    background:#333333;
+}
+.oneThird{
+    float:left;
+    height:250px;
+    width:395px;
+    margin-top:77px;
+    margin-left:7px;
+}
+.caption{
+    font-size:15px;
+    color:#999999;
+}
+.clientIconUl{
+    padding:0;
+    margin:50px 0px 0px 0px;
+    list-style:none;
+
+}
+.clientIconUl li{
+    padding:0;
+    margin:0;
+    width:48px;
+    height:48px;
+    float:left;
+    margin-right:50px;
+    background-image:url(../img/footer.png);
+    background-repeat:no-repeat;
+    backgroud-size:48px 48px;
+    cursor:pointer;
+}
+.pc{
+    background-position-x:0px;
+    background-position-y:0px;
+}
+.mac{
+    background-position-x:-92px;
+    background-position-y:0px;
+}
+.android{
+    background-position-x:-184px;
+    background-position-y:0px;
+}
+.iphone{
+    background-position-x:-276px;
+    background-position-y:0px;
+}
+.clientTextUl{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+.clientTextUl li{
+    float:left;
+    margin-top:11px;
+    font-size:14px;
+}
+.pcText{
+    margin-left:4px;
+}
+.macText{
+    margin-left:63px;
+}
+.androidText{
+    margin-left:45px;
+}
+.iphoneText{
+    margin-left:30px;
+}
+.twoThird{
+    float:left;
+    height:250px;
+    width:395px;
+    margin-top:77px;
+    margin-left:71px;
+}
+.specialUl{
+    margin:0px;
+    padding:0px;
+    list-style:none;
+    margin-top:49px;
+}
+.specialUl li{
+    float:left;
+    margin-right:26px;
+}
+.specialUl i{
+    display:block;
+    width:48px;
+    height:48px;
+    margin-bottom:10px;
+    background-image:url(../img/footer.png);
+    background-repeat:no-repeat;
+    cursor:pointer;
+}
+.twoThird span{
+    font-size:14px;
+}
+.kSound i{
+    background-position:-366px 0px;
+}
+.superSound i{
+    background-position:-460px 0px;
+    margin-left:23px;
+}
+.qPlay i{
+    background-position:-555px 0px;
+}
+.qPlay span{
+    margin-left:5px;
+}
+.original{
+    float:left;
+    margin-top:18px;
+    margin-right:28px;
+}
+.uploadVideo{
+    float:left;
+    margin-top:18px;
+    margin-right:150px;
+}
+.carConnect{
+    float:left;
+    margin-top:18px;
+    margin-right:30px;
+}
+.qqShow{
+    float:left;
+    margin-top:18px;
+}
+.threeThird{
+    float:left;
+    height:250px;
+    width:300px;
+    margin-top:77px;
+    margin-left:26px;
+}
+.linksTable{
+    font-size:14px;
+    margin-top:50px;
+}
+.linksTable td{
+    padding-bottom:14px;
+    text-align:left;
+}
+.col1{
+    padding-right:36px;
+}
+.col2{
+    padding-right:16px;
+}
+.tail{
+    width:100%;
+    float:left;
+    font-size:12px;
+    margin-top:37px;
+    color:#999999;
+}
+.tail a{
+    margin-left:4px;
+    margin-right:4px;
+}
+.copyright{
+    margin-top:12px;
+}
+.foot a{
+    color:#999999;
+    cursor:pointer;
+}
+.container{
+    width:100%;
+    border:none;
+}
+.fixDiv{
+	width:50px;
+	position:fixed;
+	right:40px;
+	z-index: 4;
+	cursor:pointer;
+}
+.player{
+	height:50px;
+	background-image:url(../img/icon_sprite.png);
+	bottom: 40px;
+	background-position:-150px -280px
+}
+.playerActive{
+	height:50px;
+	bottom: 40px;
+	line-height: 50px;
+	color:#ffffff;
+	font-size:12px;
+	text-align: center;
+	background-color:#31C27C;
+}
+.advice{
+	height:30px;
+	background-image:url(../img/icon_sprite.png);
+	bottom: 91px;
+	background-position:-100px -120px;
+	padding:10px 0px 10px 0px;
+}
+.adviceActive{
+	height:30px;
+	bottom: 91px;
+	background-color:#31C27C;
+	color:#ffffff;
+	line-height: 15px;
+	text-align: center;
+	font-size:12px;
+	padding:10px 0px 10px 0px;
+}
+.toTop{
+	height:50px;
+	background-image:url(../img/icon_sprite.png);
+	bottom: 142px;
+	background-position:0px -120px;
+	display:none;
+}
+.defaultStyleLink , .noneJsDefaultLink{
+    text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+.totalMask{
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	background-color:rgba(0,0,0,.2);
+	top:0px;
+	left:0px;
+	z-index: 5;
+	border:1px solid gray;
+	display: none;
+	border:none;
+}
+.loginWin{
+	background-color:#ffffff;
+	width:650px;
+	height:435px;
+	margin-top: 157px;
+}
+.loginTitl div{
+	position:absolute;
+	width:163px;
+	left: 243.5px;
+}
+.loginTitl{
+	border-bottom:1px solid rgb(240,240,240);
+	line-height: 55px;
+	font-size: 16px;
+	color:#32c27d;
+	text-align: center;
+	position: relative;
+	height: 55px;
+}
+.loginBody{
+	height:350px;
+}
+.accountAndPasswordLogin{
+	font-size: 20px;
+	color: #333;
+	line-height: 40px;
+}
+.new_user_sign_in{
+	font-size: 20px;
+	color: #333;
+	line-height: 40px;
+	display:none;
+}
+.loginInput{
+	width: 270px;
+	height: 40px;
+	border:1px solid #d6d6d6;
+	margin-top: 15px;
+	border-radius:3px;
+	position: relative;
+}
+.loginInput  input{
+	border:none;
+	outline: none;
+	height:18px;
+	font-size: 16px;
+	line-height: 18px;
+	width:230px;
+	margin-left: 10px;
+	margin-top: 11px;
+}
+.validateCode{
+	width: 270px;
+	height: 40px;
+	border:1px solid #d6d6d6;
+	margin-top: 15px;
+	border-radius:3px;
+	position: relative;
+}
+.validateCode  input{
+	border:none;
+	outline: none;
+	height:18px;
+	font-size: 16px;
+	line-height: 18px;
+	width:150px;
+	margin-left: 10px;
+	margin-top: 11px;
+}
+.validateImg{
+	height:100%;
+	width: 105px;
+	float: right;
+	border-left: 1px solid #d6d6d6;
+}
+.loginInput i{
+	background-image: url(../img/icon_3_tiny.png);
+	background-position: -117px -161px;
+	display: inline-block;
+	position:relative;
+	top:2px;
+	right:8px;
+	width: 20px;
+	height:20px;
+	cursor: pointer;
+}
+.loginOrSiginSubmit{
+	width: 270px;
+	height: 40px;
+	margin-top: 15px;
+	border-radius:3px;
+	
+}
+.loginOrSiginSubmit input{
+	background-color:#86ce2f;
+	color:#ffffff;
+	border:none;
+	height:100%;
+	width: 100%;
+	font-size: 16px;
+	cursor: pointer;
+	outline: none;
+}
+.comfirmPassword{
+	display: none;
+}
+.loginTail{
+	height:29px;
+	width: 100%;
+}
+.nextAutoLogin{
+	cursor:pointer;
+	float:left;
+	font-size: 12px;
+	color:#333;
+	line-height: 20px;
+	margin-left: 5px;
+}
+.loginCheckbox{
+	cursor:pointer;
+	float:left;
+	height: 18px;
+	width: 18px;
+	margin-left: 10px;
+	background-image: url(../img/icon_3_tiny.png);
+}
+.loginCheckbox[isSelected="true"]{
+	background-position: -92px -162px;
+}
+.loginCheckbox[isSelected="false"]{
+	background-position: -74px -162px;
+}
+.loginTail ul{
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+.loginTail li{
+	text-align:center;
+	float: right;
+	width:77px;
+	height:12px;
+	color:#666;
+	font-size: 12px;
+	line-height: 12px;
+}
+.loginTail .centerLi{
+	border-width:0 1px 0 1px;
+	border-color: #c8c8c8;
+	border-style: solid;
+}
+.closeIcon{
+	height: 12px;
+	width: 12px;
+	display: inline-block;
+	float: right;
+	margin-top:15px;
+	margin-right:15px;
+	background-image: url(../img/icon_popup.png);
+	background-position: 0px -200px;
+	cursor: pointer;
+}
+.loginTail a{
+	text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+.inputMessage{
+	position:absolute;
+	left: 275px;
+	width: 150px;
+	top:11px;
+	font-size: 12px;
+}
+.userHeadInHead{
+	margin-top:26px;
+	width:38px;
+	height:38px;
+	border-radius:50%;
+}
+.listenerInfoBox{
+	display:none;
+	position:absolute;
+	height: 0px;
+	width:291px;
+	top:90px;
+	left: -21px;
+	background-color:#ffffff;
+	border-width: 1px 1px 1px 1px;
+	border-style: solid;
+	border-color: #f2f2f2;
+	z-index: 4;
+	cursor:default;
+	overflow: hidden;
+}
+.lisenerHead{
+	float:left;
+    display: block;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    margin-left: 21px;
+    margin-top:26px;
+}
+.lisenerNameInfo{
+	float:left;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height:16px;
+    font-size: 13px;
+    width:170px;
+    line-height: 15px;
+    margin-top: 34px;
+    margin-left:11px;
+    color：#333;
+}
+.IconInfo1{
+	float: left;
+	margin-top: 5px;
+	margin-left:11px;
+	margin-bottom: 8px;
+}
+.IconInfo2{
+	float: left;
+	margin-top: 5px;
+	margin-right: 120px;
+	margin-bottom: 8px;
+}
+.logoutLink{
+	float:left;
+	color:#333;
+	font-size: 13px;
+	line-height: 13px;
+	margin-left: 11px;
+}
+.listenerItem{
+	list-style: none;
+	margin:0;
+	padding: 0;
+	width: 260px;
+}
+.listenerItem li{
+	float:left;
+	font-weight:300;
+	line-height: 22px;
+	font-size: 22px;
+	text-align: center;
+	width: 86px;
+	height: 40px;
+}
+.centerListenerItem{
+	border-width: 0 1px 0 1px;
+	border-color: #ededed;
+	border-style: solid;
+}
+.listenerItemsDiv{
+	margin-top: 138px;
+}
+.listenerItem li span{
+	color:#999;
+	font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+

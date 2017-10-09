@@ -1,0 +1,389 @@
+.container{
+	background-image: url(../img/bg_detail.jpg);
+    background-position: 0px -58px;
+    background-repeat: repeat-x;
+    color:#333;
+}
+.singerContent{
+	width: 1200px;
+}
+.singerInfo{
+	height:325px;
+	width:1200px;
+}
+.singerHead{
+	width: 250px;
+	height: 250px;
+	border-radius:50%;
+	margin-top:40px;
+	float:left;
+}
+.singerBaseInfo{
+	width: 895px;
+	height:100%;
+	float:right;
+}
+.singerName{
+	font-size:38px;
+	line-height: 38px;
+	height:38px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top:75px;
+}
+.singerBriefIntro{
+    margin-top: 26px;
+    font-size: 14px;
+    line-height: 14px;
+}
+.singerBriefIntro div{
+	display: inline-block;
+	width:705px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.moreInfo{
+	position: relative;
+	top:-3px;
+	text-decoration: none;
+	outline: none;
+}
+.singerWorks{
+	height:26px;
+}
+.singerWorks ul{
+	margin: 17px 0 0 0;
+	padding:0 0 0 0;
+	list-style: none;
+}
+.singerWorks li{
+	float: left;
+}
+.singerWorks li i{
+	display: inline-block;
+}
+.workType{
+	font-size: 18px;
+	line-height: 18px;
+}
+.workNum{
+	line-height:25px;
+	font-size: 25px;
+}
+.singleMusicWork{
+	padding: 0 10px 0 0;
+}
+.albumWork{
+	position:relative;
+	padding: 0 10px 0 10px;
+}
+.mvWork{
+	padding: 0 0 0 10px;
+}
+.workLine{
+	margin-top:2px;
+	background: #c9c9c9;
+	width: 1px;
+	height:23px;
+	position:absolute;
+	z-index: 3
+	
+}
+.leftLine{
+	top:0px;
+	left:0px;
+}
+.rightLine{
+	top:0px;
+	left:100%;
+}
+.singerButton{
+	position: relative;
+}
+.palyHotMusic{
+	width:179px;
+    height:40px;
+    border-radius:3px;
+    padding:0;
+    font-size:14px;
+    outline:none;
+    margin-right:2px;
+    cursor:pointer;
+    margin-top: 22px;
+    color:#ffffff;
+    background-color:#31C27C;
+    border:none;
+    position: absolute;
+    left:0px;
+}
+.palyHotMusic span i{
+	display:inline-block;
+	height:15px;
+	width:15px;
+	background-image: url(../img/icon_sprite.png);
+	background-position: -80px -220px;
+	vertical-align: -3px;
+}
+.addCare{
+	width:134px;
+    height:40px;
+    border-radius:3px;
+    padding:0;
+    font-size:14px;
+    outline:none;
+    margin-right:2px;
+    cursor:pointer;
+    margin-top: 22px;
+    color:#333;
+    border:1px solid #c9c9c9;
+    background-color: #ffffff;
+    position: absolute;
+    left:185px;
+}
+.addCare span i{
+	display:inline-block;
+	height:15px;
+	width:15px;
+	background-image: url(../img/icon_sprite.png);
+	vertical-align: -1px;
+	margin-right: 2px;
+}
+.addCare .cared{
+	background-position: -20px -180px;
+}
+.addCare .uncared{
+	background-position: -0px -180px;
+}
+.modelTitle{
+	height:60px;
+	width: 100%;
+	font-size: 24px;
+	line-height: 53px;
+}
+.toAll{
+	float:right;
+	height:20px;
+	margin-top: 22px;
+}
+.allText{
+    text-align:left;
+    color:#333;
+    float: right;
+    font-size: 14px;
+    line-height:15px;
+    cursor:pointer;
+}
+.allIcon{
+    float: right;
+    display:block;
+    width:8px;
+    height:13px;
+    background-image:url(../img/icon_sprite.png);
+    background-position:-120px -40px;
+    cursor:pointer;
+    margin-top: 2px;
+    margin-left: 5px;
+}
+.songsTable{
+    table-layout: fixed;
+    text-align: left;
+    font-weight: 100;
+    margin-bottom: 30px;
+    display: inline-block;
+    vertical-align:text-top
+}
+.songsTable th{
+    background-color:rgb(251,251,253);
+    color: rgb(153,153,153);
+    height: 50px;
+    font-size: 14px;
+    line-height: 50px;
+    font-weight: 200;
+}
+.songIndex{
+    width: 45px;
+}
+.songName{
+    width: 520px;
+}
+.songAlbum{
+    width: 545px;
+}
+.songTime{
+    width: 88px
+}
+.songTr:nth-child(even){
+    background-color:rgb(251,251,253);
+}
+.songTr:nth-child(odd){
+    background-color:rgb(255,255,255);
+}
+.songSetHeight{
+    height: 50px;
+    color: rgb(153,153,153);
+    padding-left: 10px;
+}
+.songTd{
+    line-height: 50px;
+    font-size: 14px;
+    font-weight:500;
+}
+.songNameTd{
+    color: rgb(51,51,51);
+    padding-right:10px;
+}
+.songOption{
+	margin-top:7px;
+	margin-right:10px;
+	width:36px;
+	height:36px;
+	float: right;
+	cursor: pointer;
+	display:none;
+}
+.shareSong{
+	background-image:url(../img/icon_list_menu.png);
+	background-position:0px -40px;
+}
+.downloadSong{
+	background-image:url(../img/icon_list_menu.png);
+	background-position:0px -120px
+}
+.addSong{
+	background-image:url(../img/icon_list_menu.png);
+	background-position:0px -80px
+}
+.playSong{
+	background-image:url(../img/icon_list_menu.png);
+	background-position:0px 0px
+}
+.singerTd{
+    color: rgb(51,51,51)
+}
+.songTimeTd{
+    color: rgb(153,153,153)
+}
+/************************************************/
+.modelUl{
+	list-style: none;
+	padding:0;
+	margin: 0;
+}
+.albumUl{
+	height:315px;
+}
+.similarSingerUl{
+	height:245px;
+	margin-bottom: 30px;
+}
+.mvUl{
+	height:220px;
+}
+.modelUl li{
+	position: relative;
+	float: left;
+	font-size: 14px;
+	line-height: 22px;
+}
+.modelUl li:not([special="lastModelLi"]){
+	margin-right: 20px;
+}
+.albumBox{
+	overflow: hidden;
+	height:315px;
+	width: 224px;
+}
+.mvBox{
+	overflow: hidden;
+	height:220px;
+	width: 224px;
+}
+.similarBox{
+	overflow: hidden;
+	height:245px;
+	width: 224px;
+	background-color:#fbfbfd;
+}
+.albumBox .imgContainer{
+	height: 224px;
+	width:224px;
+}
+.mvBox .imgContainer{
+	height: 126.66px;
+	width:224px;
+}
+
+.imgContainer{
+	cursor: pointer;
+	overflow: hidden;
+}
+.albumHead{
+	height: 224px;
+	width:224px;
+	position: relative;
+}
+.mvHead{
+	height: 126.66px;
+	width:224px;
+	position: relative;
+}
+.info1{
+	width: 200px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+    color:#333;
+    cursor: pointer
+}
+.info2{
+	color:#999999;
+}
+.albumBox .cover_play{
+	top: 87px;
+    left: 87px;
+    height:50px;
+}
+.mvBox .cover_play{
+	top: 38px;
+    left: 87px;
+    height:50px;
+}
+.cover_play{
+    position: absolute;
+    opacity: 0;
+}
+.similarSingerHead{
+	display: block;
+	height:140px;
+	width:140px;
+	margin-top:25px;
+	border-radius:50%;
+}
+.similarSingerName{
+	font-size:16px;
+	color:#333;
+	line-height: 16px;
+	margin-top: 20px;
+}
+.defaultStyleLink{
+    text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

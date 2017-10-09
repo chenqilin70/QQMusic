@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-30 10:30:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.huwl.oracle.qqmusic.music_model.MusicVideo" table="MUSICVIDEO">
+         <id name="videoId" type="java.lang.String">
+            <column name="VIDEO_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="video" type="java.lang.String">
+            <column name="VIDEO" />
+        </property>
+        <property name="videoName" type="java.lang.String">
+            <column name="VIDEONAME" />
+        </property>
+        <many-to-one name="singer" class="com.huwl.oracle.qqmusic.music_model.Singer" >
+            <column name="SINGER_ID" />
+        </many-to-one>
+        <property name="date" type="java.util.Date">
+            <column name="MV_DATE" />
+        </property>
+        <property name="watchTimes" type="java.lang.Integer">
+            <column name="WATCH_TIMES" />
+        </property>
+        <property name="info" type="java.lang.String">
+            <column name="INFO" />
+        </property>
+        <property name="mvDistrict" type="java.lang.String">
+            <column name="MV_DISTRICT" />
+        </property>
+        <property name="mvType" type="java.lang.String">
+            <column name="MV_TYPE" />
+        </property>
+    </class>
+</hibernate-mapping>
