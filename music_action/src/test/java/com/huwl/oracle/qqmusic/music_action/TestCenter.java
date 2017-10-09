@@ -7,6 +7,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huwl.oracle.qqmusic.music_biz.AlbumBiz;
 import com.huwl.oracle.qqmusic.music_biz.IndexBiz;
@@ -23,7 +26,6 @@ import com.huwl.oracle.qqmusic.music_dao.ListenerDao;
 import com.huwl.oracle.qqmusic.music_dao.MusicDao;
 import com.huwl.oracle.qqmusic.music_dao.MusicVideoDao;
 import com.huwl.oracle.qqmusic.music_dao.SingerDao;
-import com.huwl.oracle.qqmusic.music_model.MusicVideo;
 
 public class TestCenter {
 	public static ClassPathXmlApplicationContext ac;
@@ -45,6 +47,7 @@ public class TestCenter {
 	private static ObjectMapper objectMapper;
 	private static MusicVideoDao musicVideoDao;
 	private static MVBiz mvBiz;
+	private static JedisPool jedisPool;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		ac=new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -65,6 +68,7 @@ public class TestCenter {
 		musicBiz=(MusicBiz) ac.getBean("musicBiz");
 		musicVideoDao=(MusicVideoDao) ac.getBean("musicVideoDao");
 		mvBiz=(MVBiz) ac.getBean("mvBiz");
+		jedisPool=(JedisPool) ac.getBean("jedisPool");
 	}
 
 	@AfterClass
@@ -74,7 +78,8 @@ public class TestCenter {
 	
 	@Test
 	public void testExtend(){
-		System.out.println(mvBiz.getMusicVideo("900eY8ZThHa").getVideoName());
+		System.out.println(jedisPool);
+		System.out.println(jedisPool.getResource());
 	}
 	
 	

@@ -3,19 +3,11 @@ package com.huwl.oracle.qqmusic.music_biz;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.cache.RedisCache;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.huwl.oracle.qqmusic.music_dao.AlbumDao;
-import com.huwl.oracle.qqmusic.music_dao.BaseDao;
-import com.huwl.oracle.qqmusic.music_dao.SingerDao;
 import com.huwl.oracle.qqmusic.music_model.Album;
-import com.huwl.oracle.qqmusic.music_model.Listener;
-import com.huwl.oracle.qqmusic.music_util.HibernateUtil;
 
 @Service("albumBiz")
 public class AlbumBiz extends BaseBiz{

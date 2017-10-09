@@ -1,0 +1,10 @@
+package com.huwl.oracle.qqmusic.music_biz;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
+
+@Component
+@Aspect
+public class RedisAspect {
+
+}

@@ -1,6 +1,8 @@
 package com.huwl.oracle.qqmusic.music_model;
 
-public class LanOfSinger {
+import java.io.Serializable;
+
+public class LanOfSinger  implements Serializable{
 	private String ids;
 	private String singerId;
 	private String singerName;

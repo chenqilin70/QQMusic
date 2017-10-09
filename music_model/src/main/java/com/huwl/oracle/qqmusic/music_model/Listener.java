@@ -1,8 +1,9 @@
 package com.huwl.oracle.qqmusic.music_model;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class Listener {
+public class Listener  implements Serializable{
 	private String listenerId;
 	private String username;
 	private String password;

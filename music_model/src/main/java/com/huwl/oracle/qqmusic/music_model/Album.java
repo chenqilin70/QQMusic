@@ -1,9 +1,10 @@
 package com.huwl.oracle.qqmusic.music_model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-public class Album {
+public class Album implements Serializable{
 	private String albumId;
 	private String albumName;
 	private String genres;

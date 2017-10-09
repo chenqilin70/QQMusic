@@ -1,6 +1,8 @@
 package com.huwl.oracle.qqmusic.music_model;
 
-public enum MV_Type {
+import java.io.Serializable;
+
+public enum MV_Type  implements Serializable{
 	OFFICIAL,
 	MOVIE_BACKGROUND,
 	DANCE,

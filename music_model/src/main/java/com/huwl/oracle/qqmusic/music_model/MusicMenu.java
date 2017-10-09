@@ -1,9 +1,10 @@
 package com.huwl.oracle.qqmusic.music_model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-public class MusicMenu {
+public class MusicMenu  implements Serializable{
 	private String menuId;
 	private Listener creator;
 	private String menuName;

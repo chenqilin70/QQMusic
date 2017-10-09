@@ -1,6 +1,8 @@
 package com.huwl.oracle.qqmusic.music_model;
 
-public enum AlbumGenre {
+import java.io.Serializable;
+
+public enum AlbumGenre  implements Serializable{
 	FASHION,
 	CLASSICAL,
 	JAZZ,

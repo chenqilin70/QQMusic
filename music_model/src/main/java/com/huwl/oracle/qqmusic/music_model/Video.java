@@ -1,6 +1,8 @@
 package com.huwl.oracle.qqmusic.music_model;
 
-public class Video {
+import java.io.Serializable;
+
+public class Video  implements Serializable{
 	private String videoId;
 
 	public String getVideoId() {

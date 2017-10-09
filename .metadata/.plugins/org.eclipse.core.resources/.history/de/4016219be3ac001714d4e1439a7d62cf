@@ -1,0 +1,5 @@
+package com.huwl.oracle.qqmusic.music_util;
+
+public class SerializeUtil {
+
+}

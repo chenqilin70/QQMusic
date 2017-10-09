@@ -1,6 +1,8 @@
 package com.huwl.oracle.qqmusic.music_model;
 
-public enum MV_District {
+import java.io.Serializable;
+
+public enum MV_District  implements Serializable{
 	INLAND,
 	HONG_KONG_AND_TAI_WAN,
 	EUROPE_AND_AMERICA,

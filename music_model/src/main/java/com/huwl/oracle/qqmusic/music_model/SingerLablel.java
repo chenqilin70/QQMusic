@@ -1,6 +1,8 @@
 package com.huwl.oracle.qqmusic.music_model;
 
-public enum SingerLablel {
+import java.io.Serializable;
+
+public enum SingerLablel  implements Serializable{
 	CN_MALE,
 	CN_FEMALE,
 	CN_GROUP,

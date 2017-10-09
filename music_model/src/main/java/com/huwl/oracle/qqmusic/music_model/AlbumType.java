@@ -1,6 +1,8 @@
 package com.huwl.oracle.qqmusic.music_model;
 
-public enum AlbumType {
+import java.io.Serializable;
+
+public enum AlbumType  implements Serializable{
 	ALBUM,
 	EP,
 	SINGLE,

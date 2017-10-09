@@ -1,8 +1,9 @@
 package com.huwl.oracle.qqmusic.music_model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MusicVideo {
+public class MusicVideo  implements Serializable{
 	private String videoId;
 	private String videoName;
 	private Singer singer;

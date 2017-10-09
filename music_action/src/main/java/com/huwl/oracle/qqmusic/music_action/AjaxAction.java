@@ -1,32 +1,18 @@
 package com.huwl.oracle.qqmusic.music_action;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.dispatcher.HttpParameters;
-import org.apache.struts2.dispatcher.Parameter;
-import org.apache.struts2.dispatcher.mapper.ActionMapping;
-import org.apache.struts2.dispatcher.mapper.ParameterAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpRequest;
+import org.springframework.data.redis.cache.RedisCache;
 import org.springframework.stereotype.Controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huwl.oracle.qqmusic.music_biz.BaseBiz;
 import com.huwl.oracle.qqmusic.music_biz.IndexBiz;
-import com.huwl.oracle.qqmusic.music_model.Album;
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 @Controller("ajaxAction")
 @Scope("prototype")
 public class AjaxAction extends BaseAction{

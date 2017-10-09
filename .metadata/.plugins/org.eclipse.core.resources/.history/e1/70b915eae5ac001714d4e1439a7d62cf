@@ -1,0 +1,17 @@
+package com.huwl.oracle.qqmusic.music_biz;
+
+import java.util.Arrays;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
+
+@Component
+@Aspect
+public class RedisAspect {
+	@Before(value="com.huwl.oracle.qqmusic.music_biz.IndexBiz.getChineseAlbums(string)",argNames="string")
+     public void vlidateArgs(JoinPoint joinPoint,String string) {
+         System.out.println("validate: " + string);
+     }
+}

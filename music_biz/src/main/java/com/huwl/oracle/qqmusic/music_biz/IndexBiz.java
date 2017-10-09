@@ -40,6 +40,7 @@ public class IndexBiz  extends BaseBiz{
 		}
 	}
 	public List<Album> getChineseAlbums(String string) {
+		System.out.println("getChineseAlbums is running");
 		return albumDao.getRcommendAlbumByLanguage("国语");
 	}
 	
